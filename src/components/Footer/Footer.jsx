@@ -1,6 +1,6 @@
 import * as F from './Footer.styles';
 
 const Footer = () => {
-    return <F.FooterWrap>Footer</F.FooterWrap>;
+    return <F.Footer>Footer</F.Footer>;
 };
 export default Footer;

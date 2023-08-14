@@ -1,6 +1,6 @@
 import * as C from './Container.styls';
 
-const Container = () => {
-    return <C.maxWidth>Footer</C.maxWidth>;
+const Container = ({ children }) => {
+    return <C.maxWidth>{children}</C.maxWidth>;
 };
 export default Container;

@@ -1,6 +1,6 @@
 import * as M from './Main.styles';
 
 const Main = ({ children }) => {
-    return <M.Section>{children}</M.Section>;
+    return <M.Main>{children}</M.Main>;
 };
 export default Main;

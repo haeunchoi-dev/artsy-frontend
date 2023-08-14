@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-const Section = styled.div`
-    padding: 60px 10px 0;
+const Main = styled.main`
+    flex: 1 auto;
+    padding-top: 100px;
 `;
 
-export { Section };
+export { Main };
