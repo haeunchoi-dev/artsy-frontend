@@ -16,9 +16,9 @@ const sizes = {
 };
 
 const sizeStyles = css`
-    ${({ size }) => css`
-        padding: ${sizes[size].padding};
-        font-size: ${sizes[size].fontSize};
+    ${({ $size }) => css`
+        padding: ${sizes[$size].padding};
+        font-size: ${sizes[$size].fontSize};
     `}
 `;
 
@@ -31,8 +31,8 @@ const fullWidthStyle = css`
 `;
 
 const colorStyles = css`
-    ${({ color }) => css`
-        background-color: ${color};
+    ${({ $color }) => css`
+        background-color: ${$color};
 
         &:hover {
             filter: brightness(1.1);
