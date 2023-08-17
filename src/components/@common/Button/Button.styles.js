@@ -3,15 +3,15 @@ import styled, { css } from 'styled-components';
 const sizes = {
     large: {
         padding: '8px 20px',
-        fontSize: '1rem',
+        fontSize: '1.6rem',
     },
     medium: {
         padding: '6px 16px',
-        fontSize: '0.875rem',
+        fontSize: '1.4rem',
     },
     small: {
         padding: '4px 10px',
-        fontSize: '0.8125rem',
+        fontSize: '1.2rem',
     },
 };
 
