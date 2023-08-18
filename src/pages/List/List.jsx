@@ -1,12 +1,10 @@
 import { useState, useCallback } from 'react';
 import { useTheme } from 'styled-components';
-import { Link } from 'react-router-dom';
-import { useQuery, useQueryClient } from 'react-query';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
 
 import useCategoryQuery from '@hooks/@queries/useCategoryQuery';
 import useTicketQuery from '@hooks/@queries/useTicketQuery';
-
 import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
@@ -31,7 +29,7 @@ const List = () => {
         setSortParams(e.target.selectedIndex);
         setCategoryId(e.target.selectedIndex);
     };
-    console.log(categoryId);
+
     return (
         <>
             <Container>
@@ -44,7 +42,7 @@ const List = () => {
                     <L.Filter onChange={handleFilter} value={categoryId ?? '전체'}>
                         <option value="0">전체</option>
                         {categoryQuery?.data?.map((category, idx) => (
-                            <option key={`${category.name}-${idx}`} value={category.id}>
+                            <option key={category.id} value={category.id}>
                                 {category.name}
                             </option>
                         ))}
@@ -58,13 +56,13 @@ const List = () => {
                 {ticketQuery.data?.length === 0 && <L.NoTicket>아직 추가하신 기록이 없습니다</L.NoTicket>}
                 <L.TicketList>
                     {ticketQuery.data?.map((ticket, idx) => (
-                        <Link to={`/detail/${ticket.id}`} key={idx}>
+                        <Link to={`/detail/${ticket.id}`} key={ticket.id}>
                             <Ticket
-                                category={ticket.categoryName}
+                                categoryColor={ticket.categoryColor}
                                 title={ticket.title}
                                 showDate={ticket.showDate}
                                 rating={ticket.rating}
-                                image={ticket.files}
+                                imUrl={ticket.fileImageUrl}
                             />
                         </Link>
                     ))}

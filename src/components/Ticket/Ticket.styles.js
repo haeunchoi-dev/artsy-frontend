@@ -1,19 +1,5 @@
 import styled, { css } from 'styled-components';
 
-const bg = {
-    영화: '#8B97FF',
-    뮤지컬: '#A888FF',
-    전시: '#D373FA',
-    콘서트: '#FFC348',
-    연극: '#FFA888',
-};
-
-const bgStyles = css`
-    ${({ $category }) => css`
-        background-color: ${bg[$category]};
-    `}
-`;
-
 const ImageBox = styled.div`
     flex: 1 auto;
     overflow: hidden;
@@ -41,9 +27,9 @@ const Wrap = styled.div`
     overflow: hidden;
     position: relative;
     display: flex;
-    height: 140px;
+    height: 14rem;
     border-radius: 8px;
-    padding-left: 20px;
+    padding-left: 2rem;
     box-sizing: border-box;
     filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.15));
 
@@ -55,8 +41,8 @@ const Wrap = styled.div`
         bottom: 0;
         left: 0;
         display: block;
-        width: 20px;
-        ${bgStyles}
+        width: 2rem;
+        background-color: ${({ $categoryColor }) => $categoryColor};
     }
 
     &:hover ${ImageBox} {
@@ -70,11 +56,11 @@ const InfoBox = styled.div`
     display: flex;
     flex-direction: column;
     flex: none;
-    width: 130px;
-    padding: 20px 20px 20px 10px;
+    width: 13rem;
+    padding: 2rem 2rem 2rem 1rem;
     box-sizing: border-box;
     background-color: #fff;
-    color: #1b1d21;
+    color: ${({ theme }) => theme.colors.black};
 `;
 
 const Title = styled.div`
@@ -85,7 +71,7 @@ const Title = styled.div`
 `;
 
 const Date = styled.div`
-    margin-top: 8px;
+    margin-top: 1rem;
     font-size: ${({ theme }) => theme.fontSizes.subText};
     color: #909090;
 `;
@@ -97,9 +83,11 @@ const Rating = styled.div`
     margin-top: auto;
     text-align: right;
     font-size: ${({ theme }) => theme.fontSizes.text};
+
     span {
-        margin-left: 4px;
+        margin-left: 0.4rem;
     }
+
     img {
         width: ${({ theme }) => theme.fontSizes.text};
     }
@@ -108,11 +96,11 @@ const Rating = styled.div`
 const DivideLine = styled.div`
     position: relative;
     display: flex;
-    margin: 10px 0;
-    width: 20px;
+    margin: 1rem 0;
+    width: 2rem;
 
     span {
-        width: 10px;
+        width: 1rem;
         height: 100%;
         background-color: #fff;
     }
@@ -123,18 +111,18 @@ const DivideLine = styled.div`
 
     span:first-of-type:before,
     span:first-of-type:after {
-        top: -10px;
+        top: -1rem;
     }
     span:last-of-type::before,
     span:last-of-type::after {
-        bottom: -10px;
+        bottom: -1rem;
     }
 
     span:before {
         content: '';
-        border-left: 10px solid #fff;
-        border-top: 10px solid transparent;
-        border-bottom: 10px solid transparent;
+        border-left: 1rem solid #fff;
+        border-top: 1rem solid transparent;
+        border-bottom: 1rem solid transparent;
         position: absolute;
         left: 0;
     }

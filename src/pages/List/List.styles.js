@@ -23,31 +23,31 @@ const Filter = styled.select`
     background-color: transparent;
 
     /* 스타일 */
-    padding: 4px 10px;
+    padding: 0.4rem 1rem;
     font-size: ${({ theme }) => theme.fontSizes.text};
     border-bottom: 1px solid ${({ theme }) => theme.colors.black};
 `;
 
 const FilterInner = styled.div`
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 20px;
-    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
+    max-width: ${({ theme }) => theme.devicesSize.labtop};
+    margin: 0 auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
 `;
 
 const TicketList = styled.div`
     display: grid;
-    grid-row-gap: 16px;
+    grid-row-gap: 1.6rem;
     ${({ theme }) => theme.media.tablet} {
         grid-template-columns: repeat(2, 1fr);
-        grid-column-gap: 16px;
+        grid-column-gap: 1.6rem;
     }
     ${({ theme }) => theme.media.labtop} {
         grid-template-columns: repeat(3, 1fr);
-        grid-column-gap: 20px;
-        grid-row-gap: 20px;
+        grid-column-gap: 2rem;
+        grid-row-gap: 2rem;
     }
 `;
 
@@ -55,16 +55,21 @@ const NoTicket = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 4rem;
+    margin: 4rem 0;
     border-radius: 8px;
     box-sizing: border-box;
     background-color: #eee;
     font-size: ${({ theme }) => theme.fontSizes.body};
 
+    ${({ theme }) => theme.media.tablet} {
+        max-width: 80%;
+        margin: 4rem auto 0;
+    }
+
     ${({ theme }) => theme.media.labtop} {
-        max-width: 600px;
-        margin: 80px auto 0;
-        min-height: 200px;
+        margin: 8rem auto 0;
+        min-height: 20rem;
     }
 `;
 
