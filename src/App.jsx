@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import Layout from '@components/Layout/Layout.jsx';
-import Header from '@components/Header/Header.jsx';
-import Main from '@components/Main/Main.jsx';
+import Layout from '@components/@common/Layout/Layout.jsx';
+import Header from '@components/@common/Header/Header.jsx';
+import Main from '@components/@common/Main/Main.jsx';
+import Footer from '@components/@common/Footer/Footer.jsx';
 import GlobalStyle from '@styles/GlobalStyles';
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
                 <Main>
                     <Outlet />
                 </Main>
+                <Footer />
             </Layout>
         </>
     );

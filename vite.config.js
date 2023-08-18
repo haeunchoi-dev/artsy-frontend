@@ -11,6 +11,10 @@ export default defineConfig({
             // find: 별칭, replacement: 절대 경로 주입
             { find: '@', replacement: path.resolve(__dirname, 'src') },
             {
+                find: '@api',
+                replacement: path.resolve(__dirname, 'src/api'),
+            },
+            {
                 find: '@assets',
                 replacement: path.resolve(__dirname, 'src/assets'),
             },

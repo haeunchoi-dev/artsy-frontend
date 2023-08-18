@@ -1,10 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
 
-/*
-    normalize
-*/
-/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 const GlobalStyle = createGlobalStyle`
+    /* normalize */
+    /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
     html {
         line-height: 1.15;
         -webkit-text-size-adjust: 100%;
@@ -107,6 +105,7 @@ const GlobalStyle = createGlobalStyle`
     [type='reset'],
     [type='submit'] {
         -webkit-appearance: button;
+        appearance: textfield;
     }
 
     button::-moz-focus-inner,
@@ -158,6 +157,7 @@ const GlobalStyle = createGlobalStyle`
 
     [type='search'] {
         -webkit-appearance: textfield;
+        appearance: textfield;
         outline-offset: -2px;
     }
 
@@ -186,31 +186,46 @@ const GlobalStyle = createGlobalStyle`
         display: none;
     }
 
-    /*
-        reset override
-    */
+    /* font */
+    @font-face {
+        font-family: 'NotoSansKR';
+        src: url('../assets/font/noto-sans-kr-v27-latin_korean-regular.eot');
+        src: url('../assets/font/noto-sans-kr-v27-latin_korean-regular.woff') format('woff');
+        font-stretch: normal;
+        font-style: normal;
+        font-weight: normal;
+        }
+        @font-face {
+        font-family: 'NotoSansKR';
+        src: url('../assets/font/noto-sans-kr-v27-latin_korean-500.eot');
+        src: url('../assets/font/noto-sans-kr-v27-latin_korean-500.woff') format('woff');
+        font-stretch: normal;
+        font-style: normal;
+        font-weight: 500;
+        }
+        @font-face {
+        font-family: 'NotoSansKR';
+        src: url('../assets/font/noto-sans-kr-v27-latin_korean-700.eot');
+        src: url('../assets/font/noto-sans-kr-v27-latin_korean-700.woff') format('woff');
+        font-stretch: normal;
+        font-style: normal;
+        font-weight: bold;
+    }
+
+    /* reset override */
     html,
     body {
         height: 100%;
     }
+
+    html {
+        font-size: 62.5%;
+    }
+
     body {
-        font-family:
-            'Pretendard Variable',
-            Pretendard,
-            -apple-system,
-            BlinkMacSystemFont,
-            system-ui,
-            Roboto,
-            'Helvetica Neue',
-            'Segoe UI',
-            'Apple SD Gothic Neo',
-            'Noto Sans KR',
-            'Malgun Gothic',
-            'Apple Color Emoji',
-            'Segoe UI Emoji',
-            'Segoe UI Symbol',
-            sans-serif;
-        color: #2f3438;
+        font-size: 1.6rem;
+        font-family: 'Noto Sans', sans-serif;
+        color: #1B1D21;
     }
 
     h1,
