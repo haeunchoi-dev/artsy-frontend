@@ -3,6 +3,7 @@ import axiosInstance from './';
 const ticketApi = {
     endpoint: {
         tickets: () => `/api/user/tickets`,
+        ticket: () => `api/user/ticket`,
     },
 
     headers: {
@@ -169,6 +170,13 @@ const ticketApi = {
         } catch (err) {
             // err 핸들링
         }
+    },
+
+    getTicket: async ({ ticketId }) => {
+        const response = await axiosInstance.get(`${ticketApi.endpoint.ticket}${ticketId}`, {
+            headers: { ...ticketApi.headers },
+        });
+        return response.data.artsyData;
     },
 };
 
