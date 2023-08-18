@@ -7,6 +7,13 @@ const colors = {
     black: '#1B1D21',
 };
 
+const gradeColor = {
+    darkSilver: '#848796',
+    bronze: '#A69A89',
+    silver: '#BCBCE4',
+    gold: 'E8BC4E',
+};
+
 const fontSizes = {
     h2: '6rem',
     h3: '4.8rem',
@@ -21,12 +28,12 @@ const fontSizes = {
 const devicesSize = {
     mobile: '390px',
     tablet: '768px',
-    pc: '1280px',
+    labtop: '1280px',
 };
 
 const media = {
-    tablet: `@media all and (min-width: 768px)`,
-    labtop: `@media all and (min-width: 1280px)`,
+    tablet: `@media all and (min-width: ${devicesSize.tablet})`,
+    labtop: `@media all and (min-width: ${devicesSize.labtop})`,
 };
 
 const theme = {
@@ -34,6 +41,7 @@ const theme = {
     fontSizes,
     devicesSize,
     media,
+    gradeColor,
 };
 
 export default theme;
