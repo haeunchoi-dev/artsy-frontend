@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { ERROR_TYPE } from '@constants/serverErrorType';
+import { ERROR_MESSAGE } from '@constants/message';
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -18,11 +20,22 @@ axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
         const appError = error.response.data.error;
-        const { type, code } = appError;
+        const { type } = appError;
 
-        if (!type || (type && code === 500)) {
-            alert('앗! 오류가 발생했어요.' + '\n' + '잠시 후에 다시 시도해보세요.');
+        if (!type) {
+            alert(ERROR_MESSAGE.unexpected);
+        } else {
+            switch (type) {
+                case ERROR_TYPE.INTERNAL_SERVER_ERROR:
+                    alert(ERROR_MESSAGE.unexpected);
+                    break;
+                case ERROR_TYPE.UNAUTHORIZED:
+                    alert(ERROR_MESSAGE.auth);
+                    window.location.href = '/signin';
+                    break;
+            }
         }
+
         return Promise.reject(error);
     }
 );

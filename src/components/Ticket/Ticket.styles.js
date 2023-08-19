@@ -32,6 +32,7 @@ const Wrap = styled.div`
     padding-left: 2rem;
     box-sizing: border-box;
     filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.15));
+    cursor: pointer;
 
     /* 카테고리별 배경색 */
     &:before {
@@ -84,8 +85,13 @@ const Rating = styled.div`
     text-align: right;
     font-size: ${({ theme }) => theme.fontSizes.text};
 
-    span {
+    p {
         margin-left: 0.4rem;
+
+        > span {
+            font-size: ${({ theme }) => theme.fontSizes.subText};
+            color: #909090;
+        }
     }
 
     img {

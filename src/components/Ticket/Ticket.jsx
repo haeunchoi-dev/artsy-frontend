@@ -17,7 +17,9 @@ const Ticket = ({ title, showDate, rating, categoryColor, imUrl }) => {
                 <T.Date>{showDate}</T.Date>
                 <T.Rating>
                     <img src={starIconUrl} />
-                    <span>{rating}</span>
+                    <p>
+                        {rating} <span>/ 5</span>
+                    </p>
                 </T.Rating>
             </T.InfoBox>
         </T.Wrap>
