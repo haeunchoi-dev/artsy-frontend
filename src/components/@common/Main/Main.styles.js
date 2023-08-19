@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const Main = styled.main`
+const StyledMain = styled.main`
     flex: 1 auto;
     padding-top: 100px;
 `;
 
-export { Main };
+export default StyledMain;

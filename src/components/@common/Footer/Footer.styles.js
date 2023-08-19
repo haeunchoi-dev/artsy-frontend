@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Footer = styled.footer`
+const StyledFooter = styled.footer`
     // 임시
     height: 150px;
     line-height: 150px;
@@ -8,4 +8,4 @@ const Footer = styled.footer`
     background-color: #eee;
 `;
 
-export { Footer };
+export default StyledFooter;

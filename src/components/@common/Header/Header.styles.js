@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Header = styled.header`
+const StyledHeader = styled.header`
     z-index: 1000;
     position: fixed;
     top: 0;
@@ -14,11 +14,11 @@ const Header = styled.header`
     box-shadow: 0px 1px 10px 3px rgba(0, 0, 0, 0.02);
 `;
 
-const HeaderInner = styled.div`
+const StyledHeaderInner = styled.div`
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
 `;
 
-export { Header, HeaderInner };
+export { StyledHeader, StyledHeaderInner };

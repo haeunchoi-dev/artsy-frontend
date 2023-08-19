@@ -1,10 +1,10 @@
-import * as H from './Header.styles';
+import { StyledHeader, StyledHeaderInner } from './Header.styles';
 
 const Header = () => {
     return (
-        <H.Header>
-            <H.HeaderInner>Header</H.HeaderInner>
-        </H.Header>
+        <StyledHeader>
+            <StyledHeaderInner>Header</StyledHeaderInner>
+        </StyledHeader>
     );
 };
 export default Header;

@@ -1,4 +1,4 @@
-import * as G from './GradeBar.styles';
+import { StyledBarWrap, StyledBar, StyledLegend } from './GradeBar.styles';
 
 /* 지영님 코드 병합시 impor 구문으로 변경 */
 const BADGE_GRADE = {
@@ -33,13 +33,13 @@ const GradeBar = ({ total, width, height }) => {
     const percent = Math.floor((total / targetValue) * 100);
 
     return (
-        <G.Wrap $width={width}>
-            <G.Legend $grade={name}>
+        <StyledBarWrap $width={width}>
+            <StyledLegend $grade={name}>
                 <span>{total}</span>
                 <span> / {targetValue}</span>
-            </G.Legend>
-            <G.Bar $grade={name} $percent={percent ?? 0} $height={height} />
-        </G.Wrap>
+            </StyledLegend>
+            <StyledBar $grade={name} $percent={percent ?? 0} $height={height} />
+        </StyledBarWrap>
     );
 };
 export default GradeBar;

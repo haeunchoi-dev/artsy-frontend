@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const Container = styled.div`
+const StyledLayout = styled.div`
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 `;
 
-export { Container };
+export default StyledLayout;

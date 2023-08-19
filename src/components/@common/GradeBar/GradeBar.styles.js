@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
 
-const Wrap = styled.div``;
+const StyledBarWrap = styled.div``;
 
-const Legend = styled.div`
+const StyledLegend = styled.div`
     width: ${({ $width }) => ($width ? $width + 'rem' : '100%')};
     text-align: right;
     margin-bottom: 1rem;
@@ -18,7 +18,7 @@ const Legend = styled.div`
     }
 `;
 
-const Bar = styled.div`
+const StyledBar = styled.div`
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -39,4 +39,4 @@ const Bar = styled.div`
     }
 `;
 
-export { Wrap, Bar, Legend };
+export { StyledBarWrap, StyledBar, StyledLegend };

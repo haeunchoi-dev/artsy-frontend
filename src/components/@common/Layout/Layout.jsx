@@ -1,6 +1,6 @@
-import * as L from './Layout.styles';
+import StyledLayout from './Layout.styles';
 
 const Layout = ({ children }) => {
-    return <L.Container>{children}</L.Container>;
+    return <StyledLayout>{children}</StyledLayout>;
 };
 export default Layout;
