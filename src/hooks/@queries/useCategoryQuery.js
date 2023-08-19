@@ -1,10 +1,18 @@
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { categoryKeys } from '@constants/queryKey';
-import categoryApi from '@api/category';
+import api from '@utils/api';
+
+export const QUERY_KEY = '/api/categories';
 
 const useCategoryQuery = () => {
-    const QUERY_KEY = categoryKeys.get();
-    const fetcher = categoryApi.getCategories;
+    const fetcher = () => api.get(QUERY_KEY);
+    const query = useQuery([QUERY_KEY], fetcher);
+
+    useEffect(() => {
+        if (query.isError) {
+            // error handling
+        }
+    }, [query.isError]);
 
     return useQuery(QUERY_KEY, fetcher);
 };
