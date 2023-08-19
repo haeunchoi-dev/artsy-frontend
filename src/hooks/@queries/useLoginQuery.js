@@ -1,14 +1,21 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { userKeys } from '@constants/queryKey';
-import loginApi from '@api/login';
+import api from '@utils/api';
+import { useEffect } from 'react';
+
+export const QUERY_KEY = '/api/user/login-with-email';
 
 const useLoginQuery = () => {
     const queryClient = useQueryClient();
-    const QUERY_KEY = userKeys.post();
-    const fetcher = loginApi.signInWithEmail;
-    return useMutation((loginInfo) => fetcher(loginInfo), {
-        onSuccess: () => queryClient.invalidateQueries(QUERY_KEY),
+    const fetcher = (data) => api.post(QUERY_KEY, data);
+    const query = useMutation((loginInfo) => fetcher(loginInfo), {
+        onSuccess: () => queryClient.invalidateQueries([QUERY_KEY]),
     });
+    useEffect(() => {
+        if (query.isError) {
+            // error handling
+        }
+    }, [query.isError]);
+    return query;
 };
 
 export default useLoginQuery;
