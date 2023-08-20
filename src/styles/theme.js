@@ -11,7 +11,7 @@ const gradeColor = {
     darkSilver: '#848796',
     bronze: '#A69A89',
     silver: '#BCBCE4',
-    gold: 'E8BC4E',
+    gold: '#E8BC4E',
 };
 
 const fontSizes = {

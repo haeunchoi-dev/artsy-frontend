@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components';
 
-const StyledBarWrap = styled.div``;
+const StyledBarWrap = styled.div`
+    width: ${({ $width }) => ($width ? $width + 'rem' : '100%')};
+`;
 
 const StyledLegend = styled.div`
     width: ${({ $width }) => ($width ? $width + 'rem' : '100%')};
@@ -10,7 +12,8 @@ const StyledLegend = styled.div`
 
     > span:first-of-type {
         font-weight: bold;
-        font-size: ${({ theme }) => theme.fontSizes.text};
+        font-size: ${({ $fontSize }) => $fontSize};
+        color: ${({ $fontColor }) => $fontColor};
     }
     > span:last-of-type {
         font-weight: bold;

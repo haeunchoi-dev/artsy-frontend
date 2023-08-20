@@ -65,16 +65,22 @@ const GradeBoxTop = styled.div`
         font-size: ${({ theme }) => theme.fontSizes.text};
     }
 
-    &:before {
+    span {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 6rem;
         height: 6rem;
         border-radius: 50%;
-        /* 지영님 코드 머지시 뱃지 이미지로 교체 */
         background-color: #eee;
+
+        img {
+            width: 4rem;
+        }
     }
 `;
 
