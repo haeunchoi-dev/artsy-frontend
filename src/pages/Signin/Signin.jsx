@@ -4,7 +4,18 @@ import Input from '@components/@common/Input/Input';
 import { useEffect, useMemo, useState } from 'react';
 import useLoginQuery from '@hooks/@queries/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
-import SplitLayout from '../../components/SplitLayout/SplitLayout';
+import SplitLayout from '@components/SplitLayout/SplitLayout';
+import { ERROR_MESSAGE } from '@constants/message';
+import { VALIDATE } from '@constants/regexp';
+
+function checkValidEmail(email) {
+    var pattern = VALIDATE.email;
+    if (email.match(pattern) === null) {
+        alert(ERROR_MESSAGE.incorrectEmailFormat);
+        return false;
+    }
+    return true;
+}
 
 const Signin = () => {
     const navigate = useNavigate();
@@ -13,15 +24,21 @@ const Signin = () => {
         password: '',
     });
     const { mutate, isSuccess } = useLoginQuery();
+
     useEffect(() => {
         if (isSuccess) navigate('../');
     }, [isSuccess]);
+
     const handleChange = (e) => {
         setLoginInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(loginInfo);
+        const isCorrectFormat = checkValidEmail(loginInfo.email);
+        if (!isCorrectFormat) {
+            setLoginInfo({ email: '', password: '' });
+            return;
+        }
         mutate(loginInfo);
         setLoginInfo({ email: '', password: '' });
     };
