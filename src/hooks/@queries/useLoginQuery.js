@@ -17,12 +17,18 @@ const useLoginQuery = () => {
     useEffect(() => {
         if (query.isError) {
             const errorType = query.error.response.data.error.type;
-            if (errorType === ERROR_TYPE.INCORRECT_PASSWORD) {
-                return alert(ERROR_MESSAGE.incorrectPassword);
-            } else if (errorType === ERROR_TYPE.NOT_FOUND_EMAIL) {
-                return alert(ERROR_MESSAGE.notFoundEmail);
-            } else {
-                return alert('관리자에게 문의하세요');
+            switch (errorType) {
+                case ERROR_TYPE.INCORRECT_PASSWORD: {
+                    alert(ERROR_MESSAGE.incorrectPassword);
+                    break;
+                }
+                case ERROR_TYPE.NOT_FOUND_EMAIL: {
+                    alert(ERROR_MESSAGE.notFoundEmail);
+                    break;
+                }
+                default: {
+                    alert('관리자에게 문의하세요');
+                }
             }
         }
     }, [query.isError]);
