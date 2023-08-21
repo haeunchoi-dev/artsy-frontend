@@ -19,8 +19,7 @@ const axiosInstance = axios.create(config);
 axiosInstance.interceptors.response.use(
     (response) => response,
     (error) => {
-        const appError = error.response.data.error;
-        const { type } = appError;
+        const type = error?.response?.data?.error?.type;
 
         if (!type) {
             alert(ERROR_MESSAGE.unexpected);
