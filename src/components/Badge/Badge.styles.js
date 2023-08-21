@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import GradeBar from '@components/@common/GradeBar/GradeBar';
 
 const Badge = styled.div`
     box-sizing: border-box;
     width: 100%;
-    padding: 30px 25px;
+    padding: 30px 25px 48px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -39,39 +40,14 @@ const ImageWrapper = styled.div`
         height: auto;
     }
 `;
-const Description = styled.p`
+const Comment = styled.p`
     font-size: 1.8rem;
-    line-height: 2.2rem;
+    line-height: 2.6rem;
     font-weight: bold;
     color: white;
     margin-bottom: 0.4rem;
 `;
-const BadgeValue = styled.p`
-    align-self: flex-end;
-    color: white;
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin-bottom: 1.6rem;
-    span {
-        font-size: 0.9rem;
-        font-weight: normal;
-
-        color: ${({ theme }) => theme.colors.sub2};
-    }
-`;
-const Bar = styled.div`
-    width: 100%;
-    height: 6px;
+const ExtendGradeBar = styled(GradeBar)`
     margin-bottom: 1.8rem;
-    border-radius: 6px;
-    background-color: white;
-    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25) inset;
 `;
-const Value = styled.div`
-    width: ${({ $all, $value }) => parseInt(($value / $all) * 100)}%;
-    height: 6px;
-    border-radius: 6px;
-    background-color: ${({ theme }) => theme.colors.sub2};
-    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25) inset;
-`;
-export { Badge, Description, ImageWrapper, Bar, Value, BadgeValue };
+export { Badge, Comment, ImageWrapper, ExtendGradeBar };
