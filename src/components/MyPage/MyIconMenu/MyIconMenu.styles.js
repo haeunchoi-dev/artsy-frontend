@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
-const StyledIconButton = styled(Link)`
+const IconButton = styled(Link)`
     /* 초기화 */
     outline: none;
     border: 0px;
@@ -15,8 +15,7 @@ const StyledIconButton = styled(Link)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: ${({ $size }) => $size};
-    height: ${({ $size }) => $size};
+    width: 100%;
     border-radius: 8px;
     padding: 1rem;
     box-sizing: border-box;
@@ -45,4 +44,10 @@ const StyledIconButton = styled(Link)`
     }
 `;
 
-export default StyledIconButton;
+const IconMenu = styled.div`
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+`;
+
+export { IconButton, IconMenu };

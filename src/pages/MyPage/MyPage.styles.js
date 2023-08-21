@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const MyPage = styled.div`
     ${({ theme }) => theme.media.labtop} {
@@ -31,13 +32,8 @@ const DataWrap = styled.section`
     }
 `;
 
-const IconMenuList = styled.div`
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-`;
-
-const GradeBox = styled.div`
+const GradeBox = styled(Link)`
+    display: block;
     margin-top: 2rem;
     padding: 2rem;
     border-radius: 10px;
@@ -84,4 +80,4 @@ const GradeBoxTop = styled.div`
     }
 `;
 
-export { MyPage, ViewWrap, IconMenuList, DataWrap, GradeBox, GradeBoxTop };
+export { MyPage, ViewWrap, DataWrap, GradeBox, GradeBoxTop };
