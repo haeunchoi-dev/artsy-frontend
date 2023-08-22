@@ -1,8 +1,11 @@
+import formatKstDate from '@utils/foramtKstDate';
+
 const formatDate = (date) => {
-    date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDay();
+    const kst = formatKstDate(date);
+
+    const year = kst.getFullYear();
+    const month = kst.getMonth() + 1;
+    const day = kst.getDay();
 
     return `${year}.${month}.${day}`;
 };
