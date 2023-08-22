@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import { useTheme } from 'styled-components';
-import { Link, useSearchParams, useNavigate } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import useCategoryQuery from '@hooks/@queries/useCategoryQuery';
 import useTicketInfiniteQuery from '@hooks/@queries/useTicketInfiniteQuery';
@@ -9,9 +9,13 @@ import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
 import Loading from '@components/@common/Loading/Loading.jsx';
 import TopButton from '@components/@common/TopButton/TopButton.jsx';
+import TitleWrap from '@components/TicketListPage/TitleWrap/TitleWrap.jsx';
+import CategoryFilter from '@components/TicketListPage/CategoryFilter/CategoryFilter.jsx';
+import InfiniteLoading from '@components/TicketListPage/InfiniteLoading/InfiniteLoading.jsx';
+import NoTicket from '@components/TicketListPage/NoTicket/NoTicket.jsx';
 
 import formatDate from '@utils/formatDate';
-import * as L from './List.styles';
+import * as L from './TicketList.styles';
 
 const List = () => {
     const theme = useTheme();
@@ -60,52 +64,42 @@ const List = () => {
 
     return (
         <>
-            {' '}
-            <TopButton></TopButton>
+            <TopButton />
             <Container>
-                <L.TitleWrap>
-                    <h4>총 {ticketQuery?.data?.pages[0]?.totalCount ?? 0} 개</h4>
-                </L.TitleWrap>
+                <TitleWrap totalCount={ticketQuery?.data?.pages[0]?.totalCount} />
             </Container>
             <L.FilterWrap>
                 <L.FilterInner>
-                    <L.Filter onChange={handleFilter} value={categoryId ?? '전체'}>
-                        <option value="0">전체</option>
-                        {categoryQuery?.data?.map(({ id, name }) => (
-                            <option key={id} value={id}>
-                                {name}
-                            </option>
-                        ))}
-                    </L.Filter>
+                    <CategoryFilter
+                        onChange={(e) => handleFilter(e)}
+                        value={categoryId ?? '전체'}
+                        categories={categoryQuery?.data}
+                    />
                     <Button size="small" color={theme.colors.point1} onClick={() => navigate('/ticket/create')}>
                         티켓추가
                     </Button>
                 </L.FilterInner>
             </L.FilterWrap>
             <Container>
-                {ticketQuery?.data?.pages[0].ticketList.length === 0 && (
-                    <L.NoTicket>아직 추가하신 기록이 없습니다</L.NoTicket>
-                )}
+                {ticketQuery?.data?.pages[0].ticketList.length === 0 && <NoTicket />}
                 <L.TicketList>
                     {ticketQuery?.data?.pages.map((page) =>
                         page?.ticketList.map(({ id, categoryColor, title, showDate, rating, fileImageUrl }) => {
                             return (
-                                <Link to={`/ticket/detail/${id}`} key={id}>
-                                    <Ticket
-                                        categoryColor={categoryColor}
-                                        title={title}
-                                        showDate={formatDate(showDate)}
-                                        rating={rating}
-                                        imUrl={fileImageUrl}
-                                    />
-                                </Link>
+                                <Ticket
+                                    key={id}
+                                    categoryColor={categoryColor}
+                                    title={title}
+                                    showDate={formatDate(showDate)}
+                                    rating={rating}
+                                    imUrl={fileImageUrl}
+                                    to={`/ticket/detail/${id}`}
+                                />
                             );
                         })
                     )}
                 </L.TicketList>
-                <L.LoadingText ref={observerEl}>
-                    {ticketQuery.isFetchingNextPage && ticketQuery.hasNextPage ? <span></span> : ''}
-                </L.LoadingText>
+                <InfiniteLoading ref={observerEl} isNext={ticketQuery.isFetchingNextPage && ticketQuery.hasNextPage} />
             </Container>
         </>
     );

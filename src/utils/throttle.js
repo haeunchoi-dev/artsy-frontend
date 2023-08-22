@@ -1,4 +1,4 @@
-const throttle = (callback, delay) => {
+const throttle = (callback, delay = 100) => {
     let timerId;
 
     return () => {

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const ImageBox = styled.div`
     flex: 1 auto;
@@ -23,7 +24,7 @@ const ImageBox = styled.div`
     }
 `;
 
-const Wrap = styled.div`
+const Wrap = styled(Link)`
     overflow: hidden;
     position: relative;
     display: flex;

@@ -2,9 +2,9 @@ import * as T from './Ticket.styles';
 import starIconUrl from '@assets/icons/icon-star.png';
 import ticketUrl from '@assets/images/ticket.png';
 
-const Ticket = ({ title, showDate, rating, categoryColor, imUrl }) => {
+const Ticket = ({ title, showDate, rating, categoryColor, imUrl, to }) => {
     return (
-        <T.Wrap $categoryColor={categoryColor}>
+        <T.Wrap $categoryColor={categoryColor} to={to}>
             <T.ImageBox>
                 {imUrl ? <img src={imUrl} alt={title} /> : <img src={ticketUrl} alt="기본이미지" />}
             </T.ImageBox>
