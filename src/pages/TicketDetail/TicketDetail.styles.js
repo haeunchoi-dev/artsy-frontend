@@ -166,13 +166,6 @@ const EditWrap = styled.div`
     }
 `;
 
-const ReviewWrap = styled.div`
-    display: flex;
-    align-items: center;
-    ${({ theme }) => theme.media.labtop} {
-    }
-`;
-
 export {
     Container,
     MainWrap,
@@ -185,5 +178,4 @@ export {
     UnderLine,
     EditWrap,
     DetailWrap,
-    ReviewWrap,
 };

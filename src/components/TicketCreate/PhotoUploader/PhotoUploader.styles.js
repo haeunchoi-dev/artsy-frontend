@@ -7,11 +7,13 @@ const ImgWrap = styled.button`
 
     width: 7rem;
     height: 7rem;
-    margin: 1rem 0;
+    margin: 2rem 0;
 
     border: 1px solid #c5c5c5;
     border-radius: 10px;
     background-color: white;
+
+    cursor: pointer;
 
     img {
         width: 3.5rem;

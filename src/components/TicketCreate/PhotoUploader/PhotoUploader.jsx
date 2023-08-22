@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import * as P from '../PhotoUploader.styles';
+import * as P from './PhotoUploader.styles';
 import galleryIconUrl from '@assets/icons/icon-gallery.png';
 
 const PhotoUploader = ({ setImgfile, setImgSrc, setImgName }) => {

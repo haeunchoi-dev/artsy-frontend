@@ -1,5 +1,5 @@
 import * as D from './DetailText.styles';
-import RatingStar from './RatingStar';
+import RatingStar from './RatingStar/RatingStar';
 
 const DetailText = ({ label, content, rating }) => {
     return (
