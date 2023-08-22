@@ -23,8 +23,8 @@ const sizeStyles = css`
 `;
 
 const fullWidthStyle = css`
-    ${({ full }) =>
-        full &&
+    ${({ $full }) =>
+        $full &&
         css`
             width: 100%;
         `}
