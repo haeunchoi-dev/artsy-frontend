@@ -5,20 +5,11 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import useLoginQuery from '@hooks/@queries/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
 import SplitLayout from '@components/SplitLayout/SplitLayout';
-import { ERROR_MESSAGE } from '@constants/message';
-import { VALIDATE } from '@constants/regexp';
-import GlobalStyle from '@styles/GlobalStyles';
 import useWindowWidth from '@hooks/useWindowWidth';
 import IntroBox from '@components/introBox/IntroBox';
 
-function checkValidEmail(email) {
-    var pattern = VALIDATE.email;
-    if (email.match(pattern) === null) {
-        alert(ERROR_MESSAGE.incorrectEmailFormat);
-        return false;
-    }
-    return true;
-}
+import GlobalStyle from '@styles/GlobalStyles';
+import checkValidation from '../../utils/checkValidation';
 
 const Signin = () => {
     const [loginInfo, setLoginInfo] = useState({
@@ -39,7 +30,8 @@ const Signin = () => {
     };
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const isCorrectFormat = checkValidEmail(loginInfo.email);
+        const email = loginInfo.email;
+        const isCorrectFormat = checkValidation({ email });
         if (!isCorrectFormat) {
             setLoginInfo({ email: '', password: '' });
             emailInputRef.current.focus();

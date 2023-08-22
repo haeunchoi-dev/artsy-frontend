@@ -5,6 +5,7 @@ const Introduction = styled.div`
     display: none;
     position: relative;
     height: 100%;
+    padding-left: 20px;
     color: #fff;
     background: linear-gradient(180deg, rgba(105, 96, 204, 0.8) 0%, #554dab 100%);
     > h2 {
