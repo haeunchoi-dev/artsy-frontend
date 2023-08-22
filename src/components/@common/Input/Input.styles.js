@@ -20,7 +20,7 @@ const StyledInput = styled.input`
     font-size: 16px;
     padding: 8px 22px;
     margin-bottom: 4px;
-    border-radius: ${(props) => (props.$rounded ? '100px' : '0')};
+    border-radius: ${({ theme, $rounded }) => ($rounded ? theme.borderRadius.large : '0')};
     border: ${(props) => (props.$rounded ? '2px solid #c5c5c5' : 'none')};
     border-bottom: 2px solid #c5c5c5;
     border-color: ${(props) => (props.$valid ? '#c5c5c5' : '#FF1F00')};

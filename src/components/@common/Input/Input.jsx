@@ -8,7 +8,7 @@ import { StyledForm, StyledInput, StyledLabel, StyledRequired, StyledErrorMessag
  * @param {string} id label의 htmlfor, input의 id, name값
  * @param {event: ChangeEvent<HTMLInputElement>} onChange
  * @param {React.RefObject<HTMLInputElement>} inputRef
- * @param {boolean} isRouned input의 형태가 라운드이면 true 언더라인이면 false
+ * @param {boolean} rounded input의 형태가 라운드이면 true 언더라인이면 false
  * @param {string} min input value의 최소 길이
  * @param {string} max input value의 최대 길이
  * @param {boolean} isValid 유효성 검사 결과값
