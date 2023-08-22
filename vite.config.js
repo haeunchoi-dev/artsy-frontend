@@ -17,6 +17,10 @@ export default defineConfig({
                 replacement: path.resolve(__dirname, 'src/api'),
             },
             {
+                find: '@contexts',
+                replacement: path.resolve(__dirname, 'src/contexts'),
+            },
+            {
                 find: '@assets',
                 replacement: path.resolve(__dirname, 'src/assets'),
             },

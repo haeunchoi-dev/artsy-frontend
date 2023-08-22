@@ -5,7 +5,7 @@ const formatDate = (date) => {
 
     const year = kst.getFullYear();
     const month = kst.getMonth() + 1;
-    const day = kst.getDay();
+    const day = kst.getDate();
 
     return `${year}.${month}.${day}`;
 };
