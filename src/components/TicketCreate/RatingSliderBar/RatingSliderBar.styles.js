@@ -7,12 +7,19 @@ const SliderWrap = styled.div`
     div {
         display: flex;
         justify-content: flex-end;
+        align-items: flex-end;
+        margin-bottom: 1rem;
     }
 
     h5 {
         font-size: 1.7rem;
         color: ${({ theme }) => theme.colors.point2};
-        margin-bottom: 1rem;
+        margin-right: 0.2rem;
+    }
+
+    h4 {
+        color: #6e6e6e;
+        font-size: 1.4rem;
     }
 
     input {

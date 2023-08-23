@@ -4,17 +4,18 @@ const RadioText = styled.span`
     font-size: 1.5rem;
     width: 7rem;
     height: 3rem;
-    background-color: grey;
+    background-color: #848484;
     border-radius: 12px;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #fff;
     cursor: pointer;
-    color: ${({ theme }) => theme.colors.black};
 `;
 
 const RadioButton = styled.input.attrs({ type: 'radio' })`
+    margin-right: 10px;
     &:checked {
         display: inline-block;
         background: none;
@@ -23,23 +24,24 @@ const RadioButton = styled.input.attrs({ type: 'radio' })`
     }
     &:checked + ${RadioText} {
         background-color: ${({ color }) => color};
-        color: white;
+        color: #fff;
     }
     display: none;
 `;
 
 const Container = styled.div`
-    display: grid;
+    display: flex;
     flex-direction: row;
     margin: 1.5rem 0;
+    flex-wrap: wrap;
 
-    width: fit-content;
-    grid-gap: 1rem;
+    width: 100%;
 
-    grid-template-columns: repeat(3, 1fr);
-
-    ${({ theme }) => theme.media.tablet} {
-        grid-template-columns: repeat(5, 1fr);
+    label {
+        margin-bottom: 1rem;
+        &:not(:last-child) {
+            margin-right: 1.5rem;
+        }
     }
 `;
 

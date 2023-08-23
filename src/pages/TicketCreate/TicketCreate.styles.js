@@ -6,12 +6,6 @@ const Container = styled.div`
     margin: 0 auto;
     padding: 0 3rem 0 2rem;
 
-    h3 {
-        font-weight: 500;
-        font-size: ${({ theme }) => theme.fontSizes.h5};
-        margin-bottom: 3rem;
-    }
-
     ${({ theme }) => theme.media.tablet} {
         display: flex;
         flex-direction: column;
@@ -20,6 +14,11 @@ const Container = styled.div`
 `;
 
 const TitleContainer = styled.div`
+    h3 {
+        font-weight: 700;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
     ${({ theme }) => theme.media.tablet} {
         width: 40%;
     }
@@ -34,7 +33,7 @@ const CreateForm = styled.div`
 const ImgContainer = styled.div`
     display: flex;
     align-items: flex-end;
-    margin-bottom: 4rem;
+    margin: 2rem 0;
 `;
 
 const ImgWrap = styled.div`
@@ -43,6 +42,7 @@ const ImgWrap = styled.div`
     position: relative;
 
     border: 1px solid #c5c5c5;
+    border-radius: 10px;
 
     width: 30rem;
     height: 20rem;
@@ -51,8 +51,20 @@ const ImgWrap = styled.div`
     img {
         width: 100%;
         height: 100%;
-        object-fit: fill; // 크기에 맞춰서 채움
-        //object-fit: cover; // 비율 유지하면서 자름
+        object-fit: contain;
+    }
+`;
+
+const IconWrap = styled.div`
+    cursor: pointer;
+
+    width: 3rem;
+    height: 3rem;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
     }
 `;
 
@@ -63,7 +75,7 @@ const ReviewContainer = styled.div`
 `;
 const Label = styled.label`
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 16px;
 `;
 
@@ -87,9 +99,6 @@ const ButtonContaienr = styled.div`
 
 const CreateButton = styled(Button)`
     font-size: 1.5rem;
-    /* height: 4.5rem; */
-    /* width: 12em;
-    height: 4rem; */
 `;
 
 const StyledInput = styled(Input)``;
@@ -103,6 +112,7 @@ export {
     TitleContainer,
     CreateForm,
     ImgContainer,
+    IconWrap,
     ImgWrap,
     ReviewContainer,
     Label,

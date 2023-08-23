@@ -4,17 +4,17 @@ import * as C from './CategoryButton.styles';
 const CategoryButton = ({ datas, checkedvalue, onChange }) => {
     return (
         <C.Container>
-            {datas?.map((data) => (
-                <label key={data.id} style={{ marginRight: '1%' }} htmlFor={data.name}>
+            {datas?.map(({ id, color, name }) => (
+                <label key={id} htmlFor={name}>
                     <C.RadioButton
-                        id={data.name}
-                        color={data.color}
+                        id={name}
+                        color={color}
                         type="radio"
-                        value={data.id}
-                        checked={parseInt(checkedvalue) === data.id}
+                        value={id}
+                        checked={parseInt(checkedvalue) === id}
                         onChange={onChange}
                     />
-                    <C.RadioText>{data.name}</C.RadioText>
+                    <C.RadioText>{name}</C.RadioText>
                 </label>
             ))}
         </C.Container>

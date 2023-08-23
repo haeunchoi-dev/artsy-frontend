@@ -7,7 +7,7 @@ const StyledForm = styled.div`
 `;
 const StyledLabel = styled.label`
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 600;
     margin-bottom: 16px;
 `;
 const StyledRequired = styled.span`

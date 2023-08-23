@@ -5,8 +5,8 @@ const ImgWrap = styled.button`
     justify-content: center;
     align-items: center;
 
-    width: 7rem;
-    height: 7rem;
+    width: 30rem;
+    height: 20rem;
     margin: 2rem 0;
 
     border: 1px solid #c5c5c5;
@@ -16,8 +16,8 @@ const ImgWrap = styled.button`
     cursor: pointer;
 
     img {
-        width: 3.5rem;
-        height: 3.5rem;
+        width: 5.5rem;
+        height: 5.5rem;
     }
 `;
 

@@ -36,7 +36,7 @@ const TicketCreate = () => {
 
     const [showDate, setShowDate] = useState(new Date());
     const [rating, setRating] = useState(3);
-    const [category, setCategory] = useState(parseInt(categoryId) ?? 1);
+    const [category, setCategory] = useState(categoryId ?? 1);
 
     const [imgfile, setImgfile] = useState(''); // 이미지 파일
     const [imgSrc, setImgSrc] = useState(''); // 이미지 미리보기
@@ -102,7 +102,7 @@ const TicketCreate = () => {
         // 필수
         formData.append('categoryId', parseInt(category));
         formData.append('title', inputValue.title);
-        formData.append('showDate', formatTicketDate(formatKstDate(showDate)));
+        formData.append('showDate', formatTicketDate(showDate));
 
         // 선택사항
         formData.append('place', inputValue.place);
@@ -136,9 +136,9 @@ const TicketCreate = () => {
                         <T.ImgWrap>
                             <img alt="티켓 이미지" src={imgSrc} />
                         </T.ImgWrap>
-                        <div>
-                            <img alt="삭제" style={{ cursor: 'pointer' }} src={deleteIconUrl} onClick={onResetImage} />
-                        </div>
+                        <T.IconWrap>
+                            <img alt="삭제" src={deleteIconUrl} onClick={onResetImage} />
+                        </T.IconWrap>
                     </T.ImgContainer>
                 )}
                 <T.MarginContainer>
@@ -161,7 +161,11 @@ const TicketCreate = () => {
                 <T.MarginContainer>
                     <T.Label>카테고리</T.Label>
                     <I.StyledRequired>&#42;</I.StyledRequired>
-                    <CategoryButton datas={categoryQuery?.data} checkedvalue={category} onChange={onCategoryChange} />
+                    <CategoryButton
+                        datas={categoryQuery?.data}
+                        checkedvalue={parseInt(category)}
+                        onChange={onCategoryChange}
+                    />
                 </T.MarginContainer>
                 <T.MarginContainer>
                     <Datepicker
