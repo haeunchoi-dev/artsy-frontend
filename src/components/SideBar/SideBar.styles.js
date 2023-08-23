@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components';
 import Button from '@components/@common/Button/Button';
+
 const NavBarContainer = styled.div`
     position: fixed;
     top: 0;
     right: -100%;
-    z-index: 2000;
+    z-index: ${({ theme }) => theme.layer.layer6};
     box-sizing: border-box;
     width: 0;
     max-width: 330px;
@@ -17,7 +18,7 @@ const NavBarContainer = styled.div`
         css`
             right: 0;
             width: 60%;
-            height: 100vh;
+            height: 100%;
         `}
     ${({ theme }) => theme.media.labtop} {
         width: 100%;
@@ -26,7 +27,7 @@ const NavBarContainer = styled.div`
         ${({ $open }) =>
             $open &&
             css`
-                height: 50vh;
+                height: auto;
             `}
     }
 `;
@@ -38,7 +39,7 @@ const NavBarContent = styled.div`
     align-items: flex-start;
     box-sizing: border-box;
     height: 100%;
-    padding: 20px;
+    padding: 2rem;
 
     ${({ $open }) =>
         $open &&
@@ -50,7 +51,9 @@ const NavBarContent = styled.div`
         align-items: center;
     }
 `;
-const Navbar = styled.ul``;
+const Navbar = styled.ul`
+    margin-bottom: 1.8rem;
+`;
 const NavbarItem = styled.li`
     text-align: left;
     font-size: 1.6rem;
@@ -76,57 +79,7 @@ const LogoutButton = styled(Button)`
         font-size: 1.8rem;
     }
 `;
-const ToggleButton = styled.div`
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    z-index: 2002;
-    cursor: pointer;
-    margin-left: 12px;
-    font-size: 24px;
 
-    ${({ $active }) =>
-        $active &&
-        css`
-            > span {
-                transition:
-                    0.25s margin,
-                    0.25s transform 0.25s;
-                &:nth-child(1) {
-                    margin-bottom: -2px;
-                    margin-top: 8px;
-                    transform: rotate(45deg);
-                }
-                &:nth-child(2) {
-                    transform: rotate(45deg);
-                }
-                &:nth-child(3) {
-                    margin-top: -2px;
-                    transform: rotate(135deg);
-                }
-                ${({ theme }) => theme.media.labtop} {
-                    width: 36px;
-                }
-            }
-        `}
-`;
-const ButtonBar = styled.span`
-    display: block;
-    background-color: black;
-    width: 30px;
-    height: 2px;
-    border-radius: 3px;
-    transition:
-        0.25s margin 0.25s,
-        0.25s transform;
-
-    &:nth-child(1) {
-        margin-bottom: 6px;
-    }
-    &:nth-child(3) {
-        margin-top: 6px;
-    }
-`;
 const BackModal = styled.div`
     display: ${({ $open }) => ($open ? 'block' : 'none')};
     position: fixed;
@@ -134,7 +87,16 @@ const BackModal = styled.div`
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
-    z-index: 1999;
+    z-index: ${({ theme }) => theme.layer.layer6 - 1};
 `;
-
-export { NavBarContainer, LogoutButton, Navbar, NavbarItem, ToggleButton, ButtonBar, BackModal, NavBarContent };
+const ExtendToggleButton = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    top: -45px;
+    right: 0;
+    z-index: ${({ theme }) => theme.layer.layer6 + 1};
+    max-width: 1280px;
+    margin: 0 auto;
+`;
+export { NavBarContainer, LogoutButton, Navbar, NavbarItem, BackModal, NavBarContent, ExtendToggleButton };
