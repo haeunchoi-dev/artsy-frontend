@@ -53,11 +53,11 @@ const TicketDetailWrap = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 5rem;
 
     ${({ theme }) => theme.media.labtop} {
         flex-direction: row;
         justify-content: center;
-        margin-top: -3rem;
         height: 50rem;
     }
 `;
@@ -66,11 +66,11 @@ const TicketImageWrap = styled.div`
     max-width: 100%;
     width: 200px;
     height: 290px;
+    overflow: hidden;
 
     img {
         width: 100%;
         height: 100%;
-        object-fit: contain;
         border-radius: 12px;
     }
 

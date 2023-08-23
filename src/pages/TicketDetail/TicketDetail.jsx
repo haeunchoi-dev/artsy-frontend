@@ -42,14 +42,17 @@ const TicketDetail = () => {
         }
     }, [ticketQuery.isError]);
 
+    const getBlank = (item) => {
+        if (item === '') {
+            return '-';
+        } else return item;
+    };
+
     if (ticketQuery.isLoading) return <Loading />;
     return (
         <>
             <T.TypeColorBox color={ticketData.categoryColor} />
             <T.Container>
-                <T.MainWrap>
-                    <h2>티켓 상세</h2>
-                </T.MainWrap>
                 <T.TicketDetailWrap>
                     <T.TicketImageWrap>
                         <img src={imgSrc} alt="티켓이미지" />
@@ -63,15 +66,16 @@ const TicketDetail = () => {
                             <T.DetailWrap>
                                 <DetailText label="카테고리" content={ticketData.categoryName} />
                                 <DetailText label="별점" rating={ticketData.rating} />
-                                {ticketData.place !== '' && <DetailText label="장소" content={ticketData.place} />}
-                                {ticketData.price !== 0 && (
-                                    <DetailText label="금액" content={`${ticketData.price.toLocaleString()}원`} />
-                                )}
+                                <DetailText label="장소" content={getBlank(ticketData.place)} />
+                                <DetailText
+                                    label="금액"
+                                    content={ticketData.price === 0 ? '-' : `${ticketData.price.toLocaleString()}원`}
+                                />
                                 <DetailText
                                     label="일시"
                                     content={formatTicketDate(formatKstDate(ticketData.showDate))}
                                 />
-                                {ticketData.review !== '' && <DetailText label="리뷰" content={ticketData.review} />}
+                                <DetailText label="리뷰" content={getBlank(ticketData.review)} />
                             </T.DetailWrap>
                             <T.EditWrap>
                                 <span>수정하기</span>
