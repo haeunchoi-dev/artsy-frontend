@@ -12,13 +12,6 @@ const useRegisterQuery = () => {
         onSuccess: () => queryClient.invalidateQueries([QUERY_KEY]),
     });
 
-    useEffect(() => {
-        if (mutation.isError) {
-            const errorType = mutation.error.response?.data?.error.type;
-            console.log(errorType);
-        }
-    }, [mutation.isError]);
-
     return mutation;
 };
 

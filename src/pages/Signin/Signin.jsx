@@ -7,9 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import SplitLayout from '@components/SplitLayout/SplitLayout';
 import useWindowWidth from '@hooks/useWindowWidth';
 import IntroBox from '@components/introBox/IntroBox';
-
+import { ERROR_TYPE } from '@constants/serverErrorType';
+import { ERROR_MESSAGE } from '@constants/message';
 import GlobalStyle from '@styles/GlobalStyles';
-import checkValidation from '../../utils/checkValidation';
+import checkValidation from '@utils/checkValidation';
+import useToastContext from '@hooks/useToastContext';
 
 const Signin = () => {
     const [loginInfo, setLoginInfo] = useState({
@@ -17,13 +19,32 @@ const Signin = () => {
         password: '',
     });
     const navigate = useNavigate();
-    const { mutate, isSuccess } = useLoginQuery();
+    const { mutate, isSuccess, isError, error } = useLoginQuery();
     const windowWidth = useWindowWidth();
     const emailInputRef = useRef();
     const theme = useTheme();
+    const toast = useToastContext();
     useEffect(() => {
         if (isSuccess) navigate('../');
     }, [isSuccess]);
+    useEffect(() => {
+        if (isError) {
+            const errorType = error.response?.data?.error.type;
+            switch (errorType) {
+                case ERROR_TYPE.INCORRECT_PASSWORD: {
+                    toast.show(ERROR_MESSAGE.incorrectEmailOrPassword);
+                    break;
+                }
+                case ERROR_TYPE.NOT_FOUND_EMAIL: {
+                    toast.show(ERROR_MESSAGE.incorrectEmailOrPassword);
+                    break;
+                }
+                default: {
+                    toast.show('관리자에게 문의하세요');
+                }
+            }
+        }
+    }, [isError]);
 
     const handleChange = (e) => {
         setLoginInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));

@@ -3,14 +3,15 @@ import Input from '@components/@common/Input/Input';
 import GlobalStyle from '@styles/GlobalStyles';
 import { useEffect, useRef, useState } from 'react';
 import { useTheme } from 'styled-components';
-import useCheckEmailQuery from '../../hooks/@queries/useCheckEmailQuery';
-import { ERROR_MESSAGE } from '@constants/message';
-import useRegisterQuery from '../../hooks/@queries/useRegisterQuery';
+import useCheckEmailQuery from '@hooks/@queries/useCheckEmailQuery';
+import useRegisterQuery from '@hooks/@queries/useRegisterQuery';
 import SplitLayout from '@components/SplitLayout/SplitLayout';
 import IntroBox from '@components/introBox/IntroBox';
 import { useNavigate } from 'react-router-dom';
-import checkValidation from '../../utils/checkValidation';
-
+import checkValidation from '@utils/checkValidation';
+import useToastContext from '@hooks/useToastContext';
+import { ERROR_TYPE } from '@constants/serverErrorType';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 const leftBgColor = 'background: linear-gradient(180deg, rgba(105, 96, 204, 0.8) 0%, #554dab 100%)';
 
 const Register = () => {
@@ -22,24 +23,45 @@ const Register = () => {
 
     const [isCheckEmail, setIsCheckEmail] = useState(false);
     const { data, mutate: checkDuplicatedEmail, isSuccess: isSuccessEmailCheck } = useCheckEmailQuery();
-    const { mutate: signUp, isSuccess: isSuccessRegister } = useRegisterQuery();
+    const {
+        mutate: signUp,
+        isSuccess: isSuccessRegister,
+        isError: isErrorRegister,
+        error: registerError,
+    } = useRegisterQuery();
     const navigate = useNavigate();
     const theme = useTheme();
     const nameInputRef = useRef();
+    const toast = useToastContext();
     useEffect(() => {
         if (!isCheckEmail && isSuccessEmailCheck) {
             if (data.isExists) {
-                alert(ERROR_MESSAGE.duplicatedEmail);
+                toast.show(ERROR_MESSAGE.duplicatedEmail);
             } else {
-                alert('사용가능한 이메일 주소입니다.');
+                toast.show(SUCCESS_MESSAGE.validEmail);
                 setIsCheckEmail(true);
             }
         }
+    }, [isSuccessEmailCheck]);
+
+    useEffect(() => {
+        if (isErrorRegister) {
+            const errorType = registerError.response?.data?.error.type;
+            switch (errorType) {
+                case ERROR_TYPE.INVALID_PARAM: {
+                    toast.show(ERROR_MESSAGE.incorrectRegister);
+                    break;
+                }
+                default: {
+                    toast.show('관리자에게 문의하세요');
+                }
+            }
+        }
         if (isSuccessRegister) {
-            alert('성공적으로 가입되었습니다!');
+            toast.show(SUCCESS_MESSAGE.successRegister);
             navigate('/signin');
         }
-    }, [isSuccessEmailCheck, isSuccessRegister]);
+    }, [isSuccessRegister, isErrorRegister]);
 
     const handleChange = (e) => {
         setUserInfo((cur) => ({ ...cur, [e.target.name]: e.target.value }));
@@ -65,7 +87,7 @@ const Register = () => {
 
         const isCorrectFormat = checkValidation({ displayName }) && checkValidation({ password });
         if (!isCorrectFormat) {
-            alert('닉네임 또는 비밀번호를 조건에 맞게 입력했는지 확인하세요');
+            toast.show(ERROR_MESSAGE.incorrectRegister);
             return;
         }
         signUp(userInfo);

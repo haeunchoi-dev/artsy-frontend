@@ -1,7 +1,7 @@
 import Badge from '@components/Badge/Badge';
 import * as H from './Home.styles';
 import Record from '@components/Record/Record';
-import Greeting from '../../components/Greeting/Greeting';
+import Greeting from '@components/Greeting/Greeting';
 import useUserInfoQuery from '@hooks/@queries/useUserInfoQuery';
 import Loading from '@components/@common/Loading/Loading';
 

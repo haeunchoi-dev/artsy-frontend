@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import * as S from './SideBar.styles';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import useLogoutQuery from '../../hooks/@queries/useLogoutQuery';
+import useLogoutQuery from '@hooks/@queries/useLogoutQuery';
+import useToastContext from '@hooks/useToastContext';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
+
 const SideBar = () => {
     const [isToggle, setIstoggle] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    const { mutate, isSuccess } = useLogoutQuery();
+    const toast = useToastContext();
+    const { mutate, isSuccess, isError } = useLogoutQuery();
     useEffect(() => {
         setIstoggle((cur) => !cur);
-    }, [isSuccess, location.pathname]);
-
+    }, [location.pathname]);
+    useEffect(() => {
+        if (isSuccess) {
+            toast.show(SUCCESS_MESSAGE.successLogout);
+            navigate('/signin');
+        }
+        if (isError) {
+            toast.show(ERROR_MESSAGE.failLogout);
+        }
+    }, [isSuccess, isError]);
     const handleLogout = () => {
         mutate();
-        alert('로그아웃 했습니다.');
-        navigate('/signin');
     };
 
     return (

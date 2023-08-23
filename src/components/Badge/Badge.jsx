@@ -1,8 +1,8 @@
 import React from 'react';
 import * as B from './Badge.styles';
 import { useTheme } from 'styled-components';
-import calculateGrade from '../../utils/calculateGrade';
-
+import calculateGrade from '@utils/calculateGrade';
+import { getIconUrl } from '@utils/getImageUrl';
 const Badge = ({ totalTicket }) => {
     const theme = useTheme();
     const { name: userGrade, targetValue, imageName } = calculateGrade(totalTicket);
@@ -13,7 +13,7 @@ const Badge = ({ totalTicket }) => {
     return (
         <B.Badge $theme={theme}>
             <B.ImageWrapper>
-                <img src={`/src/assets/icons/badge_${imageName}.png`} alt={userGrade} />
+                <img src={getIconUrl(`badge_${imageName}`)} alt={userGrade} />
             </B.ImageWrapper>
             {isMasterGrade(userGrade) ? (
                 <B.Comment>

@@ -1,9 +1,10 @@
 import React from 'react';
 import * as C from './CategoryLink.styles';
 import { Link } from 'react-router-dom';
+import { getIconUrl } from '@utils/getImageUrl';
 
 const getCategoryImageURL = (categoryId) => {
-    return `/src/assets/icons/category_${categoryId}.png`;
+    return getIconUrl(`category_${categoryId}`);
 };
 
 const CategoryLink = ({ name, categoryId }) => {
