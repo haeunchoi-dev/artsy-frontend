@@ -5,7 +5,7 @@ const StyledPageNotFound = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 15rem;
+    margin: 10rem 0;
 
     h2 {
         margin: 1rem 0 4rem;

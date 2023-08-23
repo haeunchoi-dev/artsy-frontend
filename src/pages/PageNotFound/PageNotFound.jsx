@@ -14,7 +14,7 @@ const PageNotFound = () => {
                 <img src={noPageUrl} alt="페이지없음" />
             </P.StyledIcon>
             <h2>페이지를 찾을 수 없습니다.</h2>
-            <Button size="large" onClick={() => navigate('/')}>
+            <Button size="medium" onClick={() => navigate('/')}>
                 홈으로 돌아가기
             </Button>
         </P.StyledPageNotFound>
