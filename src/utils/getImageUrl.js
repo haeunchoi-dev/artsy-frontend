@@ -1,11 +1,9 @@
 const getIconUrl = (imageName) => {
-    const url = new URL(`../assets/icons/`, import.meta.url).href;
-    return `${url}/${imageName}.png`;
+    return new URL(`../assets/icons/${imageName}.png`, import.meta.url).href;
 };
 
 const getImageUrl = (imageName) => {
-    const url = new URL(`../assets/images/`, import.meta.url).href;
-    return `${url}/${imageName}.png`;
+    return new URL(`../assets/images/${imageName}.png`, import.meta.url).href;
 };
 
 export { getIconUrl, getImageUrl };

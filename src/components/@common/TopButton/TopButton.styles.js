@@ -7,7 +7,7 @@ const StyledTopButton = styled.button`
     outline: none;
 
     /* 스타일 */
-    z-index: 900;
+    z-index: ${({ theme }) => theme.layer.layer4};
     position: fixed;
     bottom: 2rem;
     right: 2rem;
