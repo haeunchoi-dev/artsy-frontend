@@ -213,6 +213,10 @@ const GlobalStyle = createGlobalStyle`
     }
 
     /* reset override */
+    * {
+        box-sizing: border-box;
+    }
+    
     html,
     body {
         height: 100%;

@@ -1,11 +1,32 @@
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
-    // 임시
-    height: 150px;
-    line-height: 150px;
-    text-align: center;
-    background-color: #eee;
+    background-color: #f7f7f7;
 `;
 
-export default StyledFooter;
+const StyledFooterInner = styled.div`
+    max-width: ${({ theme }) => theme.devicesSize.labtop};
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    box-sizing: border-box;
+`;
+
+const StyledProjectInfo = styled.ul`
+    font-size: ${({ theme }) => theme.fontSizes.text};
+    color: #909090;
+
+    > li {
+        display: flex;
+        gap: 3rem;
+
+        b {
+            width: 10rem;
+        }
+
+        + li {
+            margin-top: 0.4rem;
+        }
+    }
+`;
+
+export { StyledFooter, StyledFooterInner, StyledProjectInfo };
