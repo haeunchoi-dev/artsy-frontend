@@ -9,6 +9,7 @@ const CategoryLink = styled.div`
     padding: 1.6rem;
     border-radius: 10px;
     box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
+    cursor: pointer;
     ${({ theme }) => theme.media.tablet} {
         width: auto;
         height: auto;

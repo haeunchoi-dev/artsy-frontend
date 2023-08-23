@@ -13,7 +13,7 @@ const Badge = ({ totalTicket }) => {
     return (
         <B.Badge $theme={theme}>
             <B.ImageWrapper>
-                <img src={getIconUrl(`badge_${imageName}`)} alt={userGrade} />
+                <img src={getIconUrl(`Badge_${imageName}`)} alt={userGrade} />
             </B.ImageWrapper>
             {isMasterGrade(userGrade) ? (
                 <B.Comment>

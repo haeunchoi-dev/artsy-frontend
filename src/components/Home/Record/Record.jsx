@@ -1,6 +1,6 @@
 import React from 'react';
 import * as R from './Record.styles';
-import CategoryLink from '@components/CategoryLink/CategoryLink';
+import CategoryLink from '@components/Home/CategoryLink/CategoryLink';
 import useCategoryQuery from '@hooks/@queries/useCategoryQuery';
 
 const Record = () => {
