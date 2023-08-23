@@ -11,7 +11,7 @@ const GradeBox = ({ userInfo, gradeInfo, gradeNextInfo }) => {
         <G.StyledGradeBox>
             <G.StyledGradeInfo to="">
                 <span>
-                    <img src={getIconUrl(`badge_${gradeInfo?.imageName}`)} alt={gradeInfo?.name} />
+                    <img src={getIconUrl(`Badge_${gradeInfo?.imageName}`)} alt={gradeInfo?.name} />
                 </span>
                 <h4>{gradeInfo?.name}</h4>
                 {gradeNextInfo?.isNext === false ? (
