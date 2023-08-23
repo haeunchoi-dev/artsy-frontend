@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledLoading = styled.div`
-    z-index: 2000;
+    z-index: ${({ theme }) => theme.layer.layer8};
     position: fixed;
     top: 0;
     right: 0;

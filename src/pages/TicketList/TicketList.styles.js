@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const FilterWrap = styled.div`
-    z-index: 1000;
+    z-index: ${({ theme }) => theme.layer.layer3};
     position: sticky;
     top: 50px;
     padding: 1rem 0;
@@ -20,6 +20,8 @@ const FilterInner = styled.div`
 const TicketList = styled.div`
     display: grid;
     grid-row-gap: 1.6rem;
+    margin-top: 2rem;
+
     ${({ theme }) => theme.media.tablet} {
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 1.6rem;

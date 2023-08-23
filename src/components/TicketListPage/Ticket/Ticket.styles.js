@@ -28,7 +28,7 @@ const Wrap = styled(Link)`
     overflow: hidden;
     position: relative;
     display: flex;
-    height: 14rem;
+    height: 16rem;
     border-radius: 8px;
     padding-left: 2rem;
     box-sizing: border-box;

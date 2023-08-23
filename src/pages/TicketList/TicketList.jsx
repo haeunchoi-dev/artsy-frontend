@@ -4,11 +4,11 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 
 import useCategoryQuery from '@hooks/@queries/useCategoryQuery';
 import useTicketInfiniteQuery from '@hooks/@queries/useTicketInfiniteQuery';
-import Ticket from '@components/Ticket/Ticket';
 import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
-import Loading from '@components/@common/Loading/Loading.jsx';
 import TopButton from '@components/@common/TopButton/TopButton.jsx';
+import TicketLoading from '@components/TicketListPage/TicketLoading/TicketLoading.jsx';
+import Ticket from '@components/TicketListPage/Ticket/Ticket';
 import TitleWrap from '@components/TicketListPage/TitleWrap/TitleWrap.jsx';
 import CategoryFilter from '@components/TicketListPage/CategoryFilter/CategoryFilter.jsx';
 import InfiniteLoading from '@components/TicketListPage/InfiniteLoading/InfiniteLoading.jsx';
@@ -60,8 +60,6 @@ const List = () => {
         return () => observer.unobserve(element);
     }, [ticketQuery.fetchNextPage, ticketQuery.hasNextPage, handleObserver]);
 
-    if (ticketQuery.isLoading) return <Loading />;
-
     return (
         <>
             <TopButton />
@@ -81,6 +79,7 @@ const List = () => {
                 </L.FilterInner>
             </L.FilterWrap>
             <Container>
+                {ticketQuery?.isLoading && <TicketLoading />}
                 {ticketQuery?.data?.pages[0].ticketList.length === 0 && <NoTicket />}
                 <L.TicketList>
                     {ticketQuery?.data?.pages.map((page) =>
