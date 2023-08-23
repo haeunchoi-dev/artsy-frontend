@@ -64,4 +64,14 @@ export default defineConfig({
             },
         },
     },
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://34.64.49.14/api',
+                changeOrigin: true,
+                secure: false,
+                rewrite: (path) => path.replace(/^\/api/, ''),
+            },
+        },
+    },
 });
