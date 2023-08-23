@@ -23,10 +23,9 @@ const Intro = () => {
                             <br /> 나만의 티켓북
                         </h2>
                         <p>이제 온라인으로 나만의 문화 티켓을 기록하세요.</p>
-
-                        <Button size="medium" onClick={() => navigate('/register')}>
+                        <I.MainButton size="medium" color="#fff" onClick={() => navigate('/register')}>
                             바로 시작하기
-                        </Button>
+                        </I.MainButton>
                     </I.MainText>
                 </I.MainVisual>
             </Container>
@@ -62,10 +61,13 @@ const Intro = () => {
                 </ul>
             </I.ServiceInfo>
             <I.MainBanner>
-                <h3>간편하게 사용할 수 있는 나만의 티켓북</h3>
-                <Button size="medium" onClick={() => navigate('/register')}>
+                <h3>
+                    간편하게 사용할 수 있는
+                    <br /> 나만의 티켓북
+                </h3>
+                <I.BannerButton size="small" onClick={() => navigate('/register')}>
                     바로 시작하기
-                </Button>
+                </I.BannerButton>
             </I.MainBanner>
         </>
     );

@@ -1,16 +1,17 @@
 import styled from 'styled-components';
 
+import Button from '@components/@common/Button/Button';
 import introUrl from '@assets/images/img-intro.png';
 
 const MainVisual = styled.section`
     overflow: hidden;
     position: relative;
-    min-height: 200px;
+    min-height: 30rem;
     height: 40vh;
     border-radius: 1rem;
 
     /* media */
-    ${({ theme }) => theme.media.labtop} {
+    ${({ theme }) => theme.media.tablet} {
         height: 50vh;
     }
 `;
@@ -22,13 +23,13 @@ const MainText = styled.div`
     height: 100%;
     padding: 3rem 2rem;
     box-sizing: border-box;
+    color: #fff;
 
     h2 {
         font-size: ${({ theme }) => theme.fontSizes.h5};
     }
     p {
         margin-top: 1rem;
-        color: #909090;
         font-size: ${({ theme }) => theme.fontSizes.text};
     }
 
@@ -38,7 +39,9 @@ const MainText = styled.div`
     }
 
     /* media */
-    ${({ theme }) => theme.media.labtop} {
+    ${({ theme }) => theme.media.tablet} {
+        color: ${({ theme }) => theme.colors.black};
+
         h2 {
             font-size: ${({ theme }) => theme.fontSizes.h4};
         }
@@ -48,7 +51,7 @@ const MainText = styled.div`
         }
         button {
             align-self: flex-start;
-            padding: 0.8rem 2rem;
+            padding: 0.8rem 4rem;
             font-size: ${({ theme }) => theme.fontSizes.body};
         }
     }
@@ -56,27 +59,32 @@ const MainText = styled.div`
 
 const MainImage = styled.div`
     z-index: -1;
+    overflow: hidden;
     position: absolute;
     width: 100%;
     height: 100%;
-    background: url(${introUrl}) no-repeat center / cover;
+    background: linear-gradient(146deg, #8b97ff 0%, #7a85e0 100%);
 
     &:before {
         content: '';
+        position: absolute;
         display: block;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.4);
+        width: 20rem;
+        height: 20rem;
+        background: url(${introUrl}) no-repeat right bottom / 100%;
+        right: 0;
+        bottom: 0;
     }
 
     /* media */
-    ${({ theme }) => theme.media.labtop} {
-        width: 50%;
+    ${({ theme }) => theme.media.tablet} {
+        width: 40%;
         right: 0;
         border-radius: 2rem;
 
         &:before {
-            display: none;
+            width: 28rem;
+            height: 28rem;
         }
     }
 `;
@@ -97,7 +105,7 @@ const ServiceIcon = styled.div`
     }
 
     /* media */
-    ${({ theme }) => theme.media.labtop} {
+    ${({ theme }) => theme.media.tablet} {
         width: 8rem;
         height: 8rem;
 
@@ -152,10 +160,11 @@ const ServiceInfo = styled.div`
     }
 
     /* media */
-    ${({ theme }) => theme.media.labtop} {
+    ${({ theme }) => theme.media.tablet} {
         & {
             max-width: ${({ theme }) => theme.devicesSize.labtop};
             margin: 10rem auto 0;
+            padding: 0 20px;
         }
 
         > ul {
@@ -202,16 +211,26 @@ const MainBanner = styled.div`
     margin-top: 4rem;
     padding: 4rem;
     box-sizing: border-box;
-    background-color: rgba(139, 151, 256, 0.4);
+    background-color: ${({ theme }) => theme.colors.point2};
+    text-align: center;
+    color: #fff;
 
     h3 {
         font-size: ${({ theme }) => theme.fontSizes.h6};
     }
 
+    br {
+        display: block;
+    }
+
     /* media */
-    ${({ theme }) => theme.media.labtop} {
+    ${({ theme }) => theme.media.tablet} {
         gap: 3rem;
         margin-top: 10rem;
+
+        br {
+            display: none;
+        }
 
         h3 {
             font-size: ${({ theme }) => theme.fontSizes.h5};
@@ -224,4 +243,20 @@ const MainBanner = styled.div`
     }
 `;
 
-export { MainVisual, MainText, MainImage, ServiceInfo, ServiceIcon, MainBanner };
+const BannerButton = styled(Button)`
+    color: ${({ theme }) => theme.colors.point2};
+    background-color: #fff;
+`;
+const MainButton = styled(Button)`
+    padding: 0 4rem;
+    background-color: #fff;
+    color: ${({ theme }) => theme.colors.point1};
+
+    /* media */
+    ${({ theme }) => theme.media.tablet} {
+        color: #fff;
+        background-color: ${({ theme }) => theme.colors.point1};
+    }
+`;
+
+export { MainVisual, MainText, MainImage, ServiceInfo, ServiceIcon, MainBanner, BannerButton, MainButton };
