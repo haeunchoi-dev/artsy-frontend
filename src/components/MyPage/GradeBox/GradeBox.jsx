@@ -16,7 +16,7 @@ const GradeBox = ({ userInfo, gradeInfo, gradeNextInfo }) => {
                 <h4>{gradeInfo?.name}</h4>
                 {gradeNextInfo?.isNext === false ? (
                     <p>
-                        {gradeNextInfo?.name}까지 {gradeInfo?.targetValue - userInfo?.totalTicket}
+                        {gradeNextInfo?.nextGrade?.name}까지 {gradeInfo?.targetValue - userInfo?.totalTicket}
                         개의 티켓이 필요해요!
                     </p>
                 ) : (
