@@ -20,6 +20,7 @@ const SUCCESS_MESSAGE = {
     validEmail: '사용가능한 이메일 주소입니다.',
     successRegister: '성공적으로 가입되었습니다!',
     successLogout: '로그아웃 했습니다.',
+    successTicketDelete: '티켓이 삭제되었습니다.',
 };
 
 export { CONFIRM_MESSAGE, ERROR_MESSAGE, SUCCESS_MESSAGE };

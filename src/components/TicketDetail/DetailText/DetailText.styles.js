@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const RowContainer = styled.div`
     width: 100%;
@@ -8,11 +8,17 @@ const RowContainer = styled.div`
 
     ${({ theme }) => theme.media.labtop} {
         flex-direction: row;
+
+        ${({ $review }) =>
+            $review &&
+            css`
+                display: none;
+            `}
     }
 `;
 
 const TitleText = styled.span`
-    font-size: 1.5rem;
+    font-size: ${({ theme }) => theme.fontSizes.body};
     font-weight: 600;
 
     ${({ theme }) => theme.media.labtop} {
@@ -22,11 +28,13 @@ const TitleText = styled.span`
 `;
 
 const DetailText = styled.span`
-    font-size: 1.25rem;
+    font-size: ${({ theme }) => theme.fontSizes.text};
     margin: 10px 0;
-    word-wrap: break-word;
+    line-height: 2.5rem;
 
     ${({ theme }) => theme.media.labtop} {
+        white-space: nowrap; // 다음 줄로 넘어가지 않도록
+
         margin: 0;
         width: 20rem;
         text-align: left;

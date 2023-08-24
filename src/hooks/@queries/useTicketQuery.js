@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import api from '@utils/api';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
@@ -10,34 +10,47 @@ const useTicketCreateQuery = () => {
     const headers = { 'Content-Type': 'multipart/form-data' };
     const fetcher = (data) => api.post(QUERY_KEY, data, headers);
 
-    const query = useMutation({
+    const mutation = useMutation({
         mutationFn: (ticketInfo) => fetcher(ticketInfo),
         retry: false,
     });
 
-    return query;
+    return mutation;
 };
 
 const useTicketGetQuery = (ticketId) => {
     const fetcher = () => api.get(`${QUERY_KEY}/${ticketId}`);
     const query = useQuery([QUERY_KEY, ticketId], fetcher);
 
-    useEffect(() => {
-        if (query.isError) {
-            const errorType = query.error.response.data.error.type;
-            switch (errorType) {
-                case ERROR_TYPE.DATA_NOT_FOUND: {
-                    alert(ERROR_MESSAGE.dataNotFoundTicket);
-                    break;
-                }
-                default: {
-                    alert('관리자에게 문의하세요');
-                }
-            }
-        }
-    }, [query.isError]);
-
     return query;
 };
 
-export { useTicketCreateQuery, useTicketGetQuery };
+const useTicketUpdateQuery = () => {
+    const queryClient = useQueryClient();
+
+    const headers = { 'Content-Type': 'multipart/form-data' };
+    const fetcher = (data) => api.put(`${QUERY_KEY}/${ticketId}`, data, headers);
+
+    const mutation = useMutation({
+        mutationFn: (ticketInfo) => fetcher(ticketInfo),
+        retry: false,
+        onSuccess: () => queryClient.invalidateQueries([`${QUERY_KEY}/${ticketId}`]),
+    });
+
+    return mutation;
+};
+
+const useTicketDeleteQuery = (ticketId) => {
+    const queryClient = useQueryClient();
+    const fetcher = () => api.delete(`${QUERY_KEY}/${ticketId}`);
+
+    const mutation = useMutation({
+        mutationFn: () => fetcher(),
+        retry: false,
+        onSuccess: () => queryClient.invalidateQueries([`${QUERY_KEY}/${ticketId}`]),
+    });
+
+    return mutation;
+};
+
+export { useTicketCreateQuery, useTicketUpdateQuery, useTicketGetQuery, useTicketDeleteQuery };
