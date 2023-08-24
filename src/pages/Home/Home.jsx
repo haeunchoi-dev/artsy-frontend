@@ -7,6 +7,7 @@ import Loading from '@components/@common/Loading/Loading';
 
 const Home = () => {
     const { data: userInfo, isLoading } = useUserInfoQuery();
+
     if (isLoading) return <Loading />;
     const { displayName, totalTicket } = userInfo;
     return (

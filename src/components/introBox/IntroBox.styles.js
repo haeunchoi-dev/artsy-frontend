@@ -5,9 +5,19 @@ const Introduction = styled.div`
     display: none;
     position: relative;
     height: 100%;
-    padding-left: 20px;
     color: #fff;
     background: linear-gradient(180deg, rgba(105, 96, 204, 0.8) 0%, #554dab 100%);
+    ${({ theme }) => theme.media.labtop} {
+        display: flex;
+        justify-content: flex-end;
+        flex-basis: 60%;
+    }
+`;
+const IntroContent = styled.div`
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 750px;
+    padding-left: 20px;
     > h2 {
         font-size: 4.6rem;
         line-height: 8rem;
@@ -17,7 +27,6 @@ const Introduction = styled.div`
         font-size: 1.6rem;
         margin-bottom: 4.8rem;
     }
-
     &:before {
         content: '';
         position: absolute;
@@ -32,11 +41,9 @@ const Introduction = styled.div`
         display: flex;
         flex-direction: column;
         justify-content: center;
-        flex-basis: 60%;
         > p {
             z-index: 3;
         }
     }
 `;
-
-export { Introduction };
+export { Introduction, IntroContent };

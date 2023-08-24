@@ -1,4 +1,4 @@
-import SideBar from '../../SideBar/SideBar';
+import SideBar from '@components/SideBar/SideBar';
 import { StyledHeader, StyledHeaderInner } from './Header.styles';
 
 const Header = () => {

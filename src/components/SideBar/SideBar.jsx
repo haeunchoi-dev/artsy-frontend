@@ -5,24 +5,33 @@ import useLogoutQuery from '@hooks/@queries/useLogoutQuery';
 import useToastContext from '@hooks/useToastContext';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import ToggleButton from '@components/@common/ToggleButton/ToggleButton';
+import useAuthContext from '@hooks/useAuthContext';
 
 const SideBar = () => {
     const [isToggle, setIstoggle] = useState(false);
+    const { isLogin } = useAuthContext();
     const navigate = useNavigate();
     const toast = useToastContext();
-    const { mutate, isSuccess, isError } = useLogoutQuery();
-
+    const { mutate: logout, isSuccess: isLogoutSuccess, isError: isLogoutError } = useLogoutQuery();
     useEffect(() => {
-        if (isSuccess) {
+        if (isLogoutSuccess) {
             toast.show(SUCCESS_MESSAGE.successLogout);
+            navigate('/');
+        }
+    }, [isLogoutSuccess]);
+
+    // useEffect(() => {
+    //     if (isAuthSuccess || loginStatus) {
+    //         loginStatus.data.success ? setIsLogin(true) : setIsLogin(false);
+    //     }
+    // }, [isAuthSuccess, isLogoutSuccess]);
+    const handleAuthBtn = () => {
+        setIstoggle((cur) => !cur);
+        if (isLogin) {
+            logout();
+        } else {
             navigate('/signin');
         }
-        if (isError) {
-            toast.show(ERROR_MESSAGE.failLogout);
-        }
-    }, [isSuccess, isError]);
-    const handleLogout = () => {
-        mutate();
     };
     const handleToggleBtn = () => setIstoggle((cur) => !cur);
     return (
@@ -34,7 +43,7 @@ const SideBar = () => {
                 <S.NavBarContent $open={isToggle}>
                     <S.Navbar>
                         <S.NavbarItem onClick={handleToggleBtn}>
-                            <Link to="/">홈</Link>
+                            <Link to="/home">홈</Link>
                         </S.NavbarItem>
                         <S.NavbarItem onClick={handleToggleBtn}>
                             <Link to="/ticket/list">기록함</Link>
@@ -43,8 +52,8 @@ const SideBar = () => {
                             <Link to="/mypage">마이페이지</Link>
                         </S.NavbarItem>
                     </S.Navbar>
-                    <S.LogoutButton color={'#fff'} size={'large'} onClick={handleLogout}>
-                        로그아웃
+                    <S.LogoutButton color={'#fff'} size={'large'} onClick={handleAuthBtn} $open={isToggle}>
+                        {isLogin ? '로그아웃' : '로그인'}
                     </S.LogoutButton>
                 </S.NavBarContent>
             </S.NavBarContainer>

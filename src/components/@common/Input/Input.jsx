@@ -34,6 +34,7 @@ const Input = ({
     id,
     min,
     max,
+    readOnly = false,
     isValid,
     isRequired,
     inputWidth = '290px',
@@ -54,6 +55,7 @@ const Input = ({
                 onChange={onChange}
                 ref={inputRef}
                 $rounded={rounded}
+                readOnly={readOnly}
                 $valid={isValid}
                 minLength={isTextAttributes(inputType) ? min : undefined}
                 maxLength={isTextAttributes(inputType) ? max : undefined}
