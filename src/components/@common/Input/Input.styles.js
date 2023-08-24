@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledForm = styled.div`
     display: flex;
@@ -11,18 +11,18 @@ const StyledForm = styled.div`
     }
 `;
 const StyledLabel = styled.label`
-    font-size: 1.6rem;
+    font-size: ${({ theme }) => theme.fontSizes.body};
     font-weight: 600;
     margin-bottom: 16px;
 `;
 const StyledRequired = styled.span`
-    color: #ff1f00;
+    color: #ff624d;
 `;
 const StyledInput = styled.input`
     box-sizing: border-box;
     width: ${(props) => props.$inputWidth};
     height: 54px;
-    font-size: 16px;
+    font-size: ${({ theme }) => theme.fontSizes.body};
     color: ${({ theme }) => theme.colors.black};
     padding: 8px 22px;
     margin-bottom: 4px;
@@ -30,6 +30,8 @@ const StyledInput = styled.input`
     border: none;
     border-bottom: 2px solid #c5c5c5;
     ${({ $rounded }) => $rounded && 'border: 2px solid #c5c5c5;'};
+    ${({ $valid }) => !$valid && 'border-color: #ff624d'};
+
     &:read-only {
         color: #fff;
         background-color: ${({ theme }) => theme.colors.point1};
@@ -41,10 +43,20 @@ const StyledInput = styled.input`
         -webkit-appearance: none;
         margin: 0;
     }
+    &:autofill,
+    &:autofill:hover,
+    &:autofill:focus,
+    &:autofill:active {
+        -webkit-text-fill-color: #000;
+        -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+        box-shadow: 0 0 0px 1000px #fff inset;
+        transition: background-color 5000s ease-in-out 0s;
+    }
 `;
 
 const StyledErrorMessage = styled.span`
-    color: #ff1f00;
+    color: #ff624d;
+    font-size: ${({ theme }) => theme.fontSizes.text};
 `;
 
 export { StyledForm, StyledInput, StyledLabel, StyledRequired, StyledErrorMessage };
