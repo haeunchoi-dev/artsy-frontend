@@ -7,45 +7,45 @@ const NavBarContainer = styled.div`
     right: -100%;
     z-index: ${({ theme }) => theme.layer.layer6};
     box-sizing: border-box;
-    width: 0;
+    width: 60%;
     max-width: 330px;
     height: 0;
     padding-top: 60px;
-    transition: width 0.5s ease-in-out;
+    transform: translateX(100%);
+
+    transition: transform 0.5s ease-in-out;
     background-color: #fff;
     ${({ $open }) =>
         $open &&
         css`
             right: 0;
-            width: 60%;
             height: 100%;
+            transform: translateX(0);
         `}
     ${({ theme }) => theme.media.labtop} {
         width: 100%;
         max-width: 100%;
         align-items: center;
+        transform: translateX(0);
+        transform: translateY(-100%);
+
         ${({ $open }) =>
             $open &&
             css`
                 height: auto;
+                transform: translateY(0);
             `}
     }
 `;
 
 const NavBarContent = styled.div`
-    display: none;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
     box-sizing: border-box;
     height: 100%;
     padding: 2rem;
-
-    ${({ $open }) =>
-        $open &&
-        css`
-            display: flex;
-        `}
 
     ${({ theme }) => theme.media.labtop} {
         align-items: center;

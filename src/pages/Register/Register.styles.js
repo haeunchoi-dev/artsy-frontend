@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import Button from '@components/@common/Button/Button';
 const RegisterContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 `;
 const RegisterContent = styled.div`
     box-sizing: border-box;
@@ -43,18 +45,4 @@ const FormsContainer = styled.div`
     max-width: 290px;
 `;
 
-const RegisterForm = styled.form`
-    display: grid;
-    grid-gap: 12px;
-    margin-bottom: 16px;
-`;
-const RegisterButton = styled(Button)`
-    font-size: 1.4rem;
-`;
-const BackButton = styled.span`
-    margin-left: 0.8rem;
-    font-size: 1.4rem;
-    cursor: pointer;
-    color: #909090;
-`;
-export { RegisterContainer, RegisterContent, Title, FormsContainer, RegisterForm, RegisterButton, BackButton };
+export { RegisterContainer, RegisterContent, Title, FormsContainer };

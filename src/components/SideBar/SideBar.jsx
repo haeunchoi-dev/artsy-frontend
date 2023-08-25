@@ -3,16 +3,23 @@ import * as S from './SideBar.styles';
 import { Link, useNavigate } from 'react-router-dom';
 import useLogoutQuery from '@hooks/@queries/useLogoutQuery';
 import useToastContext from '@hooks/useToastContext';
-import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
+import { SUCCESS_MESSAGE } from '@constants/message';
 import ToggleButton from '@components/@common/ToggleButton/ToggleButton';
 import useAuthContext from '@hooks/useAuthContext';
+import useAuthQuery from '@hooks/@queries/useAuthQuery';
 
 const SideBar = () => {
     const [isToggle, setIstoggle] = useState(false);
     const { isLogin } = useAuthContext();
     const navigate = useNavigate();
     const toast = useToastContext();
-    const { mutate: logout, isSuccess: isLogoutSuccess, isError: isLogoutError } = useLogoutQuery();
+    const { data } = useAuthQuery();
+
+    const { mutate: logout, isSuccess: isLogoutSuccess } = useLogoutQuery();
+
+    useEffect(() => {
+        !isLogin && data;
+    }, []);
     useEffect(() => {
         if (isLogoutSuccess) {
             toast.show(SUCCESS_MESSAGE.successLogout);
@@ -20,11 +27,6 @@ const SideBar = () => {
         }
     }, [isLogoutSuccess]);
 
-    // useEffect(() => {
-    //     if (isAuthSuccess || loginStatus) {
-    //         loginStatus.data.success ? setIsLogin(true) : setIsLogin(false);
-    //     }
-    // }, [isAuthSuccess, isLogoutSuccess]);
     const handleAuthBtn = () => {
         setIstoggle((cur) => !cur);
         if (isLogin) {
