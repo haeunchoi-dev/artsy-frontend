@@ -20,7 +20,7 @@ const StyledProjectInfo = styled.ul`
         gap: 3rem;
 
         b {
-            width: 10rem;
+            width: 12rem;
         }
 
         + li {

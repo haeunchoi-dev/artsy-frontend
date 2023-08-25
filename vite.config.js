@@ -54,7 +54,6 @@ export default defineConfig({
             },
         ],
     },
-    // console 제거 설정
     build: {
         minify: 'terser',
         terserOptions: {

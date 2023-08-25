@@ -35,8 +35,8 @@ const useTicketInfiniteQuery = (categoryId) => {
             return lastPageTicketsCount >= limit ? latPageTickets[lastPageTicketsCount - 1].id : undefined;
         },
     };
-    const query = useInfiniteQuery([QUERY_KEY, categoryId], fetcher, options);
-    return query;
+
+    return useInfiniteQuery([QUERY_KEY, categoryId], fetcher, options);
 };
 
 export default useTicketInfiniteQuery;
