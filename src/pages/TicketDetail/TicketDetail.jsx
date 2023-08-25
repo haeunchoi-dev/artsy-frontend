@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import * as T from './TicketDetail.styles';
 import { useNavigate, useParams } from 'react-router-dom';
 import BasicTicketUrl from '@assets/images/ticket.png';
@@ -9,6 +9,7 @@ import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import Review from '@components/TicketDetail/Review/Review';
 import DetailBox from '@components/TicketDetail/DetailBox/DetailBox';
 import useToastContext from '@hooks/useToastContext';
+import useHeaderContext from '@hooks/useHeaderContext';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
@@ -16,6 +17,10 @@ const TicketDetail = () => {
     const toast = useToastContext();
     const ticketGetQuery = useTicketGetQuery(ticketId);
     const ticketData = ticketGetQuery?.data;
+    const { setColor, setTicketId } = useHeaderContext();
+
+    const colorBoxRef = useRef();
+
     const {
         mutate,
         isSuccess: isDeleteSuccess,
@@ -26,9 +31,28 @@ const TicketDetail = () => {
 
     const [imgSrc, setImgSrc] = useState('');
 
+    const [position, setPosition] = useState(0);
+    const onScroll = () => {
+        setPosition(window.scrollY);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (position > colorBoxRef.current?.offsetHeight) setColor('#fff');
+        else setColor(ticketData?.categoryColor);
+    }, [position]);
+
     // 티켓 불러오기
     useEffect(() => {
         if (ticketGetQuery.isSuccess) {
+            setColor(ticketData?.categoryColor);
+            setTicketId(ticketId);
             if (ticketData.files?.length === 0) {
                 setImgSrc(BasicTicketUrl);
             } else {
@@ -88,7 +112,7 @@ const TicketDetail = () => {
         <>
             {ticketData !== undefined && (
                 <div>
-                    <T.TypeColorBox color={ticketData?.categoryColor} />
+                    <T.TypeColorBox ref={colorBoxRef} color={ticketData?.categoryColor} />
                     <T.Container>
                         <T.TicketDetailWrap>
                             <T.TicketImageWrap>

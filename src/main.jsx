@@ -8,6 +8,7 @@ import theme from '@styles/theme';
 
 import { ToastContextProvider } from '@contexts/ToastContext.jsx';
 import { AuthContextProvider } from './contexts/AuthContext';
+import { HeaderContextProvider } from '@contexts/HeaderContext';
 const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -16,7 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             <ThemeProvider theme={theme}>
                 <AuthContextProvider>
                     <ToastContextProvider>
-                        <RouterProvider router={router}></RouterProvider>
+                        <HeaderContextProvider>
+                            <RouterProvider router={router}></RouterProvider>
+                        </HeaderContextProvider>
                     </ToastContextProvider>
                 </AuthContextProvider>
             </ThemeProvider>

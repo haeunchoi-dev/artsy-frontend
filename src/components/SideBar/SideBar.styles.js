@@ -86,6 +86,7 @@ const BackModal = styled.div`
     top: 0;
     width: 100%;
     height: 100%;
+
     background-color: rgba(0, 0, 0, 0.3);
     z-index: ${({ theme }) => theme.layer.layer6 - 1};
 `;
@@ -93,10 +94,12 @@ const ExtendToggleButton = styled.div`
     display: flex;
     justify-content: flex-end;
     position: relative;
-    top: -45px;
+    top: 0;
     right: 0;
     z-index: ${({ theme }) => theme.layer.layer6 + 1};
-    max-width: 1280px;
+    width: 100%;
+    max-width: ${({ theme }) => theme.devicesSize.labtop};
     margin: 0 auto;
+    margin: 1rem 2rem;
 `;
 export { NavBarContainer, LogoutButton, Navbar, NavbarItem, BackModal, NavBarContent, ExtendToggleButton };
