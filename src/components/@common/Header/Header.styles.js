@@ -18,7 +18,6 @@ const StyledHeader = styled.header`
 `;
 
 const StyledHeaderInner = styled.div`
-    max-width: ${({ theme }) => theme.devicesSize.labtop};
     margin: 0 auto;
     box-sizing: border-box;
 

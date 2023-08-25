@@ -57,6 +57,7 @@ const Navbar = styled.ul`
 const NavbarItem = styled.li`
     text-align: left;
     font-size: 1.6rem;
+    margin-bottom: 3rem;
     ${({ theme }) => theme.media.tablet} {
         font-size: 1.8rem;
     }
@@ -100,6 +101,5 @@ const ExtendToggleButton = styled.div`
     width: 100%;
     max-width: ${({ theme }) => theme.devicesSize.labtop};
     margin: 0 auto;
-    margin: 1rem 2rem;
 `;
 export { NavBarContainer, LogoutButton, Navbar, NavbarItem, BackModal, NavBarContent, ExtendToggleButton };
