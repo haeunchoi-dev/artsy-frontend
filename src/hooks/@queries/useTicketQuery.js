@@ -1,8 +1,5 @@
-import { useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import api from '@utils/api';
-import { ERROR_TYPE } from '@constants/serverErrorType';
-import { ERROR_MESSAGE } from '@constants/message';
 
 export const QUERY_KEY = '/api/user/ticket';
 
@@ -18,14 +15,20 @@ const useTicketCreateQuery = () => {
     return mutation;
 };
 
-const useTicketGetQuery = (ticketId) => {
+const useTicketGetQuery = (ticketId, updateDate) => {
+    const queryClient = useQueryClient();
+
     const fetcher = () => api.get(`${QUERY_KEY}/${ticketId}`);
-    const query = useQuery([QUERY_KEY, ticketId], fetcher);
+    const query = useQuery({
+        queryKey: [QUERY_KEY, ticketId, updateDate],
+        queryFn: fetcher,
+        onSuccess: () => queryClient.invalidateQueries([QUERY_KEY, ticketId, updateDate]),
+    });
 
     return query;
 };
 
-const useTicketUpdateQuery = () => {
+const useTicketUpdateQuery = (ticketId) => {
     const queryClient = useQueryClient();
 
     const headers = { 'Content-Type': 'multipart/form-data' };
@@ -34,7 +37,7 @@ const useTicketUpdateQuery = () => {
     const mutation = useMutation({
         mutationFn: (ticketInfo) => fetcher(ticketInfo),
         retry: false,
-        onSuccess: () => queryClient.invalidateQueries([`${QUERY_KEY}/${ticketId}`]),
+        onSuccess: () => queryClient.invalidateQueries([QUERY_KEY, ticketId, 'update']),
     });
 
     return mutation;
@@ -47,7 +50,7 @@ const useTicketDeleteQuery = (ticketId) => {
     const mutation = useMutation({
         mutationFn: () => fetcher(),
         retry: false,
-        onSuccess: () => queryClient.invalidateQueries([`${QUERY_KEY}/${ticketId}`]),
+        onSuccess: () => queryClient.invalidateQueries([QUERY_KEY, ticketId, 'delete']),
     });
 
     return mutation;

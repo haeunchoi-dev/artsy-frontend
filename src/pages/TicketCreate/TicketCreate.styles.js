@@ -24,7 +24,7 @@ const TitleContainer = styled.div`
     }
 `;
 
-const CreateForm = styled.div`
+const TicketForm = styled.div`
     ${({ theme }) => theme.media.tablet} {
         width: 40%;
     }
@@ -74,7 +74,7 @@ const ReviewContainer = styled.div`
     align-items: flex-start;
 `;
 const Label = styled.label`
-    font-size: 18px;
+    font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: 16px;
 `;
@@ -84,11 +84,17 @@ const ReviewInput = styled.textarea`
     width: 100%;
     height: 20rem;
     font-size: 16px;
-    padding: 8px 22px;
+    padding: 1.2rem 2.2rem;
     border-radius: ${(props) => (props.$rounded ? '100px' : '0')};
     border: 1px solid #c5c5c5;
     resize: none;
     overflow: hidden;
+
+    &:focus {
+        outline: none;
+        border-color: ${({ theme }) => theme.colors.point1};
+        caret-color: ${({ theme }) => theme.colors.point1};
+    }
 `;
 
 const ButtonContaienr = styled.div`
@@ -110,7 +116,7 @@ const MarginContainer = styled.div`
 export {
     Container,
     TitleContainer,
-    CreateForm,
+    TicketForm,
     ImgContainer,
     IconWrap,
     ImgWrap,

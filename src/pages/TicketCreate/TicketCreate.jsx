@@ -10,12 +10,11 @@ import CategoryButton from '@components/TicketCreate/CategoryButton/CategoryButt
 import Loading from '@components/@common/Loading/Loading';
 import * as I from '@components/@common/Input/Input.styles';
 import deleteIconUrl from '@assets/icons/icon-delete.png';
-
 import formatTicketDate from '@utils/formatTicketDate';
-import formatKstDate from '@utils/foramtKstDate';
 import { useTicketCreateQuery } from '@hooks/@queries/useTicketQuery';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
+import useInput from '@hooks/useInput';
 
 const TicketCreate = () => {
     const theme = useTheme();
@@ -25,9 +24,9 @@ const TicketCreate = () => {
 
     const categoryId = searchParams.get('categoryId');
 
-    const { mutate, isSuccess, data, isError } = useTicketCreateQuery();
+    const { mutate, isSuccess, data, isError, error } = useTicketCreateQuery();
 
-    const [inputValue, setInputValue] = useState({
+    const [{ title, place, price, review }, onChangeInput, onNumberChange, inputReset] = useInput({
         title: '',
         place: '',
         price: '',
@@ -40,13 +39,10 @@ const TicketCreate = () => {
 
     const [imgfile, setImgfile] = useState(''); // 이미지 파일
     const [imgSrc, setImgSrc] = useState(''); // 이미지 미리보기
-    const [imgName, setImgName] = useState(''); // 이미지 이름
 
     const titleRef = useRef();
     const [titleError, setTitleError] = useState('');
     const [titleValid, setTitleValid] = useState(true);
-
-    useEffect(() => {});
 
     useEffect(() => {
         if (isSuccess) navigate(`/ticket/detail/${data.id}`);
@@ -54,7 +50,7 @@ const TicketCreate = () => {
 
     useEffect(() => {
         if (isError) {
-            const errorType = query.error.response.data.error.type;
+            const errorType = error.response.data.error.type;
 
             switch (errorType) {
                 case ERROR_TYPE.LIMIT_FILE_SIZE:
@@ -74,22 +70,19 @@ const TicketCreate = () => {
         }
     }, [isError]);
 
-    const onChange = (e) => {
-        setInputValue((input) => ({ ...input, [e.target.id]: e.target.value }));
-    };
-
     const onCategoryChange = (e) => {
         setCategory(e.target.value);
     };
 
     const onResetImage = () => {
         setImgSrc('');
+        setImgfile('');
     };
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        if (inputValue.title === '') {
+        if (title === '') {
             setTitleError('제목을 입력해주세요');
             setTitleValid(false);
             titleRef.current.focus();
@@ -101,14 +94,14 @@ const TicketCreate = () => {
 
         // 필수
         formData.append('categoryId', parseInt(category));
-        formData.append('title', inputValue.title);
+        formData.append('title', title);
         formData.append('showDate', formatTicketDate(showDate));
 
         // 선택사항
-        formData.append('place', inputValue.place);
-        formData.append('price', inputValue.price ?? parseInt(inputValue.price));
+        formData.append('place', place);
+        formData.append('price', price ?? parseInt(price));
         formData.append('rating', parseInt(rating));
-        formData.append('review', inputValue.review);
+        formData.append('review', review);
 
         if (imgfile !== '') {
             formData.append('file', imgfile);
@@ -116,7 +109,7 @@ const TicketCreate = () => {
 
         mutate(formData);
 
-        setInputValue({ title: '', place: '', price: '', review: '' });
+        inputReset();
         setTitleError('');
     };
 
@@ -127,10 +120,8 @@ const TicketCreate = () => {
             <T.TitleContainer>
                 <h3>티켓 등록</h3>
             </T.TitleContainer>
-            <T.CreateForm onSubmit={(e) => onSubmit(e)}>
-                {imgSrc === '' && (
-                    <PhotoUploader setImgfile={setImgfile} setImgSrc={setImgSrc} setImgName={setImgName} />
-                )}
+            <T.TicketForm>
+                {imgSrc === '' && <PhotoUploader setImgfile={setImgfile} setImgSrc={setImgSrc} />}
                 {imgSrc !== '' && (
                     <T.ImgContainer>
                         <T.ImgWrap>
@@ -145,17 +136,18 @@ const TicketCreate = () => {
                     <T.StyledInput
                         id="title"
                         labelText="제목"
-                        onChange={onChange}
-                        value={inputValue.title}
+                        onChange={onChangeInput}
+                        value={title}
                         isRequired
                         isValid={titleValid}
                         onBlur={() => {
-                            if (inputValue.title !== '') setTitleValid(true);
+                            if (title !== '') setTitleValid(true);
                         }}
                         placeholder="제목을 입력하세요"
                         inputWidth="100%"
                         errorMessage={titleError}
                         inputRef={titleRef}
+                        maxLength="30"
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
@@ -187,19 +179,20 @@ const TicketCreate = () => {
                     <T.StyledInput
                         id="place"
                         labelText="장소"
-                        onChange={onChange}
-                        value={inputValue.place}
+                        onChange={onChangeInput}
+                        value={place}
                         isValid={true}
                         placeholder="장소를 입력하세요"
                         inputWidth="100%"
+                        maxLength="30"
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
                     <T.StyledInput
                         id="price"
                         labelText="금액"
-                        onChange={onChange}
-                        value={inputValue.price}
+                        onChange={onNumberChange}
+                        value={price}
                         inputType="number"
                         isValid={true}
                         placeholder="금액을 입력하세요"
@@ -215,8 +208,9 @@ const TicketCreate = () => {
                     <T.ReviewInput
                         placeholder="리뷰를 입력하세요(1000자)"
                         id="review"
-                        onChange={onChange}
-                        value={inputValue.review}
+                        onChange={onChangeInput}
+                        value={review}
+                        maxLength="1000"
                     />
                 </T.ReviewContainer>
                 <T.ButtonContaienr>
@@ -224,7 +218,7 @@ const TicketCreate = () => {
                         등록하기
                     </T.CreateButton>
                 </T.ButtonContaienr>
-            </T.CreateForm>
+            </T.TicketForm>
         </T.Container>
     );
 };

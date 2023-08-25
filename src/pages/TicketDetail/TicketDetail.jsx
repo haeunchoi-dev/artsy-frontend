@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import * as T from './TicketDetail.styles';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import BasicTicketUrl from '@assets/images/ticket.png';
 import { useTicketGetQuery, useTicketDeleteQuery } from '@hooks/@queries/useTicketQuery';
 import Loading from '@components/@common/Loading/Loading';
@@ -13,9 +13,11 @@ import useHeaderContext from '@hooks/useHeaderContext';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
+    const location = useLocation();
+    const [updateDate, setUpdateDate] = useState(location?.state);
     const navigate = useNavigate();
     const toast = useToastContext();
-    const ticketGetQuery = useTicketGetQuery(ticketId);
+    const ticketGetQuery = useTicketGetQuery(ticketId, updateDate);
     const ticketData = ticketGetQuery?.data;
     const { setColor, setTicketId } = useHeaderContext();
 
@@ -65,14 +67,12 @@ const TicketDetail = () => {
         if (ticketGetQuery.isError) {
             const errorType = ticketGetQuery.error.response.data.error.type;
             switch (errorType) {
-                case ERROR_TYPE.DATA_NOT_FOUND: {
+                case ERROR_TYPE.DATA_NOT_FOUND:
                     toast.show(ERROR_MESSAGE.dataNotFoundTicket);
                     navigate('/ticket/list');
                     break;
-                }
-                default: {
+                default:
                     toast.show('관리자에게 문의하세요');
-                }
             }
         }
     }, [ticketGetQuery.isError]);
@@ -93,25 +93,23 @@ const TicketDetail = () => {
         if (isDeleteError) {
             const errorType = deleteError.response.data.error.type;
             switch (errorType) {
-                default: {
+                default:
                     toast.show('관리자에게 문의하세요');
-                }
             }
         }
     }, [isDeleteError]);
 
     // 티켓 수정 이동
     const onUpdate = () => {
-        navigate(`/ticket/edit/${ticketId}`);
+        navigate(`/ticket/edit/${ticketId}`, { state: ticketData });
     };
-
-    if (ticketGetQuery.isLoading) return <Loading />;
-    if (isDeleteLoding) return <Loading />;
 
     return (
         <>
             {ticketData !== undefined && (
                 <div>
+                    {isDeleteLoding && <Loading />}
+                    {ticketGetQuery?.isLoading && <Loading />}
                     <T.TypeColorBox ref={colorBoxRef} color={ticketData?.categoryColor} />
                     <T.Container>
                         <T.TicketDetailWrap>

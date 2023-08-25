@@ -1,7 +1,8 @@
-const formatKstDate = (utc) => {
-    utc = new Date(utc);
-    const diff = 9 * 60 * 60 * 1000;
-    return new Date(utc + diff);
+const formatKstDate = (time) => {
+    time = new Date(time);
+    const offset = time.getTimezoneOffset() * 60000;
+
+    return new Date(time.getTime() + offset);
 };
 
 export default formatKstDate;

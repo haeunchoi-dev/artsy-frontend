@@ -55,6 +55,8 @@ const StyledInput = styled.input`
 `;
 
 const StyledErrorMessage = styled.span`
+    margin-left: 22px;
+    margin-top: 4px;
     color: #ff624d;
     font-size: ${({ theme }) => theme.fontSizes.text};
 `;

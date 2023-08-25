@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import * as P from './PhotoUploader.styles';
 import galleryIconUrl from '@assets/icons/icon-gallery.png';
 
-const PhotoUploader = ({ setImgfile, setImgSrc, setImgName }) => {
+const PhotoUploader = ({ setImgfile, setImgSrc }) => {
     // 사진 업로드 input 태그 접근
     const imageInput = useRef();
 
@@ -20,7 +20,6 @@ const PhotoUploader = ({ setImgfile, setImgSrc, setImgName }) => {
             reader.onload = () => {
                 // 실제 전송될 파일
                 setImgfile(e.target.files[0]);
-                setImgName(e.target.files[0].name);
                 // 미리보기 사진
                 setImgSrc(reader.result);
                 resolve();
