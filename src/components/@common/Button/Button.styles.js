@@ -74,6 +74,15 @@ const StyledButton = styled.button`
 
     /* 풀너비 */
     ${fullWidthStyle}
+
+    /* 라인스타일 */
+    ${({ $style }) =>
+        $style &&
+        css`
+            background-color: #fff;
+            border: 2px solid ${({ $color }) => $color};
+            color: ${({ $color }) => $color};
+        `}
 `;
 
 export default StyledButton;

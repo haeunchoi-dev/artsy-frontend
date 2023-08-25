@@ -7,7 +7,7 @@ import chartIconUrl from '@assets/icons/icon-chart.png';
 const MyIconMenu = () => {
     return (
         <M.IconMenu>
-            <M.IconButton $imgUrl={myIconUrl} to="/user/info">
+            <M.IconButton $imgUrl={myIconUrl} to="/user/edit">
                 <span>계정정보</span>
             </M.IconButton>
             <M.IconButton $imgUrl={bookIconUrl} to="/ticket/list">

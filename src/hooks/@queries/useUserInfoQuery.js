@@ -1,17 +1,26 @@
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 import api from '@utils/api';
 
 export const QUERY_KEY = '/api/user/info';
 
-const useUserInfoQuery = () => {
+const useUserGetQuery = () => {
     const fetcher = () => api.get(QUERY_KEY);
     const options = {
         retry: false,
     };
-    const query = useQuery([QUERY_KEY], fetcher, options);
-
-    return query;
+    return useQuery([QUERY_KEY], fetcher, options);
 };
 
-export default useUserInfoQuery;
+const useUserEditQuery = () => {
+    const fetcher = (data) => api.put(QUERY_KEY, data);
+    const queryClient = useQueryClient();
+    const options = {
+        retry: false,
+        onSuccess: () => queryClient.invalidateQueries(QUERY_KEY),
+    };
+
+    return useMutation(fetcher, options);
+};
+
+export { useUserGetQuery, useUserEditQuery };

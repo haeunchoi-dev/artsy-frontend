@@ -35,10 +35,19 @@ const StyledBar = styled.div`
         position: absolute;
         top: 0;
         left: 0;
-        width: ${({ $percent }) => $percent + '%'};
         height: 100%;
         border-radius: ${({ $height }) => ($height ? $height / 2 + 'rem' : '0.5rem')};
         background-color: ${({ theme, $grade }) => theme.gradeColor[$grade]};
+        animation: bars 1s 0.5s forwards ease-in;
+    }
+
+    @keyframes bars {
+        0% {
+            width: 0px;
+        }
+        100% {
+            width: ${({ $percent }) => $percent + '%'};
+        }
     }
 `;
 

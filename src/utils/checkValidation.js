@@ -2,11 +2,10 @@ import { ERROR_MESSAGE } from '@constants/message';
 import { VALIDATE } from '@constants/regexp';
 
 function checkValidation(value) {
-    const checkType = Object.keys(value);
+    const checkType = Object.keys(value)[0];
     const checkedValue = Object.values(value)[0];
-    const pattern = VALIDATE[checkType[0]];
+    const pattern = VALIDATE[checkType];
     if (checkedValue.match(pattern) === null) {
-        value === 'email' && alert(ERROR_MESSAGE.incorrectEmailFormat);
         return false;
     }
     return true;

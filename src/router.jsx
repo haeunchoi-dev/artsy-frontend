@@ -3,6 +3,7 @@ import App from './App.jsx';
 import Intro from '@pages/Intro/Intro.jsx';
 import Home from '@pages/Home/Home.jsx';
 import MyPage from '@pages/MyPage/MyPage.jsx';
+import UserEdit from '@pages/UserEdit/UserEdit.jsx';
 import TicketList from '@pages/TicketList/TicketList.jsx';
 import TicketCreate from '@pages/TicketCreate/TicketCreate.jsx';
 import TicketDetail from '@pages/TicketDetail/TicketDetail.jsx';
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path: 'mypage',
                 element: <MyPage />,
+            },
+            {
+                path: 'user/edit',
+                element: <UserEdit />,
             },
             {
                 path: 'ticket/list',
