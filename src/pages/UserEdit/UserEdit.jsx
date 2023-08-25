@@ -104,7 +104,12 @@ const UserEdit = () => {
             formValid.confirmPassword &&
             newPasswordRef.current.value === confirmPasswordRef.current.value
         ) {
-            updateUser({ displayName: updatedUser.displayName, password: updatedUser.newPassword });
+            if (newPasswordRef.current.value) {
+                updateUser({ displayName: displayNameRef.current.value, password: newPasswordRef.current.value });
+            } else {
+                updateUser({ displayName: displayNameRef.current.value });
+            }
+
             setUpdatedUser({ ...updatedUser, newPassword: '', confirmPassword: '' });
             return;
         } else {
