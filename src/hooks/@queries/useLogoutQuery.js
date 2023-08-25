@@ -9,7 +9,7 @@ const useLogoutQuery = () => {
 
     const queryClient = useQueryClient();
     const fetcher = () => api.post(QUERY_KEY);
-    const mutation = useMutation({
+    return useMutation({
         mutationFn: () => fetcher(),
         retry: false,
         onSuccess: () => {
@@ -17,8 +17,6 @@ const useLogoutQuery = () => {
             setIsLogin(false);
         },
     });
-
-    return mutation;
 };
 
 export default useLogoutQuery;

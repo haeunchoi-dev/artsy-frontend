@@ -8,7 +8,7 @@ const useLoginQuery = () => {
     const { setIsLogin } = useAuthContext();
     const queryClient = useQueryClient();
     const fetcher = (data) => api.post(QUERY_KEY, data);
-    const mutation = useMutation({
+    return useMutation({
         mutationFn: (loginInfo) => fetcher(loginInfo),
         retry: false,
         onSuccess: () => {
@@ -16,7 +16,6 @@ const useLoginQuery = () => {
             setIsLogin(true);
         },
     });
-    return mutation;
 };
 
 export default useLoginQuery;

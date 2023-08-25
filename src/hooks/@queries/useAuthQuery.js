@@ -8,6 +8,7 @@ export const QUERY_KEY_AUTH = 'auth';
 const useAuthQuery = () => {
     const { setIsLogin } = useAuthContext();
     const AuthApi = authApi();
+    const options = { retry: false };
     const fetchUser = async () => {
         const response = await AuthApi.get(userInfoPath);
         if (response.data?.success) {
@@ -17,9 +18,7 @@ const useAuthQuery = () => {
         }
         return response.data.success;
     };
-    const query = useQuery({ queryKey: [QUERY_KEY_AUTH], queryFn: fetchUser, retry: false });
-
-    return query;
+    return useQuery([QUERY_KEY_AUTH], fetchUser, options);
 };
 
 export default useAuthQuery;
