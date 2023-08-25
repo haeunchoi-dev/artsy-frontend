@@ -44,7 +44,7 @@ const UnderLine = styled.div`
 
 const TitleWrap = styled.div`
     h3 {
-        font-size: 2rem;
+        font-size: ${({ theme }) => theme.fontSizes.h6};
         font-weight: 600;
         margin-top: 10rem;
     }

@@ -4,7 +4,7 @@ const Container = styled.div`
     padding-bottom: 4rem;
 
     ${({ theme }) => theme.media.labtop} {
-        max-width: 1280px;
+        max-width: ${({ theme }) => theme.devicesSize.labtop};
         margin: 0 auto;
         padding: 0 4rem;
         padding-bottom: 4rem;

@@ -10,7 +10,7 @@ const ImgWrap = styled.button`
     margin: 2rem 0;
 
     border: 1px solid #c5c5c5;
-    border-radius: 10px;
+    border-radius: ${({ theme }) => theme.borderRadius.large};
     background-color: white;
 
     cursor: pointer;

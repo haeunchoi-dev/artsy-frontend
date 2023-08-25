@@ -12,14 +12,14 @@ const SliderWrap = styled.div`
     }
 
     h5 {
-        font-size: 1.7rem;
+        font-size: ${({ theme }) => theme.fontSizes.body};
         color: ${({ theme }) => theme.colors.point2};
         margin-right: 0.2rem;
     }
 
     h4 {
         color: #6e6e6e;
-        font-size: 1.4rem;
+        font-size: ${({ theme }) => theme.fontSizes.text};
     }
 
     input {

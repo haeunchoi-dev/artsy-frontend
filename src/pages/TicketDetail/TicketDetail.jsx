@@ -55,6 +55,7 @@ const TicketDetail = () => {
         if (ticketGetQuery.isSuccess) {
             setColor(ticketData?.categoryColor);
             setTicketId(ticketId);
+
             if (ticketData.files?.length === 0) {
                 setImgSrc(BasicTicketUrl);
             } else {
@@ -84,7 +85,7 @@ const TicketDetail = () => {
 
     useEffect(() => {
         if (isDeleteSuccess) {
-            toast.show(SUCCESS_MESSAGE.successTicketDelete);
+            toast.show(SUCCESS_MESSAGE.successDeleteTicket);
             navigate('/ticket/list');
         }
     }, [isDeleteSuccess]);
