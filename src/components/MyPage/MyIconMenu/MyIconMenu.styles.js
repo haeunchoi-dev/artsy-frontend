@@ -16,7 +16,7 @@ const IconButton = styled(Link)`
     justify-content: center;
     align-items: center;
     width: 100%;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     padding: 1rem;
     box-sizing: border-box;
     box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.02);

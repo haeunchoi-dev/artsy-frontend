@@ -13,7 +13,7 @@ const MyIconMenu = () => {
             <M.IconButton $imgUrl={bookIconUrl} to="/ticket/list">
                 <span>기록함</span>
             </M.IconButton>
-            <M.IconButton $imgUrl={chartIconUrl} to="">
+            <M.IconButton $imgUrl={chartIconUrl} to="/user/stats">
                 <span>통계</span>
             </M.IconButton>
         </M.IconMenu>

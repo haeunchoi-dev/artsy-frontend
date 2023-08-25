@@ -8,7 +8,7 @@ const StyledMyExpense = styled.div`
     justify-content: center;
     min-height: 10rem;
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 0.8rem;
     box-sizing: border-box;
     background-color: #a888ff;
     background: #a888ff url(${menoeyIconUrl}) no-repeat right 2rem center / 6rem;

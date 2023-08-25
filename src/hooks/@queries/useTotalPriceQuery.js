@@ -9,9 +9,7 @@ const useTotalPriceQuery = () => {
     const options = {
         retry: false,
     };
-    const query = useQuery([QUERY_KEY], fetcher, options);
-
-    return query;
+    return useQuery([QUERY_KEY], fetcher, options);
 };
 
 export default useTotalPriceQuery;
