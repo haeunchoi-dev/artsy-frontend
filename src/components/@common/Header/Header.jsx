@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SideBar from '@components/SideBar/SideBar';
 import { StyledHeader, StyledHeaderInner } from './Header.styles';
 import useHeaderContext from '@hooks/useHeaderContext';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Header = () => {
     const { color, setColor, ticketId } = useHeaderContext();
@@ -17,7 +17,9 @@ const Header = () => {
     return (
         <StyledHeader color={color}>
             <StyledHeaderInner>
-                <h2>Artsy</h2>
+                <h1>
+                    <Link to="/home">Artsy</Link>
+                </h1>
                 <SideBar />
             </StyledHeaderInner>
         </StyledHeader>

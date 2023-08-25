@@ -18,17 +18,18 @@ const StyledHeader = styled.header`
 `;
 
 const StyledHeaderInner = styled.div`
-    margin: 0 auto;
-    box-sizing: border-box;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 0 auto;
+    box-sizing: border-box;
+    max-width: ${({ theme }) => theme.devicesSize.labtop};
+    height: 100%;
+    padding: 0 2rem;
 
-    h2 {
-        font-size: 3rem;
+    h1 {
+        font-size: ${({ theme }) => theme.fontSizes.h5};
         width: 100%;
-        margin: 1rem 2rem;
     }
 `;
 
