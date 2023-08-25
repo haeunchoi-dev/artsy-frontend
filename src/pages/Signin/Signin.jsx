@@ -22,6 +22,7 @@ const Signin = () => {
     const windowWidth = useWindowWidth();
     const emailInputRef = useRef();
     const theme = useTheme();
+    const labtopSize = theme.devicesSize.labtop.replace('px', '');
     const toast = useToastContext();
     useEffect(() => {
         if (isSuccess) navigate('/home');
@@ -73,7 +74,7 @@ const Signin = () => {
             <S.SignInContainer>
                 <IntroBox />
                 <S.SignInContent>
-                    <S.loginTitle>{windowWidth > 1280 ? 'Welcome!' : 'Artsy'}</S.loginTitle>
+                    <S.loginTitle>{windowWidth > labtopSize ? 'Welcome!' : 'Artsy'}</S.loginTitle>
                     <S.loginForm onSubmit={handleSubmit}>
                         <Input
                             placeholder="이메일 주소를 입력하세요."

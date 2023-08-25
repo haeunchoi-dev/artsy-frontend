@@ -1,12 +1,16 @@
 import styled from 'styled-components';
-
+import Button from '@components/@common/Button/Button';
 const Greeting = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
     margin-bottom: 16px;
     h2 {
         font-size: 2.4rem;
         font-weight: 500;
         line-height: 3rem;
-        margin-bottom: 8px;
+        margin-bottom: 0.8rem;
     }
     p {
         display: none;
@@ -14,26 +18,40 @@ const Greeting = styled.div`
         color: #505050;
     }
 
-    ${({ $theme }) => $theme.media.tablet} {
+    ${({ theme }) => theme.media.tablet} {
         flex: 1 auto;
         h2 {
-            font-size: 2.6rem;
+            font-size: 3.4rem;
+            line-height: 3.8rem;
             font-weight: bold;
-            line-height: 3.2rem;
         }
         p {
             display: block;
+            font-size: 1.6rem;
+            margin-bottom: 6rem;
         }
     }
-    ${({ $theme }) => $theme.media.labtop} {
+    ${({ theme }) => theme.media.labtop} {
         h2 {
-            font-size: 3.4rem;
-            line-height: 4rem;
+            font-size: 4.6rem;
+            line-height: 6rem;
         }
         p {
-            font-size: 1.6rem;
+            font-size: 2rem;
         }
     }
 `;
 
-export { Greeting };
+const ExtendedButton = styled(Button)`
+    display: none;
+
+    ${({ theme }) => theme.media.tablet} {
+        display: block;
+        margin-bottom: 2rem;
+    }
+    ${({ theme }) => theme.media.labtop} {
+        margin-bottom: 1.4rem;
+    }
+`;
+
+export { Greeting, ExtendedButton };
