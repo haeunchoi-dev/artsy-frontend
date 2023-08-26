@@ -24,7 +24,7 @@ const List = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [categoryId, setCategoryId] = useState(searchParams.get('categoryId'));
 
-    const setSortParams = useCallback((categoryId) => {
+    const changeSearchParams = useCallback((categoryId) => {
         categoryId === 0 ? searchParams.delete('categoryId') : searchParams.set('categoryId', categoryId);
         setSearchParams(searchParams);
     }, []);
@@ -34,7 +34,7 @@ const List = () => {
 
     const handleFilter = (e) => {
         const selectedIdx = e.target.selectedIndex;
-        setSortParams(selectedIdx);
+        changeSearchParams(selectedIdx);
         setCategoryId(selectedIdx);
     };
 
