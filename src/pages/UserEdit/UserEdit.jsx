@@ -36,14 +36,18 @@ const UserEdit = () => {
         errorMessage: '',
         isValid: false,
     });
-    const [confirmPasswordInfo, setConfirmPassword] = useState({
+    const [confirmPasswordInfo, setConfirmPasswordInfo] = useState({
         confirmPassword: '',
         errorMessage: '',
         isValid: false,
     });
 
     useEffect(() => {
-        if (isSuccessGet) setDisplayNameInfo({ ...displayNameInfo, displayName: userInfo.displayName, isValid: true });
+        if (isSuccessGet) {
+            setDisplayNameInfo({ ...displayNameInfo, displayName: userInfo.displayName, isValid: true });
+            setNewPasswordInfo({ ...newPasswordInfo, isValid: true });
+            setConfirmPasswordInfo({ ...confirmPasswordInfo, isValid: true });
+        }
     }, [isSuccessGet]);
 
     useEffect(() => {
@@ -79,7 +83,7 @@ const UserEdit = () => {
         setNewPasswordInfo({ ...newPasswordInfo, newPassword: value });
 
         if (!value) {
-            setConfirmPassword({ confirmPassword: '', errorMessage: '', isValid: true });
+            setConfirmPasswordInfo({ confirmPassword: '', errorMessage: '', isValid: true });
             setNewPasswordInfo({ newPassword: '', errorMessage: '', isValid: true });
             return;
         }
@@ -92,17 +96,17 @@ const UserEdit = () => {
 
     const handleChangeConfirmPassword = (e) => {
         const { value } = e.target;
-        setConfirmPassword({ ...confirmPasswordInfo, confirmPassword: value });
+        setConfirmPasswordInfo({ ...confirmPasswordInfo, confirmPassword: value });
 
         if (newPasswordRef.current.value !== confirmPasswordRef.current.value) {
-            setConfirmPassword({
+            setConfirmPasswordInfo({
                 confirmPassword: value,
                 errorMessage: ERROR_MESSAGE.incorrectConfirmPassword,
                 isValid: false,
             });
             return;
         }
-        setConfirmPassword({ confirmPassword: value, errorMessage: '', isValid: true });
+        setConfirmPasswordInfo({ confirmPassword: value, errorMessage: '', isValid: true });
     };
 
     const handleSubmit = (e) => {
@@ -120,7 +124,7 @@ const UserEdit = () => {
             }
 
             setNewPasswordInfo({ newPassword: '', errorMessage: '', isValid: true });
-            setConfirmPassword({ confirmPassword: '', errorMessage: '', isValid: true });
+            setConfirmPasswordInfo({ confirmPassword: '', errorMessage: '', isValid: true });
 
             return;
         }
@@ -133,7 +137,7 @@ const UserEdit = () => {
             return;
         } else {
             confirmPasswordRef.current.focus();
-            setConfirmPassword({
+            setConfirmPasswordInfo({
                 ...confirmPasswordInfo,
                 errorMessage: ERROR_MESSAGE.incorrectConfirmPassword,
                 isValid: false,
