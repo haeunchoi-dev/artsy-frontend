@@ -47,7 +47,7 @@ const IconButton = styled(Link)`
 const IconMenu = styled.div`
     display: flex;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
 `;
 
 export { IconButton, IconMenu };

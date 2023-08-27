@@ -11,7 +11,7 @@ const MyPage = styled.div`
 
 const ViewWrap = styled.section`
     ${({ theme }) => theme.media.labtop} {
-        padding: 3rem;
+        padding: 4rem 3rem;
         border-radius: 2rem;
         box-sizing: border-box;
         box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.02);
@@ -24,7 +24,7 @@ const DataWrap = styled.section`
 
     ${({ theme }) => theme.media.labtop} {
         margin-top: 0;
-        padding: 3rem;
+        padding: 4rem 3rem;
         border-radius: 2rem;
         box-sizing: border-box;
         box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.02);

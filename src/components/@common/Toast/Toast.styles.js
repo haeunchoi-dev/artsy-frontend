@@ -4,7 +4,7 @@ const StyledToast = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: calc(100% - 2rem);
+    width: calc(100vw - 6rem);
     min-height: 4.8rem;
     margin-top: 1.6rem;
     padding: 1rem 2rem;
