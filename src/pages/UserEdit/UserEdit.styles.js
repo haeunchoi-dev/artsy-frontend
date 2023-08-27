@@ -12,4 +12,5 @@ const InputBox = styled.div`
     margin-bottom: 3.5rem;
 `;
 
-export { Wrap, InputBox };
+const Form = styled.div``;
+export { Wrap, InputBox, Form };

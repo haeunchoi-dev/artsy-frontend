@@ -25,26 +25,25 @@ const UserEdit = () => {
     const displayNameRef = useRef();
     const newPasswordRef = useRef();
     const confirmPasswordRef = useRef();
-    const [updatedUser, setUpdatedUser] = useState({
-        displayName: '',
-        newPassword: '',
-        confirmPassword: '',
-    });
 
-    const [formErrors, setFormErrors] = useState({
+    const [displayNameInfo, setDisplayNameInfo] = useState({
         displayName: '',
-        newPassword: '',
-        confirmPassword: '',
+        errorMessage: '',
+        isValid: false,
     });
-
-    const [formValid, setFormValid] = useState({
-        displayName: true,
-        newPassword: true,
-        confirmPassword: true,
+    const [newPasswordInfo, setNewPasswordInfo] = useState({
+        newPassword: '',
+        errorMessage: '',
+        isValid: false,
+    });
+    const [confirmPasswordInfo, setConfirmPassword] = useState({
+        confirmPassword: '',
+        errorMessage: '',
+        isValid: false,
     });
 
     useEffect(() => {
-        if (isSuccessGet) setUpdatedUser({ ...updatedUser, displayName: userInfo.displayName });
+        if (isSuccessGet) setDisplayNameInfo({ ...displayNameInfo, displayName: userInfo.displayName, isValid: true });
     }, [isSuccessGet]);
 
     useEffect(() => {
@@ -55,53 +54,63 @@ const UserEdit = () => {
         if (isErrorUpdate) toast.show(ERROR_MESSAGE.failUpdateUser);
     }, [isErrorUpdate]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUpdatedUser({ ...updatedUser, [name]: value });
+    const handleChangeDisplayName = (e) => {
+        const { value } = e.target;
+        setDisplayNameInfo({ ...displayNameInfo, displayName: value });
 
-        switch (name) {
-            case 'displayName':
-                if (!value.trim()) {
-                    setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.required });
-                    setFormValid({ ...formValid, [name]: false });
-                } else if (!checkValidation({ displayName: value })) {
-                    setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.incorrectDisplayName });
-                    setFormValid({ ...formValid, [name]: false });
-                } else {
-                    setFormValid({ ...formValid, [name]: true });
-                    setFormErrors({ ...formErrors, [name]: '' });
-                }
-                break;
-            case 'newPassword':
-                if (!value) {
-                    setFormErrors({ ...formErrors, [name]: '', confirmPassword: '' });
-                    setFormValid({ ...formValid, [name]: true, confirmPassword: true });
-                } else if (!checkValidation({ password: value })) {
-                    setFormErrors((prev) => ({ ...prev, [name]: ERROR_MESSAGE.incorrectPassword }));
-                    setFormValid({ ...formValid, [name]: false });
-                } else {
-                    setFormValid({ ...formValid, [name]: true });
-                    setFormErrors({ ...formErrors, [name]: '' });
-                }
-                break;
-            case 'confirmPassword':
-                if (newPasswordRef.current.value !== confirmPasswordRef.current.value) {
-                    setFormErrors({ ...formErrors, [name]: ERROR_MESSAGE.incorrectConfirmPassword });
-                    setFormValid({ ...formValid, [name]: false });
-                } else {
-                    setFormValid({ ...formValid, [name]: true });
-                    setFormErrors({ ...formErrors, [name]: '' });
-                }
-                break;
+        if (!value.trim()) {
+            setDisplayNameInfo({ displayName: value, errorMessage: ERROR_MESSAGE.required, isValid: false });
+            return;
         }
+        if (!checkValidation({ displayName: value })) {
+            setDisplayNameInfo({
+                displayName: value,
+                errorMessage: ERROR_MESSAGE.incorrectDisplayName,
+                isValid: false,
+            });
+            return;
+        }
+        setDisplayNameInfo({ displayName: value, errorMessage: '', isValid: true });
+    };
+
+    const handleChangeNewPassword = (e) => {
+        const { value } = e.target;
+
+        setNewPasswordInfo({ ...newPasswordInfo, newPassword: value });
+
+        if (!value) {
+            setConfirmPassword({ confirmPassword: '', errorMessage: '', isValid: true });
+            setNewPasswordInfo({ newPassword: '', errorMessage: '', isValid: true });
+            return;
+        }
+        if (!checkValidation({ password: value })) {
+            setNewPasswordInfo({ newPassword: value, errorMessage: ERROR_MESSAGE.incorrectPassword, isValid: false });
+            return;
+        }
+        setNewPasswordInfo({ newPassword: value, errorMessage: '', isValid: true });
+    };
+
+    const handleChangeConfirmPassword = (e) => {
+        const { value } = e.target;
+        setConfirmPassword({ ...confirmPasswordInfo, confirmPassword: value });
+
+        if (newPasswordRef.current.value !== confirmPasswordRef.current.value) {
+            setConfirmPassword({
+                confirmPassword: value,
+                errorMessage: ERROR_MESSAGE.incorrectConfirmPassword,
+                isValid: false,
+            });
+            return;
+        }
+        setConfirmPassword({ confirmPassword: value, errorMessage: '', isValid: true });
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         if (
-            formValid.displayName &&
-            formValid.newPassword &&
-            formValid.confirmPassword &&
+            displayNameInfo.isValid &&
+            newPasswordInfo.isValid &&
+            confirmPasswordInfo.isValid &&
             newPasswordRef.current.value === confirmPasswordRef.current.value
         ) {
             if (newPasswordRef.current.value) {
@@ -110,20 +119,25 @@ const UserEdit = () => {
                 updateUser({ displayName: displayNameRef.current.value });
             }
 
-            setUpdatedUser({ ...updatedUser, newPassword: '', confirmPassword: '' });
+            setNewPasswordInfo({ newPassword: '', errorMessage: '', isValid: true });
+            setConfirmPassword({ confirmPassword: '', errorMessage: '', isValid: true });
+
+            return;
+        }
+
+        if (!displayNameInfo.isValid) {
+            displayNameRef.current.focus();
+            return;
+        } else if (!newPasswordInfo.isValid) {
+            newPasswordRef.current.focus();
             return;
         } else {
-            if (!formValid.displayName) {
-                displayNameRef.current.focus();
-                return;
-            } else if (!formValid.newPassword) {
-                newPasswordRef.current.focus();
-                return;
-            } else {
-                confirmPasswordRef.current.focus();
-                setFormErrors({ ...formErrors, confirmPassword: ERROR_MESSAGE.incorrectConfirmPassword });
-                setFormValid({ ...formValid, confirmPassword: false });
-            }
+            confirmPasswordRef.current.focus();
+            setConfirmPassword({
+                ...confirmPasswordInfo,
+                errorMessage: ERROR_MESSAGE.incorrectConfirmPassword,
+                isValid: false,
+            });
         }
     };
     if (isLoadingGet) return <Loading />;
@@ -132,7 +146,7 @@ const UserEdit = () => {
         <Container>
             <U.Wrap>
                 <PageTitle>회원 정보 수정</PageTitle>
-                <form>
+                <U.Form>
                     <U.InputBox>
                         <Input
                             id="inputEmail"
@@ -149,12 +163,12 @@ const UserEdit = () => {
                             id="displayName"
                             inputType="text"
                             labelText="이름(닉네임)"
-                            isValid={formValid.displayName}
+                            isValid={displayNameInfo.errorMessage.length === 0}
                             isRequired
                             inputWidth="100%"
-                            value={updatedUser.displayName}
-                            errorMessage={formErrors.displayName}
-                            onChange={handleChange}
+                            value={displayNameInfo.displayName}
+                            errorMessage={displayNameInfo.errorMessage}
+                            onChange={handleChangeDisplayName}
                             inputRef={displayNameRef}
                         />
                     </U.InputBox>
@@ -165,11 +179,11 @@ const UserEdit = () => {
                                 inputType="password"
                                 labelText="비밀번호"
                                 placeholder="새 비밀번호"
-                                isValid={formValid.newPassword}
-                                errorMessage={formErrors.newPassword}
+                                isValid={newPasswordInfo.errorMessage.length === 0}
+                                errorMessage={newPasswordInfo.errorMessage}
                                 inputWidth="100%"
-                                value={updatedUser.newPassword}
-                                onChange={handleChange}
+                                value={newPasswordInfo.newPassword}
+                                onChange={handleChangeNewPassword}
                                 inputRef={newPasswordRef}
                             />
                         </div>
@@ -178,11 +192,11 @@ const UserEdit = () => {
                                 id="confirmPassword"
                                 inputType="password"
                                 placeholder="새 비밀번호 확인"
-                                isValid={formValid.confirmPassword}
-                                errorMessage={formErrors.confirmPassword}
+                                isValid={confirmPasswordInfo.errorMessage.length === 0}
+                                errorMessage={confirmPasswordInfo.errorMessage}
                                 inputWidth="100%"
-                                value={updatedUser.confirmPassword}
-                                onChange={handleChange}
+                                value={confirmPasswordInfo.confirmPassword}
+                                onChange={handleChangeConfirmPassword}
                                 inputRef={confirmPasswordRef}
                             />
                         </div>
@@ -195,7 +209,7 @@ const UserEdit = () => {
                             수정
                         </Button>
                     </ButtonWrap>
-                </form>
+                </U.Form>
             </U.Wrap>
         </Container>
     );
