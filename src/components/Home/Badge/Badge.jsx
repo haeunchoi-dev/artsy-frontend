@@ -1,7 +1,7 @@
 import React from 'react';
 import * as B from './Badge.styles';
 import { useTheme } from 'styled-components';
-import calculateGrade from '@utils/calculateGrade';
+import { calculateGrade } from '@utils/calculateGrade';
 import { getIconUrl } from '@utils/getImageUrl';
 const Badge = ({ totalTicket }) => {
     const theme = useTheme();

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useUserGetQuery, useUserEditQuery } from '@hooks/@queries/useUserInfoQuery';
+import { getUser, updateUser } from '@hooks/@queries/useUserInfoQuery';
 import useToastContext from '@hooks/useToastContext';
 
 import Container from '@components/@common/Container/Container';
@@ -19,8 +19,8 @@ import * as U from './UserEdit.styles';
 
 const UserEdit = () => {
     const navigate = useNavigate();
-    const { data: userInfo, isSuccess: isSuccessGet, isLoading: isLoadingGet } = useUserGetQuery();
-    const { mutate: updateUser, isSuccess: isSuccessUpdate, isError: isErrorUpdate } = useUserEditQuery();
+    const { data: userInfo, isSuccess: isSuccessGet, isLoading: isLoadingGet } = getUser();
+    const { mutate: mutateUser, isSuccess: isSuccessUpdate, isError: isErrorUpdate } = updateUser();
     const toast = useToastContext();
     const displayNameRef = useRef();
     const newPasswordRef = useRef();
@@ -114,9 +114,9 @@ const UserEdit = () => {
             newPasswordRef.current.value === confirmPasswordRef.current.value
         ) {
             if (newPasswordRef.current.value) {
-                updateUser({ displayName: displayNameRef.current.value, password: newPasswordRef.current.value });
+                mutateUser({ displayName: displayNameRef.current.value, password: newPasswordRef.current.value });
             } else {
-                updateUser({ displayName: displayNameRef.current.value });
+                mutateUser({ displayName: displayNameRef.current.value });
             }
 
             setNewPasswordInfo({ newPassword: '', errorMessage: '', isValid: true });

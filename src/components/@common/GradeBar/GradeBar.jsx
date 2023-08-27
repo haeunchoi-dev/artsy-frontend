@@ -1,6 +1,6 @@
 import { StyledBarWrap, StyledBar, StyledLegend } from './GradeBar.styles';
 import { BADGE_GRADE } from '@constants/badgeGrade';
-import calculateGrade from '@utils/calculateGrade';
+import { calculateGrade } from '@utils/calculateGrade';
 
 import { useTheme } from 'styled-components';
 

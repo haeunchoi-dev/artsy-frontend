@@ -4,7 +4,7 @@ import api from '@utils/api';
 
 export const QUERY_KEY = '/api/user/info';
 
-const useUserGetQuery = () => {
+const getUser = () => {
     const fetcher = () => api.get(QUERY_KEY);
     const options = {
         retry: false,
@@ -12,7 +12,7 @@ const useUserGetQuery = () => {
     return useQuery([QUERY_KEY], fetcher, options);
 };
 
-const useUserEditQuery = () => {
+const updateUser = () => {
     const fetcher = (data) => api.put(QUERY_KEY, data);
     const queryClient = useQueryClient();
     const options = {
@@ -23,4 +23,4 @@ const useUserEditQuery = () => {
     return useMutation(fetcher, options);
 };
 
-export { useUserGetQuery, useUserEditQuery };
+export { getUser, updateUser };
