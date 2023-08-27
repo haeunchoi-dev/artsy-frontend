@@ -41,13 +41,13 @@ const SideBar = () => {
                 <S.NavBarContent $open={isToggle}>
                     <S.Navbar>
                         <S.NavbarItem onClick={handleToggleBtn}>
-                            <Link to="/home">홈</Link>
+                            <S.NavbarItemLink to="/home">홈</S.NavbarItemLink>
                         </S.NavbarItem>
                         <S.NavbarItem onClick={handleToggleBtn}>
-                            <Link to="/ticket/list">기록함</Link>
+                            <S.NavbarItemLink to="/ticket/list">기록함</S.NavbarItemLink>
                         </S.NavbarItem>
                         <S.NavbarItem onClick={handleToggleBtn}>
-                            <Link to="/mypage">마이페이지</Link>
+                            <S.NavbarItemLink to="/mypage">마이페이지</S.NavbarItemLink>
                         </S.NavbarItem>
                     </S.Navbar>
                     <S.LogoutButton color={'#fff'} size={'large'} onClick={handleAuthBtn} $open={isToggle}>

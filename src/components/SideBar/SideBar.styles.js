@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import Button from '@components/@common/Button/Button';
+import { Link } from 'react-router-dom';
 
 const NavBarContainer = styled.div`
     position: fixed;
@@ -52,9 +53,11 @@ const NavBarContent = styled.div`
     }
 `;
 const Navbar = styled.ul`
+    width: 100%;
     margin-bottom: 1.8rem;
 `;
 const NavbarItem = styled.li`
+    width: 100%;
     text-align: left;
     font-size: 1.6rem;
     margin-bottom: 3rem;
@@ -63,6 +66,13 @@ const NavbarItem = styled.li`
     }
     ${({ theme }) => theme.media.labtop} {
         text-align: center;
+    }
+`;
+
+const NavbarItemLink = styled(Link)`
+    display: flex;
+    &:hover {
+        color: ${({ theme }) => theme.colors.point1};
     }
 `;
 const LogoutButton = styled(Button)`
@@ -109,4 +119,13 @@ const ExtendToggleButton = styled.div`
         height: 7rem;
     }
 `;
-export { NavBarContainer, LogoutButton, Navbar, NavbarItem, BackModal, NavBarContent, ExtendToggleButton };
+export {
+    NavBarContainer,
+    LogoutButton,
+    Navbar,
+    NavbarItem,
+    NavbarItemLink,
+    BackModal,
+    NavBarContent,
+    ExtendToggleButton,
+};

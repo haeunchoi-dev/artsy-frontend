@@ -8,16 +8,17 @@ import useRegisterQuery from '@hooks/@queries/useRegisterQuery';
 import checkValidation from '@utils/checkValidation';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
+import useValidation from '@hooks/useValidation';
+
+const checkSamePassword = (passwords) => {
+    const { passwordCheck, password } = passwords;
+    return passwordCheck === password;
+};
 
 const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEmail }) => {
     const [passwordCheck, setPasswordCheck] = useState('');
-    const [isSamePassword, setIsSamePassword] = useState(true);
-    const [isValidName, setIsValidName] = useState(true);
-    const [isValidPassword, setIsValidPassword] = useState(true);
     const [isdisabledButton, setIsdisabledButton] = useState(true);
 
-    const nameInputRef = useRef(null);
-    const passwordInputRef = useRef(null);
     const passwordCheckInputRef = useRef(null);
     const theme = useTheme();
     const navigate = useNavigate();
@@ -27,29 +28,22 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
 
     const { displayName, email, password } = userInfo;
 
-    useEffect(() => {
-        if (passwordCheck !== '') {
-            password === passwordCheck ? setIsSamePassword(true) : setIsSamePassword(false);
-        } else {
-            setIsSamePassword(true);
-        }
-    }, [password, passwordCheck]);
+    const { isValid: isValidName, errorMessage: errorMessageName } = useValidation(
+        { displayName },
+        checkValidation,
+        ERROR_MESSAGE.incorrectDisplayName
+    );
 
-    useEffect(() => {
-        if (password !== '') {
-            checkValidation({ password }) ? setIsValidPassword(true) : setIsValidPassword(false);
-        } else {
-            setIsValidPassword(true);
-        }
-    }, [password]);
-
-    useEffect(() => {
-        if (displayName !== '') {
-            checkValidation({ displayName }) ? setIsValidName(true) : setIsValidName(false);
-        } else {
-            setIsValidName(true);
-        }
-    }, [displayName]);
+    const { isValid: isValidPassword, errorMessage: errorMessagePassword } = useValidation(
+        { password },
+        checkValidation,
+        ERROR_MESSAGE.incorrectPassword
+    );
+    const { isValid: isSamePassword, errorMessage: errorMessagePasswordCheck } = useValidation(
+        { passwordCheck, password },
+        checkSamePassword,
+        ERROR_MESSAGE.incorrectConfirmPassword
+    );
 
     useEffect(() => {
         if (isError) {
@@ -69,22 +63,20 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
             navigate('/signin');
         }
     }, [isSuccess, isError]);
+
     useEffect(() => {
-        const isCorrectFormat = checkValidation({ displayName }) && checkValidation({ password });
-        if (isCorrectFormat && isSamePassword) {
+        const isCorrectFormat = isValidPassword && isValidName && isSamePassword;
+
+        if (isCorrectFormat) {
             setIsdisabledButton(false);
         } else {
             setIsdisabledButton(true);
         }
     }, [displayName, password, isSamePassword]);
+
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        const isCorrectFormat = checkValidation({ displayName }) && checkValidation({ password });
-        if (!isCorrectFormat || !isSamePassword) {
-            toast.show(ERROR_MESSAGE.incorrectRegister);
-            return;
-        }
         signUp(userInfo);
         initializeUserInfo();
     };
@@ -108,27 +100,25 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
                     placeholder="이름(닉네임)을 입력하세요."
                     id="displayName"
                     name="displayName"
-                    inputRef={nameInputRef}
                     onChange={handleChange}
                     value={displayName}
                     rounded
                     isRequired
-                    isValid={isValidName}
+                    isValid={errorMessageName === ''}
                     inputWidth="100%"
-                    errorMessage={'이름(닉네임)은 3~15자리를 입력해주세요'}
+                    errorMessage={errorMessageName}
                 />
                 <Input
                     inputType="password"
                     placeholder="비밀번호를 입력하세요."
                     id="password"
-                    inputRef={passwordInputRef}
                     onChange={handleChange}
                     value={password}
                     rounded
                     isRequired
-                    isValid={isValidPassword}
+                    isValid={errorMessagePassword === ''}
                     inputWidth="100%"
-                    errorMessage={'비밀번호는 8~32자리(영문자/숫자/특수문자)로 입력해주세요.'}
+                    errorMessage={errorMessagePassword}
                 />
                 <Input
                     inputType="password"
@@ -139,9 +129,9 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
                     value={passwordCheck}
                     rounded
                     isRequired
-                    isValid={isSamePassword}
+                    isValid={errorMessagePasswordCheck === ''}
                     inputWidth="100%"
-                    errorMessage={'입력한 비밀번호와 재입력한 비밀번호가 일치하지 않습니다.'}
+                    errorMessage={errorMessagePasswordCheck}
                 />
 
                 <R.RegisterButton color={theme.colors.point1} size={'large'} disabled={isdisabledButton}>
