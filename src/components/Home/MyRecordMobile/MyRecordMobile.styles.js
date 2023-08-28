@@ -12,19 +12,27 @@ const Container = styled(Link)`
     background-color: #fff;
     border-radius: ${({ theme }) => theme.borderRadius.large};
     box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
+    ${({ theme }) => theme.media.tablet} {
+        display: none;
+    }
 `;
 const BookImage = styled.img`
     width: 18%;
+    max-width: 100px;
     height: auto;
 `;
 const Content = styled.p`
     flex: 1 auto;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-left: 0.8rem;
     font-size: 1.4rem;
 `;
-const Arrow = styled.img`
-    width: 18px;
+const Arrow = styled.span`
+    width: 20px;
+    img {
+        width: 100%;
+    }
 `;
 export { Container, BookImage, Content, Arrow };

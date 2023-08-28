@@ -26,7 +26,7 @@ const Home = () => {
                 )}
             </H.TopContainer>
             <Record />
-            {windowWidth <= tabletSize && <MyRecordMobile />}
+            <MyRecordMobile />
         </H.Home>
     );
 };
