@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import useLoginQuery from '@hooks/@queries/useLoginQuery';
 import { useNavigate } from 'react-router-dom';
 import useWindowWidth from '@hooks/useWindowWidth';
-import IntroBox from '@components/introBox/IntroBox';
+import IntroBox from '@components/@common/introBox/IntroBox';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
 import GlobalStyle from '@styles/GlobalStyles';

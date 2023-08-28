@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import SideBar from '@components/SideBar/SideBar';
+import SideBar from '@components/@common/SideBar/SideBar';
 import { StyledHeader, StyledHeaderInner } from './Header.styles';
 import useHeaderContext from '@hooks/useHeaderContext';
 import { Link } from 'react-router-dom';
