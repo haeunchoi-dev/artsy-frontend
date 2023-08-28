@@ -54,7 +54,7 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
                     break;
                 }
                 default: {
-                    toast.show('관리자에게 문의하세요');
+                    toast.show(ERROR_MESSAGE.defaultError);
                 }
             }
         }

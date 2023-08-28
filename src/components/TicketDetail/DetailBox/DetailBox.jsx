@@ -1,7 +1,6 @@
+import { formatTicketDate, formatKstDate } from '@utils/formatDate';
 import DetailText from '../DetailText/DetailText';
 import * as D from './DetailBox.styles';
-import formatKstDate from '@utils/foramtKstDate';
-import formatTicketDate from '@utils/formatTicketDate';
 
 const DetailBox = ({ ticketData, onUpdate, onDelete }) => {
     const { title, categoryName, rating, place, price, showDate, review } = ticketData;

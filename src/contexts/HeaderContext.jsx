@@ -4,9 +4,8 @@ const HeaderContext = createContext();
 
 const HeaderContextProvider = ({ children }) => {
     const [color, setColor] = useState('#fff');
-    const [ticketId, setTicketId] = useState('');
 
-    const value = { color, setColor, ticketId, setTicketId };
+    const value = { color, setColor };
 
     return <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider>;
 };

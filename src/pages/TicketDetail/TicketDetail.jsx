@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import * as T from './TicketDetail.styles';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import BasicTicketUrl from '@assets/images/ticket.png';
-import { useTicketGetQuery, useTicketDeleteQuery } from '@hooks/@queries/useTicketQuery';
 import Loading from '@components/@common/Loading/Loading';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
@@ -10,6 +9,8 @@ import Review from '@components/TicketDetail/Review/Review';
 import DetailBox from '@components/TicketDetail/DetailBox/DetailBox';
 import useToastContext from '@hooks/useToastContext';
 import useHeaderContext from '@hooks/useHeaderContext';
+import useTicketQuery from '@hooks/@queries/useTicketQuery';
+import compareImage from '@utils/compareImage';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
@@ -17,9 +18,15 @@ const TicketDetail = () => {
     const [updateDate, setUpdateDate] = useState(location?.state);
     const navigate = useNavigate();
     const toast = useToastContext();
-    const ticketGetQuery = useTicketGetQuery(ticketId, updateDate);
-    const ticketData = ticketGetQuery?.data;
-    const { setColor, setTicketId } = useHeaderContext();
+    const { getTicket, deleteTicket } = useTicketQuery();
+    const {
+        data: ticketData,
+        isSuccess: isGetSuccess,
+        isError: isGetError,
+        isLoading: isGetLoading,
+        error: getError,
+    } = getTicket(ticketId, updateDate);
+    const { setColor } = useHeaderContext();
 
     const colorBoxRef = useRef();
 
@@ -29,9 +36,10 @@ const TicketDetail = () => {
         isError: isDeleteError,
         isLoading: isDeleteLoding,
         error: deleteError,
-    } = useTicketDeleteQuery(ticketId);
+    } = deleteTicket(ticketId);
 
     const [imgSrc, setImgSrc] = useState('');
+    const [imageSize, setImageSize] = useState('height');
 
     const [position, setPosition] = useState(0);
     const onScroll = () => {
@@ -48,35 +56,40 @@ const TicketDetail = () => {
     useEffect(() => {
         if (position > colorBoxRef.current?.offsetHeight) setColor('#fff');
         else setColor(ticketData?.categoryColor);
+
+        return () => {
+            setColor('#fff');
+        };
     }, [position]);
 
     // 티켓 불러오기
     useEffect(() => {
-        if (ticketGetQuery.isSuccess) {
-            setColor(ticketData?.categoryColor);
-            setTicketId(ticketId);
+        if (!isGetSuccess) return;
+        window.scrollTo(0, 0);
+        setColor(ticketData?.categoryColor);
 
-            if (ticketData.files?.length === 0) {
-                setImgSrc(BasicTicketUrl);
-            } else {
-                setImgSrc(ticketData.files[0].imageUrl);
-            }
+        if (ticketData.files?.length === 0) {
+            setImgSrc(BasicTicketUrl);
+        } else {
+            const { imageUrl, width, height } = ticketData.files[0];
+            setImgSrc(imageUrl);
+            setImageSize(compareImage(width, height));
         }
-    }, [ticketGetQuery.isSuccess]);
+    }, [isGetSuccess]);
 
     useEffect(() => {
-        if (ticketGetQuery.isError) {
-            const errorType = ticketGetQuery.error.response.data.error.type;
-            switch (errorType) {
-                case ERROR_TYPE.DATA_NOT_FOUND:
-                    toast.show(ERROR_MESSAGE.dataNotFoundTicket);
-                    navigate('/ticket/list');
-                    break;
-                default:
-                    toast.show('관리자에게 문의하세요');
-            }
+        if (!isGetError) return;
+
+        const errorType = getError.response.data.error.type;
+        switch (errorType) {
+            case ERROR_TYPE.DATA_NOT_FOUND:
+                toast.show(ERROR_MESSAGE.dataNotFoundTicket);
+                navigate('/ticket/list');
+                break;
+            default:
+                toast.show(ERROR_MESSAGE.defaultError);
         }
-    }, [ticketGetQuery.isError]);
+    }, [isGetError]);
 
     // 티켓 삭제
     const onDelete = () => {
@@ -95,7 +108,7 @@ const TicketDetail = () => {
             const errorType = deleteError.response.data.error.type;
             switch (errorType) {
                 default:
-                    toast.show('관리자에게 문의하세요');
+                    toast.show(ERROR_MESSAGE.defaultError);
             }
         }
     }, [isDeleteError]);
@@ -110,11 +123,11 @@ const TicketDetail = () => {
             {ticketData !== undefined && (
                 <div>
                     {isDeleteLoding && <Loading />}
-                    {ticketGetQuery?.isLoading && <Loading />}
+                    {isGetLoading && <Loading />}
                     <T.TypeColorBox ref={colorBoxRef} color={ticketData?.categoryColor} />
                     <T.Container>
                         <T.TicketDetailWrap>
-                            <T.TicketImageWrap>
+                            <T.TicketImageWrap $size={imageSize}>
                                 <img src={imgSrc} alt="티켓이미지" />
                             </T.TicketImageWrap>
                             <DetailBox ticketData={ticketData} onUpdate={onUpdate} onDelete={onDelete} />

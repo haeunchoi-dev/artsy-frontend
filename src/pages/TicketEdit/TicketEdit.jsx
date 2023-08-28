@@ -10,13 +10,13 @@ import CategoryButton from '@components/TicketCreate/CategoryButton/CategoryButt
 import Loading from '@components/@common/Loading/Loading';
 import * as I from '@components/@common/Input/Input.styles';
 import deleteIconUrl from '@assets/icons/icon-delete.png';
-import formatTicketDate from '@utils/formatTicketDate';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
-import { useTicketUpdateQuery } from '@hooks/@queries/useTicketQuery';
-import formatKstDate from '@utils/foramtKstDate';
 import useToastContext from '@hooks/useToastContext';
 import useInput from '@hooks/useInput';
+import useTicketQuery from '@hooks/@queries/useTicketQuery';
+import { formatTicketDate, formatKstDate } from '@utils/formatDate';
+import setFormData from '@utils/setFormData';
 
 const TicketEdit = () => {
     const theme = useTheme();
@@ -27,9 +27,16 @@ const TicketEdit = () => {
     const categoryQuery = useCategoryQuery();
     const ticketData = location.state;
 
-    const { mutate, isSuccess, data, isError, error } = useTicketUpdateQuery(parseInt(ticketId));
+    const { updateTicket } = useTicketQuery();
 
-    const [{ title, place, price, review }, onChangeInput, onNumberChange, inputReset] = useInput({
+    const { mutate, isSuccess, data, isError, error } = updateTicket(parseInt(ticketId));
+
+    const {
+        input: { title, place, price, review },
+        onChange: onChangeInput,
+        onNumberChange,
+        reset,
+    } = useInput({
         title: ticketData.title ?? '',
         place: ticketData.place ?? '',
         price: ticketData.price ?? '',
@@ -46,6 +53,10 @@ const TicketEdit = () => {
     const titleRef = useRef();
     const [titleError, setTitleError] = useState('');
     const [titleValid, setTitleValid] = useState(true);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     useEffect(() => {
         if (isSuccess) {
@@ -71,7 +82,7 @@ const TicketEdit = () => {
                     break;
 
                 default:
-                    toast.show('관리자에게 문의하세요');
+                    toast.show(ERROR_MESSAGE.defaultError);
             }
         }
     }, [isError]);
@@ -96,18 +107,16 @@ const TicketEdit = () => {
         }
 
         // mutate
-        let formData = new FormData();
-
-        // 필수
-        formData.append('categoryId', parseInt(category));
-        formData.append('title', title);
-        formData.append('showDate', formatTicketDate(showDate));
-
-        // 선택사항
-        formData.append('place', place);
-        formData.append('price', price ?? parseInt(price));
-        formData.append('rating', parseInt(rating));
-        formData.append('review', review);
+        const inputData = {
+            categoryId: parseInt(category),
+            title: title,
+            showDate: formatTicketDate(showDate),
+            place: place,
+            price: price ?? parseInt(price),
+            rating: parseInt(rating),
+            review: review,
+        };
+        let formData = setFormData(inputData);
 
         // 파일 삭제
         if (imgSrc === '' && ticketData.files.length !== 0) {
@@ -120,7 +129,7 @@ const TicketEdit = () => {
 
         mutate(formData);
 
-        inputReset();
+        reset();
         setTitleError('');
     };
 
@@ -202,7 +211,7 @@ const TicketEdit = () => {
                         id="price"
                         labelText="금액"
                         onChange={onNumberChange}
-                        value={parseInt(price)}
+                        value={price}
                         inputType="number"
                         isValid={true}
                         placeholder="금액을 입력하세요"

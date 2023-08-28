@@ -19,6 +19,7 @@ const ERROR_MESSAGE = {
     incorrectPassword: '비밀번호는 영문 소문자,대문자, 숫자, 특수문자를 포함하여 입력해주세요.',
     incorrectConfirmPassword: '비밀번호가 일치하지 않습니다.',
     failUpdateUser: '회원 정보 수정에 실패했습니다.',
+    defaultError: '관리자에게 문의하세요',
 };
 
 const SUCCESS_MESSAGE = {

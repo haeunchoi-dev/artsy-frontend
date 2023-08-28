@@ -1,4 +1,15 @@
-import formatKstDate from '@utils/foramtKstDate';
+import { format } from 'date-fns';
+
+const formatTicketDate = (date) => {
+    return format(date, 'yyyy-MM-dd HH:mm');
+};
+
+const formatKstDate = (time) => {
+    time = new Date(time);
+    const offset = time.getTimezoneOffset() * 60000;
+
+    return new Date(time.getTime() + offset);
+};
 
 const formatDate = (date) => {
     const kst = formatKstDate(date);
@@ -10,4 +21,4 @@ const formatDate = (date) => {
     return `${year}.${month}.${day}`;
 };
 
-export default formatDate;
+export { formatTicketDate, formatKstDate, formatDate };

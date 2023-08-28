@@ -14,8 +14,8 @@ import CategoryFilter from '@components/TicketListPage/CategoryFilter/CategoryFi
 import InfiniteLoading from '@components/TicketListPage/InfiniteLoading/InfiniteLoading.jsx';
 import NoTicket from '@components/TicketListPage/NoTicket/NoTicket.jsx';
 
-import formatDate from '@utils/formatDate';
 import * as L from './TicketList.styles';
+import { formatDate } from '@utils/formatDate';
 
 const List = () => {
     const theme = useTheme();
