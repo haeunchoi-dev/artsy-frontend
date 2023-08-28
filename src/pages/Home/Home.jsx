@@ -5,14 +5,9 @@ import * as H from './Home.styles';
 import { getUser } from '@hooks/@queries/useUserInfoQuery';
 import Loading from '@components/@common/Loading/Loading';
 import MyRecordMobile from '@components/Home/MyRecordMobile/MyRecordMobile';
-import useWindowWidth from '@hooks/useWindowWidth';
-import { useTheme } from 'styled-components';
 
 const Home = () => {
     const { data: userInfo, isLoading } = getUser();
-    const theme = useTheme();
-    const windowWidth = useWindowWidth();
-    const tabletSize = theme.devicesSize.tablet.replace('px', '');
     if (isLoading) return <Loading />;
     const { displayName, totalTicket } = userInfo;
     return (

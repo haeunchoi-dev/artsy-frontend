@@ -11,7 +11,7 @@ import TicketEdit from '@pages/TicketEdit/TicketEdit.jsx';
 import PageNotFound from '@pages/PageNotFound/PageNotFound.jsx';
 import Signin from '@pages/Signin/Signin.jsx';
 import Register from '@pages/Register/Register.jsx';
-import PageGuard from '@components/PageGuard.jsx';
+import PageGuard from '@pages/PageGuard/PageGuard.jsx';
 import Grade from '@pages/Grade/Grade.jsx';
 
 const router = createBrowserRouter([
