@@ -13,6 +13,7 @@ import Signin from '@pages/Signin/Signin.jsx';
 import Register from '@pages/Register/Register.jsx';
 import PageGuard from '@pages/PageGuard/PageGuard.jsx';
 import Grade from '@pages/Grade/Grade.jsx';
+import UserStats from '@pages/UserStats/UserStats.jsx';
 
 const router = createBrowserRouter([
     {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
                     {
                         path: 'user/edit',
                         element: <UserEdit />,
+                    },
+                    {
+                        path: 'user/stats',
+                        element: <UserStats />,
                     },
                     {
                         path: 'ticket/list',
