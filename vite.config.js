@@ -64,6 +64,7 @@ export default defineConfig({
         },
     },
     server: {
+        host: true,
         proxy: {
             '/api': {
                 target: 'http://34.64.49.14/api',
