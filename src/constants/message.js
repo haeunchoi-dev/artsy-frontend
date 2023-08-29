@@ -3,7 +3,7 @@ const CONFIRM_MESSAGE = {
 };
 
 const ERROR_MESSAGE = {
-    unexpected: '앗! 오류가 발생했어요.' + '\n' + '잠시 후에 다시 시도해보세요.',
+    unexpected: '앗! 오류가 발생했어요. 잠시 후에 다시 시도해보세요.',
     auth: '로그인이 필요한 페이지입니다. 로그인을 먼저 해주세요.',
     incorrectEmailOrPassword: `이메일 주소 또는 비밀번호를 잘못입력했습니다. 다시 확인해주세요.`,
     incorrectEmailFormat: '이메일 형식이 올바르지 않습니다.',
@@ -20,6 +20,7 @@ const ERROR_MESSAGE = {
     incorrectConfirmPassword: '비밀번호가 일치하지 않습니다.',
     failUpdateUser: '회원 정보 수정에 실패했습니다.',
     defaultError: '관리자에게 문의하세요',
+    failCheckPassword: '비밀번호 확인에 실패했습니다. 비밀번호를 다시 입력해주세요.',
 };
 
 const SUCCESS_MESSAGE = {

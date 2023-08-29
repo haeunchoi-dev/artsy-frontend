@@ -8,7 +8,7 @@ const MyIconMenu = () => {
     return (
         <M.IconMenu>
             <M.IconButton $imgUrl={myIconUrl} to="/user/edit">
-                <span>계정정보</span>
+                <span>회원정보수정</span>
             </M.IconButton>
             <M.IconButton $imgUrl={bookIconUrl} to="/ticket/list">
                 <span>기록함</span>

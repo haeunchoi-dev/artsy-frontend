@@ -8,8 +8,8 @@ import { getIconUrl } from '@utils/getImageUrl';
 
 const GradeBox = ({ userInfo, gradeInfo, gradeNextInfo }) => {
     return (
-        <G.StyledGradeBox>
-            <G.StyledGradeInfo to="">
+        <G.StyledGradeBox to="/grade">
+            <G.StyledGradeInfo>
                 <span>
                     <img src={getIconUrl(`Badge_${gradeInfo?.imageName}`)} alt={gradeInfo?.name} />
                 </span>
