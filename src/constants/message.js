@@ -21,10 +21,12 @@ const ERROR_MESSAGE = {
     failUpdateUser: '회원 정보 수정에 실패했습니다.',
     defaultError: '관리자에게 문의하세요',
     failCheckPassword: '비밀번호 확인에 실패했습니다. 비밀번호를 다시 입력해주세요.',
+    invalideEmail: '가입된 이메일주소가 아닙니다.',
 };
 
 const SUCCESS_MESSAGE = {
     validEmail: '사용가능한 이메일 주소입니다.',
+    successSignin: '성공적으로 로그인했습니다.',
     successRegister: '성공적으로 가입되었습니다!',
     successLogout: '로그아웃 했습니다.',
     successCreateTicket: '성공적으로 티켓이 추가되었습니다.',

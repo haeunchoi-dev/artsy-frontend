@@ -4,6 +4,7 @@ import Intro from '@pages/Intro/Intro.jsx';
 import Home from '@pages/Home/Home.jsx';
 import MyPage from '@pages/MyPage/MyPage.jsx';
 import UserEdit from '@pages/UserEdit/UserEdit.jsx';
+import SearchPwd from '@pages/SearchPwd/SearchPwd.jsx';
 import TicketList from '@pages/TicketList/TicketList.jsx';
 import TicketCreate from '@pages/TicketCreate/TicketCreate.jsx';
 import TicketDetail from '@pages/TicketDetail/TicketDetail.jsx';
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
                         element: <Grade />,
                     },
                 ],
+            },
+            {
+                path: 'user/search',
+                element: <SearchPwd />,
             },
             {
                 path: '*',

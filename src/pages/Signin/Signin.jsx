@@ -98,6 +98,7 @@ const Signin = () => {
                 <S.RegisterButton size={'large'} onClick={handleRegister}>
                     회원가입
                 </S.RegisterButton>
+                <S.SearchPasswordButton to="/user/search">비밀번호 찾기</S.SearchPasswordButton>
             </S.SignInContent>
         </S.SignInContainer>
     );

@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
 
 const ToggleButton = styled.div`
-    padding: 16px 5px;
+    margin-right: -1rem;
+    padding: 1.6rem 1rem;
     cursor: pointer;
+
     ${({ $active }) =>
         $active &&
         css`
