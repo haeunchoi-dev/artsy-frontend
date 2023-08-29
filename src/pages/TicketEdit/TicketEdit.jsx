@@ -52,7 +52,7 @@ const TicketEdit = () => {
 
     const titleRef = useRef();
     const [titleError, setTitleError] = useState('');
-    const [titleValid, setTitleValid] = useState(true);
+    const [isTitleValid, setIsTitleValid] = useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -101,7 +101,7 @@ const TicketEdit = () => {
 
         if (title === '') {
             setTitleError('제목을 입력해주세요');
-            setTitleValid(false);
+            setIsTitleValid(false);
             titleRef.current.focus();
             return;
         }
@@ -130,6 +130,7 @@ const TicketEdit = () => {
         mutate(formData);
 
         reset();
+        setIsTitleValid(true);
         setTitleError('');
     };
 
@@ -158,9 +159,9 @@ const TicketEdit = () => {
                         onChange={onChangeInput}
                         value={title}
                         isRequired
-                        isValid={titleValid}
+                        isValid={isTitleValid || title === ''}
                         onBlur={() => {
-                            if (title !== '') setTitleValid(true);
+                            if (title !== '') seIstTitleValid(true);
                         }}
                         placeholder="제목을 입력하세요"
                         inputWidth="100%"

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import * as P from './PhotoUploader.styles';
 import galleryIconUrl from '@assets/icons/icon-gallery.png';
+import imageCompression from 'browser-image-compression';
 
 const PhotoUploader = ({ setImgfile, setImgSrc }) => {
     // 사진 업로드 input 태그 접근
@@ -12,19 +13,28 @@ const PhotoUploader = ({ setImgfile, setImgSrc }) => {
     };
 
     // 사진 미리보기 인코딩(base64)
-    const onChangeFile = (e) => {
+    const onChangeFile = async (e) => {
         const reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
+        const imageFile = e.target?.files[0];
 
-        return new Promise((resolve) => {
-            reader.onload = () => {
-                // 실제 전송될 파일
-                setImgfile(e.target.files[0]);
-                // 미리보기 사진
-                setImgSrc(reader.result);
-                resolve();
+        const options = {
+            maxSizeMB: 3,
+            maxWidthOrHeight: 1000,
+            useWebWorker: true,
+        };
+
+        try {
+            const compressedFile = await imageCompression(imageFile, options);
+            setImgfile(compressedFile);
+
+            reader.readAsDataURL(compressedFile);
+            reader.onloadend = () => {
+                const base64data = reader.result;
+                setImgSrc(base64data);
             };
-        });
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

@@ -22,7 +22,7 @@ const useTicketQuery = () => {
         return useQuery({
             queryKey: [QUERY_KEY, ticketId, updateDate],
             queryFn: fetcher,
-            onSuccess: () => queryClient.invalidateQueries([QUERY_KEY, ticketId, updateDate]),
+            retry: false,
         });
     };
 
