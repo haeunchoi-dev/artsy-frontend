@@ -1,13 +1,14 @@
 import React from 'react';
-import * as T from './Input.styles';
+import { StyledForm, StyledInput, StyledLabel, StyledRequired, StyledErrorMessage } from './Input.styles';
 /**
  * input 컴포넌트
  * @param {string} labelText label태그 내 텍스트
  * @param {string} errorMessage error일때 텍스트
  * @param {string} inputType input태그 type을 지정
+ * @param {string} id label의 htmlfor, input의 id, name값
  * @param {event: ChangeEvent<HTMLInputElement>} onChange
  * @param {React.RefObject<HTMLInputElement>} inputRef
- * @param {boolean} isRouned input의 형태가 라운드이면 true 언더라인이면 false
+ * @param {boolean} rounded input의 형태가 라운드이면 true 언더라인이면 false
  * @param {string} min input value의 최소 길이
  * @param {string} max input value의 최대 길이
  * @param {boolean} isValid 유효성 검사 결과값
@@ -30,26 +31,31 @@ const Input = ({
     onChange,
     inputRef,
     rounded,
+    id,
     min,
     max,
+    readOnly = false,
     isValid,
     isRequired,
     inputWidth = '290px',
     ...props
 }) => {
     return (
-        <T.FormGroup>
+        <StyledForm>
             {labelText && (
-                <T.Label htmlFor={id}>
+                <StyledLabel htmlFor={id}>
                     {labelText}
-                    {isRequired && <T.Required>&#42;</T.Required>}
-                </T.Label>
+                    {isRequired && <StyledRequired>&#42;</StyledRequired>}
+                </StyledLabel>
             )}
-            <T.Input
+            <StyledInput
                 type={inputType}
+                id={id}
+                name={id}
                 onChange={onChange}
                 ref={inputRef}
                 $rounded={rounded}
+                readOnly={readOnly}
                 $valid={isValid}
                 minLength={isTextAttributes(inputType) ? min : undefined}
                 maxLength={isTextAttributes(inputType) ? max : undefined}
@@ -59,8 +65,8 @@ const Input = ({
                 $inputWidth={inputWidth}
                 {...props}
             />
-            {!isValid ? errorMessage && <T.ErrorMessage>{errorMessage}</T.ErrorMessage> : null}
-        </T.FormGroup>
+            {!isValid ? errorMessage && <StyledErrorMessage>{errorMessage}</StyledErrorMessage> : null}
+        </StyledForm>
     );
 };
 

@@ -1,24 +1,35 @@
 import styled from 'styled-components';
 
-const Header = styled.header`
-    z-index: 1000;
+const StyledHeader = styled.header`
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    // 임시
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    background-color: #fff;
-    box-shadow: 0px 1px 10px 3px rgba(0, 0, 0, 0.02);
+    height: 5.5rem;
+
+    z-index: ${({ theme }) => theme.layer.layer5};
+    background-color: ${({ color }) => color};
+
+    ${({ theme }) => theme.media.labtop} {
+        height: 7rem;
+        background-color: #fff;
+    }
 `;
 
-const HeaderInner = styled.div`
-    max-width: 1280px;
+const StyledHeaderInner = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0 auto;
-    padding: 0 20px;
     box-sizing: border-box;
+    max-width: ${({ theme }) => theme.devicesSize.labtop};
+    height: 100%;
+    padding: 0 2rem;
+
+    h1 {
+        font-size: ${({ theme }) => theme.fontSizes.h5};
+        width: 100%;
+    }
 `;
 
-export { Header, HeaderInner };
+export { StyledHeader, StyledHeaderInner };

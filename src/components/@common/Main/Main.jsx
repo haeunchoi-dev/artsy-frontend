@@ -1,6 +1,6 @@
-import * as M from './Main.styles';
+import StyledMain from './Main.styles';
 
 const Main = ({ children }) => {
-    return <M.Main>{children}</M.Main>;
+    return <StyledMain>{children}</StyledMain>;
 };
 export default Main;

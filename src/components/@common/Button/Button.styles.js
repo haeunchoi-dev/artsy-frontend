@@ -1,30 +1,36 @@
 import styled, { css } from 'styled-components';
 
-const sizes = {
-    large: {
-        padding: '8px 20px',
-        fontSize: '1.6rem',
-    },
-    medium: {
-        padding: '6px 16px',
-        fontSize: '1.4rem',
-    },
-    small: {
-        padding: '4px 10px',
-        fontSize: '1.2rem',
-    },
-};
-
 const sizeStyles = css`
-    ${({ $size }) => css`
-        padding: ${sizes[$size].padding};
-        font-size: ${sizes[$size].fontSize};
-    `}
+    ${({ $size }) =>
+        $size === 'large' &&
+        css`
+            height: 5rem;
+            padding: 0 2rem;
+            font-size: ${({ theme }) => theme.fontSizes.body};
+            border-radius: ${({ theme }) => theme.borderRadius.large};
+        `}
+
+    ${({ $size }) =>
+        $size === 'medium' &&
+        css`
+            height: 4.6rem;
+            padding: 0 1.6rem;
+            font-size: ${({ theme }) => theme.fontSizes.text};
+            border-radius: ${({ theme }) => theme.borderRadius.medium};
+        `}
+    ${({ $size }) =>
+        $size === 'small' &&
+        css`
+            height: 3.2rem;
+            padding: 0 1rem;
+            font-size: ${({ theme }) => theme.fontSizes.subText};
+            border-radius: ${({ theme }) => theme.borderRadius.small};
+        `}
 `;
 
 const fullWidthStyle = css`
-    ${({ full }) =>
-        full &&
+    ${({ $full }) =>
+        $full &&
         css`
             width: 100%;
         `}
@@ -57,7 +63,6 @@ const StyledButton = styled.button`
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    border-radius: 4px;
     box-sizing: border-box;
     color: #fff;
 
@@ -69,6 +74,23 @@ const StyledButton = styled.button`
 
     /* 풀너비 */
     ${fullWidthStyle}
+
+    /* 라인스타일 */
+    ${({ $style }) =>
+        $style &&
+        css`
+            background-color: #fff;
+            border: 2px solid ${({ $color }) => $color};
+            color: ${({ $color }) => $color};
+
+            &:disabled {
+                border-color: #909090;
+                color: #fff;
+            }
+        `}
+    &:disabled {
+        background-color: #909090;
+    }
 `;
 
 export default StyledButton;

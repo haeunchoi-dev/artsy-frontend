@@ -1,48 +1,43 @@
+import { useMemo } from 'react';
+
 import Container from '@components/@common/Container/Container.jsx';
-import GradeBar from '@components/@common/GradeBar/GradeBar.jsx';
-
+import Loading from '@components/@common/Loading/Loading.jsx';
 import MyGreeting from '@components/MyPage/MyGreeting/MyGreeting.jsx';
-import MyIconButton from '@components/MyPage/MyIconButton/MyIconButton.jsx';
+import MyIconMenu from '@components/MyPage/MyIconMenu/MyIconMenu.jsx';
 import MyExpense from '@components/MyPage/MyExpense/MyExpense.jsx';
+import GradeBox from '@components/MyPage/GradeBox/GradeBox.jsx';
 
-import myIconUrl from '@assets/icons/icon-my.png';
-import bookIconUrl from '@assets/icons/icon-book.png';
-import chartIconUrl from '@assets/icons/icon-chart.png';
+import { getUser } from '@hooks/@queries/useUserInfoQuery';
+import useTotalPriceQuery from '@hooks/@queries/useTotalPriceQuery';
+
+import { calculateGrade, calculateNextGrade } from '@utils/calculateGrade';
 
 import * as M from './MyPage.styles';
 
 const MyPage = () => {
+    const { data: userInfo, isSuccess: isSuccessUser, isLoading: isLoadingUser } = getUser();
+    const { data: totalPrice, isLoading: isLoadingTotalPrice } = useTotalPriceQuery();
+    const gradeInfo = useMemo(() => {
+        if (isSuccessUser) return calculateGrade(userInfo?.totalTicket);
+    }, [userInfo]);
+
+    const gradeNextInfo = useMemo(() => {
+        if (isSuccessUser) return calculateNextGrade(gradeInfo.name);
+    }, [userInfo]);
+
+    if (isLoadingUser || isLoadingTotalPrice) return <Loading />;
+
     return (
         <>
             <Container>
                 <M.MyPage>
                     <M.ViewWrap>
-                        {/* api 호출 정보 */}
-                        <MyGreeting username={'지영'} />
-                        <M.IconMenuList>
-                            <MyIconButton to="" imgUrl={myIconUrl}>
-                                계정정보
-                            </MyIconButton>
-                            <MyIconButton to="/ticket/list" imgUrl={bookIconUrl}>
-                                기록함
-                            </MyIconButton>
-                            <MyIconButton to="" imgUrl={chartIconUrl}>
-                                통계
-                            </MyIconButton>
-                        </M.IconMenuList>
-                        <M.GradeBox>
-                            <M.GradeBoxTop>
-                                {/* api 호출 정보 */}
-                                <h4>문화 전문가</h4>
-                                <p>문화 마스터까지 {13}개의 티켓이 필요해요!</p>
-                            </M.GradeBoxTop>
-                            {/* api 호출 정보 */}
-                            <GradeBar total={30} height={0.8} />
-                        </M.GradeBox>
+                        <MyGreeting username={userInfo?.displayName} />
+                        <MyIconMenu />
+                        <GradeBox userInfo={userInfo} gradeInfo={gradeInfo} gradeNextInfo={gradeNextInfo} />
                     </M.ViewWrap>
                     <M.DataWrap>
-                        {/* api 호출 정보 */}
-                        <MyExpense totalPrice={'125,000,000'} />
+                        <MyExpense totalPrice={totalPrice?.totalPrice?.toLocaleString() ?? '0'} />
                     </M.DataWrap>
                 </M.MyPage>
             </Container>

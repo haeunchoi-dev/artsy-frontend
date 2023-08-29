@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-const Main = styled.main`
+const StyledMain = styled.main`
     flex: 1 auto;
-    padding-top: 100px;
+    padding: 8rem 0;
+
+    ${({ theme }) => theme.media.labtop} {
+        padding: 12rem 0 8rem;
+    }
 `;
 
-export { Main };
+export default StyledMain;

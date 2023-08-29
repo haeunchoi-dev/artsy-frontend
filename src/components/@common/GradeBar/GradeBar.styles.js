@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
 
-const Wrap = styled.div``;
+const StyledBarWrap = styled.div`
+    width: ${({ $width }) => ($width ? $width + 'rem' : '100%')};
+`;
 
-const Legend = styled.div`
+const StyledLegend = styled.div`
     width: ${({ $width }) => ($width ? $width + 'rem' : '100%')};
     text-align: right;
     margin-bottom: 1rem;
@@ -10,7 +12,8 @@ const Legend = styled.div`
 
     > span:first-of-type {
         font-weight: bold;
-        font-size: ${({ theme }) => theme.fontSizes.text};
+        font-size: ${({ $fontSize }) => $fontSize};
+        color: ${({ $fontColor }) => $fontColor};
     }
     > span:last-of-type {
         font-weight: bold;
@@ -18,7 +21,7 @@ const Legend = styled.div`
     }
 `;
 
-const Bar = styled.div`
+const StyledBar = styled.div`
     overflow: hidden;
     position: relative;
     width: 100%;
@@ -32,11 +35,20 @@ const Bar = styled.div`
         position: absolute;
         top: 0;
         left: 0;
-        width: ${({ $percent }) => $percent + '%'};
         height: 100%;
         border-radius: ${({ $height }) => ($height ? $height / 2 + 'rem' : '0.5rem')};
         background-color: ${({ theme, $grade }) => theme.gradeColor[$grade]};
+        animation: bars 1s 0.5s forwards ease-in;
+    }
+
+    @keyframes bars {
+        0% {
+            width: 0px;
+        }
+        100% {
+            width: ${({ $percent }) => $percent + '%'};
+        }
     }
 `;
 
-export { Wrap, Bar, Legend };
+export { StyledBarWrap, StyledBar, StyledLegend };

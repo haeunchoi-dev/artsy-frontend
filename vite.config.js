@@ -5,14 +5,20 @@ import path from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
     esbuild: {},
+    define: {
+        'process.env': process.env,
+    },
     plugins: [react()],
     resolve: {
         alias: [
-            // find: 별칭, replacement: 절대 경로 주입
             { find: '@', replacement: path.resolve(__dirname, 'src') },
             {
                 find: '@api',
                 replacement: path.resolve(__dirname, 'src/api'),
+            },
+            {
+                find: '@contexts',
+                replacement: path.resolve(__dirname, 'src/contexts'),
             },
             {
                 find: '@assets',
@@ -48,13 +54,23 @@ export default defineConfig({
             },
         ],
     },
-    // console 제거 설정
     build: {
         minify: 'terser',
         terserOptions: {
             compress: {
                 drop_console: true,
                 drop_debugger: true,
+            },
+        },
+    },
+    server: {
+        host: true,
+        proxy: {
+            '/api': {
+                target: 'http://34.64.49.14/api',
+                changeOrigin: true,
+                secure: false,
+                rewrite: (path) => path.replace(/^\/api/, ''),
             },
         },
     },

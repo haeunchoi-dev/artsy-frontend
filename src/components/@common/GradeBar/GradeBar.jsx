@@ -1,45 +1,39 @@
-import * as G from './GradeBar.styles';
+import { StyledBarWrap, StyledBar, StyledLegend } from './GradeBar.styles';
+import { BADGE_GRADE } from '@constants/badgeGrade';
+import { calculateGrade } from '@utils/calculateGrade';
 
-/* 지영님 코드 병합시 impor 구문으로 변경 */
-const BADGE_GRADE = {
-    first: { name: 'darkSilver', targetValue: 10 },
-    second: { name: 'bronze', targetValue: 30 },
-    third: { name: 'silver', targetValue: 50 },
-    fourth: { name: 'gold', targetValue: 100 },
-};
-
-const calculateGrade = (ticketCount) => {
-    if (ticketCount < BADGE_GRADE.first.targetValue) {
-        return BADGE_GRADE.first;
-    } else if (ticketCount < BADGE_GRADE.second.targetValue) {
-        return BADGE_GRADE.second;
-    } else if (ticketCount < BADGE_GRADE.third.targetValue) {
-        return BADGE_GRADE.third;
-    } else {
-        return BADGE_GRADE.fourth;
-    }
-};
-/* // 지영님 코드 병합시 impor 구문으로 변경 */
+import { useTheme } from 'styled-components';
 
 /**
  *
  * @param {Number} total
- * @param {Number} height rem 단위로 계산한 숫자(default: 100%)
- * @param {Number} height rem 단위로 계산한 숫자(default: 1rem)
+ * @param {Number} width rem 단위로 계산한 숫자만(default: 100%)
+ * @param {Number} height rem 단위로 계산한 숫자만(default: 1rem)
+ * @param {String} fontColor (ex: '#fff')
+ * @param {String} fontSize (ex: '1.4rem')
+ *
  * @returns
  */
-const GradeBar = ({ total, width, height }) => {
-    const { name, targetValue } = calculateGrade(total);
-    const percent = Math.floor((total / targetValue) * 100);
+const GradeBar = ({ total, width, height, fontColor, fontSize }) => {
+    const theme = useTheme();
+    const { targetValue, imageName } = calculateGrade(total);
+    let percent = 0;
+    if (total !== 0) {
+        percent = total >= BADGE_GRADE[2].targetValue ? 100 : Math.floor((total / targetValue) * 100);
+    }
 
     return (
-        <G.Wrap $width={width}>
-            <G.Legend $grade={name}>
+        <StyledBarWrap $width={width}>
+            <StyledLegend
+                $grade={imageName}
+                $fontSize={fontSize ?? theme.fontSizes.subText}
+                $fontColor={fontColor ?? theme.colors.black}
+            >
                 <span>{total}</span>
-                <span> / {targetValue}</span>
-            </G.Legend>
-            <G.Bar $grade={name} $percent={percent ?? 0} $height={height} />
-        </G.Wrap>
+                <span>{isFinite(targetValue) ? ` / ${targetValue}` : ' / ∞'}</span>
+            </StyledLegend>
+            <StyledBar $grade={imageName} $percent={percent ?? 0} $height={height} />
+        </StyledBarWrap>
     );
 };
 export default GradeBar;

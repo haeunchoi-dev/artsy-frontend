@@ -1,6 +1,6 @@
-import * as C from './Container.styls';
+import StyledMaxWidth from './Container.styls';
 
 const Container = ({ children }) => {
-    return <C.maxWidth>{children}</C.maxWidth>;
+    return <StyledMaxWidth>{children}</StyledMaxWidth>;
 };
 export default Container;

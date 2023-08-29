@@ -11,7 +11,7 @@ const gradeColor = {
     darkSilver: '#848796',
     bronze: '#A69A89',
     silver: '#BCBCE4',
-    gold: 'E8BC4E',
+    gold: '#E8BC4E',
 };
 
 const fontSizes = {
@@ -36,12 +36,33 @@ const media = {
     labtop: `@media all and (min-width: ${devicesSize.labtop})`,
 };
 
+const borderRadius = {
+    small: '0.4rem',
+    medium: '0.6rem',
+    large: '0.8rem',
+};
+
+const layer = {
+    layer1: 100,
+    layer2: 200,
+    layer3: 300,
+    layer4: 400,
+    layer5: 500,
+    layer6: 600,
+    layer7: 700,
+    layer8: 800,
+    layer9: 900,
+    layer10: 1000,
+};
+
 const theme = {
     colors,
     fontSizes,
     devicesSize,
     media,
     gradeColor,
+    borderRadius,
+    layer,
 };
 
 export default theme;

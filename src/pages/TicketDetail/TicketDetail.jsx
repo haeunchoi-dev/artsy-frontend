@@ -1,59 +1,141 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import * as T from './TicketDetail.styles';
-import DetailText from '../../components/TicketDetail/DetailText';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import BasicTicketUrl from '@assets/images/ticket.png';
+import Loading from '@components/@common/Loading/Loading';
+import { ERROR_TYPE } from '@constants/serverErrorType';
+import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
+import Review from '@components/TicketDetail/Review/Review';
+import DetailBox from '@components/TicketDetail/DetailBox/DetailBox';
+import useToastContext from '@hooks/useToastContext';
+import useHeaderContext from '@hooks/useHeaderContext';
+import useTicketQuery from '@hooks/@queries/useTicketQuery';
+import compareImage from '@utils/compareImage';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
+    const location = useLocation();
+    const [updateDate, setUpdateDate] = useState(location?.state);
+    const navigate = useNavigate();
+    const toast = useToastContext();
+    const { getTicket, deleteTicket } = useTicketQuery();
+    const {
+        data: ticketData,
+        isSuccess: isGetSuccess,
+        isError: isGetError,
+        isLoading: isGetLoading,
+        error: getError,
+    } = getTicket(ticketId, updateDate);
+    const { setColor } = useHeaderContext();
 
-    const imgUrl =
-        'https://i.namu.wiki/i/CM9WgqYNFXtGFZCtBU1r2Exs1y-zKyjmIW55gBudgExj9Q6NIfUavAeq7Tn55FB-GxyJ8hWK9PShcQVBdxJPwQ.webp';
+    const colorBoxRef = useRef();
 
-    const ticketData = {
-        categoryName: '영화',
-        title: '엘리멘탈',
-        showDate: '2023-08-14',
-        rating: '4',
-        place: '성수 메가박스',
-        price: 12000,
-        review: '오늘 영화 봄',
-        categoryColor: '#A888FF',
+    const {
+        mutate,
+        isSuccess: isDeleteSuccess,
+        isError: isDeleteError,
+        isLoading: isDeleteLoding,
+        error: deleteError,
+    } = deleteTicket(ticketId);
+
+    const [imgSrc, setImgSrc] = useState('');
+    const [imageSize, setImageSize] = useState('height');
+
+    const [position, setPosition] = useState(0);
+    const onScroll = () => {
+        setPosition(window.scrollY);
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (position > colorBoxRef.current?.offsetHeight) setColor('#fff');
+        else setColor(ticketData?.categoryColor);
+
+        return () => {
+            setColor('#fff');
+        };
+    }, [position]);
+
+    // 티켓 불러오기
+    useEffect(() => {
+        if (!isGetSuccess) return;
+        window.scrollTo(0, 0);
+        setColor(ticketData?.categoryColor);
+
+        if (ticketData.files?.length === 0) {
+            setImgSrc(BasicTicketUrl);
+        } else {
+            const { imageUrl, width, height } = ticketData.files[0];
+            setImgSrc(imageUrl);
+            setImageSize(compareImage(width, height));
+        }
+    }, [isGetSuccess]);
+
+    useEffect(() => {
+        if (!isGetError) return;
+
+        const errorType = getError.response.data.error.type;
+        switch (errorType) {
+            case ERROR_TYPE.DATA_NOT_FOUND:
+                toast.show(ERROR_MESSAGE.dataNotFoundTicket);
+                navigate('/ticket/list');
+                break;
+            default:
+                toast.show(ERROR_MESSAGE.defaultError);
+        }
+    }, [isGetError]);
+
+    // 티켓 삭제
+    const onDelete = () => {
+        mutate();
+    };
+
+    useEffect(() => {
+        if (isDeleteSuccess) {
+            toast.show(SUCCESS_MESSAGE.successDeleteTicket);
+            navigate('/ticket/list');
+        }
+    }, [isDeleteSuccess]);
+
+    useEffect(() => {
+        if (isDeleteError) {
+            const errorType = deleteError.response.data.error.type;
+            switch (errorType) {
+                default:
+                    toast.show(ERROR_MESSAGE.defaultError);
+            }
+        }
+    }, [isDeleteError]);
+
+    // 티켓 수정 이동
+    const onUpdate = () => {
+        navigate(`/ticket/edit/${ticketId}`, { state: ticketData });
     };
 
     return (
         <>
-            <T.TypeColorBox color={ticketData.categoryColor} />
-            <T.Container>
-                <T.MainWrap>
-                    <h2>티켓 상세</h2>
-                </T.MainWrap>
-                <T.TicketDetailWrap>
-                    <T.TicketImageWrap>
-                        <img src={imgUrl} alt="티켓이미지" />
-                    </T.TicketImageWrap>
-                    <T.TicketDetailBox>
-                        <T.DetailContainer>
-                            <T.TitleWrap>
-                                <h3>{ticketData.title}</h3>
-                            </T.TitleWrap>
-                            <T.UnderLine />
-                            <T.DetailWrap>
-                                <DetailText label="카테고리" content={ticketData.categoryName} />
-                                <DetailText label="별점" rating={ticketData.rating} />
-                                <DetailText label="장소" content={ticketData.place} />
-                                <DetailText label="금액" content={`${ticketData.price.toLocaleString()}원`} />
-                                <DetailText label="일시" content={ticketData.showDate} />
-                                <DetailText label="리뷰" content={ticketData.review} />
-                            </T.DetailWrap>
-                            <T.EditWrap>
-                                <span>수정하기</span>
-                                <span>|</span>
-                                <span>삭제하기</span>
-                            </T.EditWrap>
-                        </T.DetailContainer>
-                    </T.TicketDetailBox>
-                </T.TicketDetailWrap>
-            </T.Container>
+            {ticketData !== undefined && (
+                <div>
+                    {isDeleteLoding && <Loading />}
+                    {isGetLoading && <Loading />}
+                    <T.TypeColorBox ref={colorBoxRef} color={ticketData?.categoryColor} />
+                    <T.Container>
+                        <T.TicketDetailWrap>
+                            <T.TicketImageWrap $size={imageSize}>
+                                <img src={imgSrc} alt="티켓이미지" />
+                            </T.TicketImageWrap>
+                            <DetailBox ticketData={ticketData} onUpdate={onUpdate} onDelete={onDelete} />
+                        </T.TicketDetailWrap>
+                        <Review content={ticketData?.review} />
+                    </T.Container>
+                </div>
+            )}
         </>
     );
 };

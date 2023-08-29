@@ -1,8 +1,4 @@
-# React + Vite
+# Artsy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
--   [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
--   [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+"Art"와 "Easy"를 합친 합성어로, 문화 생활을 쉽게 즐길 수 있다는 의미입니다.
+나만의 문화기록을 하고싶은 사람, 티켓을 오프라인이 아닌 온라인으로 관리하고 싶은 분, 문화생활 통계를 확인하고 싶은 분을 위한 공간입니다.

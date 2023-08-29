@@ -1,5 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
+import eotUrlRegular from '@assets/font/noto-sans-kr-v27-latin_korean-regular.eot';
+import woffUrlRegular from '@assets/font/noto-sans-kr-v27-latin_korean-regular.woff';
+import eotUrl500 from '@assets/font/noto-sans-kr-v27-latin_korean-500.eot';
+import woffUrl500 from '@assets/font/noto-sans-kr-v27-latin_korean-500.woff';
+import eotUrl700 from '@assets/font/noto-sans-kr-v27-latin_korean-700.eot';
+import woffUrl700 from '@assets/font/noto-sans-kr-v27-latin_korean-700.woff';
+
 const GlobalStyle = createGlobalStyle`
     /* normalize */
     /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
@@ -185,34 +192,38 @@ const GlobalStyle = createGlobalStyle`
     [hidden] {
         display: none;
     }
-
+    
     /* font */
     @font-face {
-        font-family: 'NotoSansKR';
-        src: url('../assets/font/noto-sans-kr-v27-latin_korean-regular.eot');
-        src: url('../assets/font/noto-sans-kr-v27-latin_korean-regular.woff') format('woff');
+        font-family: 'Noto Sans KR';
+        src: url('${eotUrlRegular}');
+        src: url('${woffUrlRegular}') format('woff');
         font-stretch: normal;
         font-style: normal;
         font-weight: normal;
         }
         @font-face {
-        font-family: 'NotoSansKR';
-        src: url('../assets/font/noto-sans-kr-v27-latin_korean-500.eot');
-        src: url('../assets/font/noto-sans-kr-v27-latin_korean-500.woff') format('woff');
+        font-family: 'Noto Sans KR';
+        src: url('${eotUrl500}');
+        src: url('${woffUrl500}') format('woff');
         font-stretch: normal;
         font-style: normal;
         font-weight: 500;
         }
         @font-face {
-        font-family: 'NotoSansKR';
-        src: url('../assets/font/noto-sans-kr-v27-latin_korean-700.eot');
-        src: url('../assets/font/noto-sans-kr-v27-latin_korean-700.woff') format('woff');
+        font-family: 'Noto Sans KR';
+        src: url('${eotUrl700}');
+        src: url('${woffUrl700}') format('woff');
         font-stretch: normal;
         font-style: normal;
         font-weight: bold;
     }
 
     /* reset override */
+    * {
+        box-sizing: border-box;
+    }
+    
     html,
     body {
         height: 100%;
@@ -224,7 +235,7 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         font-size: 1.6rem;
-        font-family: 'Noto Sans', sans-serif;
+        font-family: 'Noto Sans KR', sans-serif;
         color: #1B1D21;
     }
 
