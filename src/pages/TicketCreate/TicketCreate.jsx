@@ -16,7 +16,7 @@ import useInput from '@hooks/useInput';
 import useToastContext from '@hooks/useToastContext';
 import Input from '@components/@common/Input/Input';
 import useTicketQuery from '@hooks/@queries/useTicketQuery';
-import { formatTicketDate } from '@utils/formatDate';
+import { formatTicketDate, formatTenMinutes } from '@utils/formatDate';
 import setFormData from '@utils/setFormData';
 
 const TicketCreate = () => {
@@ -42,7 +42,7 @@ const TicketCreate = () => {
         review: '',
     });
 
-    const [showDate, setShowDate] = useState(new Date());
+    const [showDate, setShowDate] = useState(formatTenMinutes());
     const [rating, setRating] = useState(3);
     const [category, setCategory] = useState(categoryId ?? 1);
 
@@ -154,9 +154,12 @@ const TicketCreate = () => {
                         onChange={onChangeInput}
                         value={title}
                         isRequired
-                        isValid={isTitleValid || title === ''}
+                        isValid={titleError === ''}
                         onBlur={() => {
-                            if (title !== '') setIsTitleValid(true);
+                            if (title !== '') {
+                                setIsTitleValid(true);
+                                setTitleError('');
+                            }
                         }}
                         placeholder="제목을 입력하세요"
                         inputWidth="100%"

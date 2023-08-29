@@ -159,9 +159,12 @@ const TicketEdit = () => {
                         onChange={onChangeInput}
                         value={title}
                         isRequired
-                        isValid={isTitleValid || title === ''}
+                        isValid={titleError === ''}
                         onBlur={() => {
-                            if (title !== '') seIstTitleValid(true);
+                            if (title !== '') {
+                                setIsTitleValid(true);
+                                setTitleError('');
+                            }
                         }}
                         placeholder="제목을 입력하세요"
                         inputWidth="100%"
