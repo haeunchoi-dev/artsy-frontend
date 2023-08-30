@@ -32,6 +32,7 @@ const Wrap = styled(Link)`
     border-radius: 8px;
     padding-left: 2rem;
     box-sizing: border-box;
+    will-change: filter;
     filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.15));
     cursor: pointer;
 

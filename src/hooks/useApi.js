@@ -13,7 +13,7 @@ const config = {
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: 'application/json',
     },
 };
 
@@ -23,8 +23,8 @@ const HTTP = {
     GET: 'get',
     POST: 'post',
     PUT: 'put',
-    DELETE: 'delete'
-}
+    DELETE: 'delete',
+};
 
 const useApi = () => {
     const toast = useToastContext();
@@ -49,7 +49,7 @@ const useApi = () => {
             multipartPut: async (path, formData) => {
                 return await callApi(HTTP.PUT, path, formData, true);
             },
-        }
+        };
     }, []);
 
     const callApi = useCallback(async (method, path, data, isFormData = false) => {
@@ -58,9 +58,7 @@ const useApi = () => {
         try {
             const response = await axiosInstance(axiosParams);
             return response.data.artsyData;
-
         } catch (error) {
-            //console.error('callApi에서 캐치한 에러', error);
             const errorType = error?.response?.data?.error?.type;
 
             if (!errorType || errorType === ERROR_TYPE.INTERNAL_SERVER_ERROR) {
@@ -75,15 +73,15 @@ const useApi = () => {
         const axiosParams = {
             method: method,
             url: path,
-        }
+        };
 
         if (data !== undefined) axiosParams.data = data;
-        if (isFormData === true) axiosParams.headers = { "Content-Type": "multipart/form-data" };
+        if (isFormData === true) axiosParams.headers = { 'Content-Type': 'multipart/form-data' };
 
         return axiosParams;
     }, []);
 
     return api;
-}
+};
 
 export default useApi;

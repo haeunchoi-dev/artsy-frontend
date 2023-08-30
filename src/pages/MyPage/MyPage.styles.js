@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-
 const MyPage = styled.div`
     ${({ theme }) => theme.media.labtop} {
         display: grid;
