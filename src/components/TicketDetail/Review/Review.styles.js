@@ -10,7 +10,7 @@ const Container = styled.div`
         border-radius: 12px;
         box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
 
-        background-color: #fff;
+        background-color: ${({ theme }) => theme.colors.background3};
 
         margin-top: 13rem;
     }

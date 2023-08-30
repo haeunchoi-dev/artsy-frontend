@@ -13,7 +13,7 @@ const NavBarContainer = styled.div`
     width: 60%;
     max-width: 330px;
     height: 0;
-    padding-top: 1.6rem;
+    padding-top: 2rem;
     transform: translateX(100%);
 
     transition: transform 0.5s ease-in-out;
@@ -52,7 +52,7 @@ const DarkButtonContainer = styled.div`
 `;
 const DarkToggleButtonWrap = styled.span`
     display: flex;
-    width: 80px;
+    width: 64px;
     margin: 0 4rem 1.6rem 2rem;
     cursor: pointer;
     position: absolute;
@@ -60,6 +60,9 @@ const DarkToggleButtonWrap = styled.span`
     img {
         width: 100%;
         height: auto;
+    }
+    ${({ theme }) => theme.media.labtop} {
+        width: 80px;
     }
 `;
 const NavBarContent = styled.div`
@@ -69,7 +72,7 @@ const NavBarContent = styled.div`
     align-items: flex-start;
     box-sizing: border-box;
     height: 100%;
-    padding: 8rem 2rem 2rem;
+    padding: 7rem 2rem 2rem;
 
     ${({ theme }) => theme.media.labtop} {
         align-items: center;
@@ -81,8 +84,10 @@ const Navbar = styled.ul`
 `;
 const NavbarItem = styled.li`
     width: 100%;
+    height: 4rem;
+    margin-bottom: 0.8rem;
     font-size: 1.6rem;
-    margin-bottom: 3rem;
+    line-height: 4rem;
     ${({ theme }) => theme.media.tablet} {
         font-size: 1.8rem;
     }
@@ -91,6 +96,7 @@ const NavbarItem = styled.li`
 const NavbarItemLink = styled(Link)`
     display: flex;
     justify-content: flex-start;
+    height: 100%;
     &:hover {
         color: ${({ theme }) => theme.colors.point1};
     }
