@@ -213,7 +213,7 @@ const UserEdit = () => {
                             value={displayNameInfo.displayName}
                             errorMessage={displayNameInfo.errorMessage}
                             onChange={handleChangeDisplayName}
-                            inputRef={displayNameRef}
+                            ref={displayNameRef}
                         />
                     </U.InputBox>
                     <U.InputBox>
@@ -228,7 +228,7 @@ const UserEdit = () => {
                                 inputWidth="100%"
                                 value={newPasswordInfo.newPassword}
                                 onChange={handleChangeNewPassword}
-                                inputRef={newPasswordRef}
+                                ref={newPasswordRef}
                             />
                         </div>
                         <div>
@@ -241,7 +241,7 @@ const UserEdit = () => {
                                 inputWidth="100%"
                                 value={confirmPasswordInfo.confirmPassword}
                                 onChange={handleChangeConfirmPassword}
-                                inputRef={confirmPasswordRef}
+                                ref={confirmPasswordRef}
                             />
                         </div>
                     </U.InputBox>
@@ -275,7 +275,7 @@ const UserEdit = () => {
                                 inputWidth="100%"
                                 value={checkPasswordInfo.checkPassword}
                                 onChange={handleChangeCheckPassword}
-                                inputRef={checkPasswordRef}
+                                ref={checkPasswordRef}
                             />
                         </div>
                     </U.InputBox>

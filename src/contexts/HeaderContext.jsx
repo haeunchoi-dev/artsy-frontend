@@ -10,7 +10,7 @@ const HeaderContextProvider = ({ children }) => {
 
     useEffect(() => {
         setColor(theme.colors.background1);
-    }, [theme, color]);
+    }, [theme]);
 
     return <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider>;
 };

@@ -12,8 +12,8 @@ const StyledForm = styled.div`
 `;
 const StyledLabel = styled.label`
     font-size: ${({ theme }) => theme.fontSizes.body};
-    font-weight: 600;
-    margin-bottom: 16px;
+    font-weight: 500;
+    margin-bottom: 1.6rem;
 `;
 const StyledRequired = styled.span`
     color: #ff624d;
@@ -24,8 +24,8 @@ const StyledInput = styled.input`
     height: 54px;
     font-size: ${({ theme }) => theme.fontSizes.body};
     color: ${({ theme }) => theme.colors.font1};
-    padding: 8px 22px;
-    margin-bottom: 4px;
+    padding: 0.8rem 1.2rem;
+    margin-bottom: 0.4rem;
     background-color: ${({ theme }) => theme.colors.background3};
     border-radius: ${({ theme, $rounded }) => ($rounded ? theme.borderRadius.large : '0')};
     border: none;
@@ -60,8 +60,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledErrorMessage = styled.span`
-    margin-left: 22px;
-    margin-top: 4px;
+    margin-top: 0.4rem;
     color: #ff624d;
     font-size: ${({ theme }) => theme.fontSizes.text};
 `;

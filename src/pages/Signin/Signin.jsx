@@ -68,10 +68,11 @@ const Signin = () => {
                 <S.loginTitle>{windowWidth > labtopSize ? 'Welcome!' : 'Artsy'}</S.loginTitle>
                 <S.loginForm onSubmit={handleSubmit}>
                     <Input
+                        inputType="email"
                         placeholder="이메일 주소를 입력하세요."
                         id="email"
                         name="email"
-                        inputRef={emailInputRef}
+                        ref={emailInputRef}
                         onChange={handleChange}
                         value={loginInfo.email}
                         rounded
@@ -95,7 +96,7 @@ const Signin = () => {
                         로그인
                     </S.SignInButton>
                 </S.loginForm>
-                <S.RegisterButton size={'large'} onClick={handleRegister}>
+                <S.RegisterButton size={'large'} onClick={handleRegister} style="line">
                     회원가입
                 </S.RegisterButton>
                 <S.SearchPasswordButton to="/user/search">비밀번호 찾기</S.SearchPasswordButton>

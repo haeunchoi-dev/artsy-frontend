@@ -9,7 +9,6 @@ import { ERROR_MESSAGE } from '@constants/message';
 import useValidation from '../../../hooks/useValidation';
 
 const EmailForm = ({ userInfo, handleChange, setIsCheckEmail }) => {
-    const emailInputRef = useRef(null);
     const theme = useTheme();
     const toast = useToastContext();
     const { email } = userInfo;
@@ -34,10 +33,10 @@ const EmailForm = ({ userInfo, handleChange, setIsCheckEmail }) => {
     return (
         <E.EmailForm onSubmit={handleCheckEmail}>
             <Input
+                inputType="email"
                 placeholder="이메일 주소를 입력하세요."
                 id="email"
                 name="email"
-                inputRef={emailInputRef}
                 onChange={handleChange}
                 value={email}
                 rounded

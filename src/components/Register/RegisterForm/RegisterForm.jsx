@@ -124,7 +124,7 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
                     inputType="password"
                     placeholder="비밀번호를 재입력하세요."
                     id="passwordCheck"
-                    inputRef={passwordCheckInputRef}
+                    ref={passwordCheckInputRef}
                     onChange={handlePasswordCheck}
                     value={passwordCheck}
                     rounded

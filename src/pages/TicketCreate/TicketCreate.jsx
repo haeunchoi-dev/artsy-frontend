@@ -164,7 +164,7 @@ const TicketCreate = () => {
                         placeholder="제목을 입력하세요"
                         inputWidth="100%"
                         errorMessage={titleError}
-                        inputRef={titleRef}
+                        ref={titleRef}
                         maxLength="30"
                     />
                 </T.MarginContainer>

@@ -56,8 +56,6 @@ const RegisterButton = styled(Button)`
     max-width: 29rem;
     border: 2px solid ${({ theme }) => theme.colors.point1};
     font-size: 1.4rem;
-    color: ${({ theme }) => theme.colors.point1};
-    background: ${({ theme }) => theme.colors.background4};
 `;
 
 const SearchPasswordButton = styled(Link)`
