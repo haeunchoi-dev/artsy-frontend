@@ -5,7 +5,7 @@ import { getUser, updateUser } from '@hooks/@queries/useUserInfoQuery';
 import { checkPassword } from '@hooks/@queries/useCheckPassword';
 import useToastContext from '@hooks/useToastContext';
 
-import Container from '@components/@common/Container/Container';
+import Wrap from '@components/@common/Wrap/Wrap.jsx';
 import Loading from '@components/@common/Loading/Loading';
 import Input from '@components/@common/Input/Input';
 import Button from '@components/@common/Button/Button';
@@ -187,114 +187,106 @@ const UserEdit = () => {
     if (isLoadingGet) return <Loading />;
 
     return (
-        <Container>
-            <U.Wrap>
-                <PageTitle>회원 정보 수정</PageTitle>
-                {isCheckPassword?.isCorrect === true ? (
-                    <U.EditForm>
-                        <U.InputBox>
+        <Wrap>
+            <PageTitle>회원 정보 수정</PageTitle>
+            {isCheckPassword?.isCorrect === true ? (
+                <U.EditForm>
+                    <U.InputBox>
+                        <Input
+                            id="inputEmail"
+                            inputType="text"
+                            labelText="이메일"
+                            readOnly="readonly"
+                            isValid={true}
+                            inputWidth="100%"
+                            value={userInfo?.email || ''}
+                        />
+                    </U.InputBox>
+                    <U.InputBox>
+                        <Input
+                            id="displayName"
+                            inputType="text"
+                            labelText="이름(닉네임)"
+                            isValid={displayNameInfo.errorMessage.length === 0}
+                            isRequired
+                            inputWidth="100%"
+                            value={displayNameInfo.displayName}
+                            errorMessage={displayNameInfo.errorMessage}
+                            onChange={handleChangeDisplayName}
+                            inputRef={displayNameRef}
+                        />
+                    </U.InputBox>
+                    <U.InputBox>
+                        <div>
                             <Input
-                                id="inputEmail"
-                                inputType="text"
-                                labelText="이메일"
-                                readOnly="readonly"
-                                isValid={true}
+                                id="newPassword"
+                                inputType="password"
+                                labelText="비밀번호"
+                                placeholder="새 비밀번호"
+                                isValid={newPasswordInfo.errorMessage.length === 0}
+                                errorMessage={newPasswordInfo.errorMessage}
                                 inputWidth="100%"
-                                value={userInfo?.email || ''}
+                                value={newPasswordInfo.newPassword}
+                                onChange={handleChangeNewPassword}
+                                inputRef={newPasswordRef}
                             />
-                        </U.InputBox>
-                        <U.InputBox>
+                        </div>
+                        <div>
                             <Input
-                                id="displayName"
-                                inputType="text"
-                                labelText="이름(닉네임)"
-                                isValid={displayNameInfo.errorMessage.length === 0}
-                                isRequired
+                                id="confirmPassword"
+                                inputType="password"
+                                placeholder="새 비밀번호 확인"
+                                isValid={confirmPasswordInfo.errorMessage.length === 0}
+                                errorMessage={confirmPasswordInfo.errorMessage}
                                 inputWidth="100%"
-                                value={displayNameInfo.displayName}
-                                errorMessage={displayNameInfo.errorMessage}
-                                onChange={handleChangeDisplayName}
-                                inputRef={displayNameRef}
+                                value={confirmPasswordInfo.confirmPassword}
+                                onChange={handleChangeConfirmPassword}
+                                inputRef={confirmPasswordRef}
                             />
-                        </U.InputBox>
-                        <U.InputBox>
-                            <div>
-                                <Input
-                                    id="newPassword"
-                                    inputType="password"
-                                    labelText="비밀번호"
-                                    placeholder="새 비밀번호"
-                                    isValid={newPasswordInfo.errorMessage.length === 0}
-                                    errorMessage={newPasswordInfo.errorMessage}
-                                    inputWidth="100%"
-                                    value={newPasswordInfo.newPassword}
-                                    onChange={handleChangeNewPassword}
-                                    inputRef={newPasswordRef}
-                                />
-                            </div>
-                            <div>
-                                <Input
-                                    id="confirmPassword"
-                                    inputType="password"
-                                    placeholder="새 비밀번호 확인"
-                                    isValid={confirmPasswordInfo.errorMessage.length === 0}
-                                    errorMessage={confirmPasswordInfo.errorMessage}
-                                    inputWidth="100%"
-                                    value={confirmPasswordInfo.confirmPassword}
-                                    onChange={handleChangeConfirmPassword}
-                                    inputRef={confirmPasswordRef}
-                                />
-                            </div>
-                        </U.InputBox>
-                        <ButtonWrap>
-                            <Button
-                                type="button"
-                                size="large"
-                                full="full"
-                                style="line"
-                                onClick={() => navigate('/mypage')}
-                            >
-                                취소
-                            </Button>
-                            <Button type="button" size="large" full="full" onClick={handleSubmit}>
-                                수정
-                            </Button>
-                        </ButtonWrap>
-                    </U.EditForm>
-                ) : (
-                    <U.EditForm>
-                        <U.SubTitleWrap>
-                            <U.SubTitle>비밀번호 확인</U.SubTitle>
-                            <U.SubText>
-                                <b>{userInfo.displayName}</b>님의 회원정보를 안전하게 보호하기 위해 비밀번호를 한번 더
-                                확인해주세요.
-                            </U.SubText>
-                        </U.SubTitleWrap>
-                        <U.InputBox>
-                            <div>
-                                <Input
-                                    id="checkPassword"
-                                    inputType="password"
-                                    labelText="비밀번호"
-                                    placeholder="비밀번호 확인"
-                                    isValid={checkPasswordInfo.errorMessage.length === 0}
-                                    errorMessage={checkPasswordInfo.errorMessage}
-                                    inputWidth="100%"
-                                    value={checkPasswordInfo.checkPassword}
-                                    onChange={handleChangeCheckPassword}
-                                    inputRef={checkPasswordRef}
-                                />
-                            </div>
-                        </U.InputBox>
-                        <ButtonWrap>
-                            <Button type="button" size="large" full="full" onClick={handleClickCheck}>
-                                확인
-                            </Button>
-                        </ButtonWrap>
-                    </U.EditForm>
-                )}
-            </U.Wrap>
-        </Container>
+                        </div>
+                    </U.InputBox>
+                    <ButtonWrap>
+                        <Button type="button" size="large" full="full" style="line" onClick={() => navigate('/mypage')}>
+                            취소
+                        </Button>
+                        <Button type="button" size="large" full="full" onClick={handleSubmit}>
+                            수정
+                        </Button>
+                    </ButtonWrap>
+                </U.EditForm>
+            ) : (
+                <U.EditForm>
+                    <U.SubTitleWrap>
+                        <U.SubTitle>비밀번호 확인</U.SubTitle>
+                        <U.SubText>
+                            <b>{userInfo.displayName}</b>님의 회원정보를 안전하게 보호하기 위해 비밀번호를 한번 더
+                            확인해주세요.
+                        </U.SubText>
+                    </U.SubTitleWrap>
+                    <U.InputBox>
+                        <div>
+                            <Input
+                                id="checkPassword"
+                                inputType="password"
+                                labelText="비밀번호"
+                                placeholder="비밀번호 확인"
+                                isValid={checkPasswordInfo.errorMessage.length === 0}
+                                errorMessage={checkPasswordInfo.errorMessage}
+                                inputWidth="100%"
+                                value={checkPasswordInfo.checkPassword}
+                                onChange={handleChangeCheckPassword}
+                                inputRef={checkPasswordRef}
+                            />
+                        </div>
+                    </U.InputBox>
+                    <ButtonWrap>
+                        <Button type="button" size="large" full="full" onClick={handleClickCheck}>
+                            확인
+                        </Button>
+                    </ButtonWrap>
+                </U.EditForm>
+            )}
+        </Wrap>
     );
 };
 export default UserEdit;

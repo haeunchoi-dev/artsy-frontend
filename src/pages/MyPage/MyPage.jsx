@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import Container from '@components/@common/Container/Container.jsx';
+import Wrap from '@components/@common/Wrap/Wrap.jsx';
 import Loading from '@components/@common/Loading/Loading.jsx';
 import MyGreeting from '@components/MyPage/MyGreeting/MyGreeting.jsx';
 import MyIconMenu from '@components/MyPage/MyIconMenu/MyIconMenu.jsx';
@@ -31,24 +31,17 @@ const MyPage = () => {
     if (isLoadingUser || isLoadingTotalPrice || isLoadingPercent) return <Loading />;
 
     return (
-        <>
-            <Container>
-                <M.MyPage>
-                    <M.ViewWrap>
-                        <MyGreeting username={userInfo?.displayName} />
-                        <MyIconMenu />
-                        <GradeBox userInfo={userInfo} gradeInfo={gradeInfo} gradeNextInfo={gradeNextInfo} />
-                    </M.ViewWrap>
-                    <M.DataWrap>
-                        <MyExpense totalPrice={totalPrice?.totalPrice?.toLocaleString() ?? '0'} />
-                        <PercentBox
-                            username={userInfo?.displayName ?? ''}
-                            percentage={percentageInfo?.percentage ?? '0'}
-                        />
-                    </M.DataWrap>
-                </M.MyPage>
-            </Container>
-        </>
+        <Wrap>
+            <M.ViewWrap>
+                <MyGreeting username={userInfo?.displayName} />
+                <MyIconMenu />
+                <GradeBox userInfo={userInfo} gradeInfo={gradeInfo} gradeNextInfo={gradeNextInfo} />
+            </M.ViewWrap>
+            <M.DataWrap>
+                <MyExpense totalPrice={totalPrice?.totalPrice?.toLocaleString() ?? '0'} />
+                <PercentBox username={userInfo?.displayName ?? ''} percentage={percentageInfo?.percentage ?? '0'} />
+            </M.DataWrap>
+        </Wrap>
     );
 };
 export default MyPage;

@@ -71,6 +71,7 @@ const Title = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: ${({ theme }) => theme.fontSizes.text};
+    line-height: 1.4;
 `;
 
 const Date = styled.div`

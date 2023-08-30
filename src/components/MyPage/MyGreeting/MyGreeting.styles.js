@@ -6,10 +6,6 @@ const StyledMyGreeting = styled.div`
     h2 {
         font-size: ${({ theme }) => theme.fontSizes.h5};
     }
-
-    ${({ theme }) => theme.media.labtop} {
-        text-align: left;
-    }
 `;
 
 export default StyledMyGreeting;

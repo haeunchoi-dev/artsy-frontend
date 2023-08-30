@@ -21,6 +21,7 @@ const IconButton = styled(Link)`
     box-sizing: border-box;
     box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.02);
     background-color: ${({ theme }) => theme.colors.background3};
+    text-align: center;
 
     /* 아이콘 */
     &:before {

@@ -65,6 +65,7 @@ const StyledButton = styled.button`
     align-items: center;
     box-sizing: border-box;
     color: #fff;
+    font-weight: 500;
 
     /* 크기 */
     ${sizeStyles}
@@ -79,7 +80,7 @@ const StyledButton = styled.button`
     ${({ $style }) =>
         $style &&
         css`
-            background-color: ${({ theme }) => theme.colors.background3};
+            background-color: transparent;
             border: 2px solid ${({ $color }) => $color};
             color: ${({ $color }) => $color};
 
@@ -88,8 +89,14 @@ const StyledButton = styled.button`
                 color: #fff;
             }
         `}
+
     &:disabled {
-        background-color: ${({ theme }) => theme.colors.background8};
+        background-color: ${({ theme }) => theme.colors.border2};
+
+        &:hover {
+            filter: brightness(1);
+            cursor: default;
+        }
     }
 `;
 

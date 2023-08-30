@@ -11,13 +11,12 @@ const StyledLegend = styled.div`
     font-size: ${({ theme }) => theme.fontSizes.subText};
 
     > span:first-of-type {
-        font-weight: bold;
+        font-weight: 500;
         font-size: ${({ $fontSize }) => $fontSize};
         color: ${({ $fontColor }) => $fontColor};
     }
     > span:last-of-type {
-        font-weight: bold;
-        color: ${({ theme, $grade }) => theme.gradeColor[$grade]};
+        color: ${({ theme, $grade, $fontColor }) => ($fontColor !== '#fff' ? theme.gradeColor[$grade] : $fontColor)};
     }
 `;
 
@@ -27,7 +26,7 @@ const StyledBar = styled.div`
     width: 100%;
     height: ${({ $height }) => ($height ? $height + 'rem' : '1rem')};
     border-radius: ${({ $height }) => ($height ? $height / 2 + 'rem' : '0.5rem')};
-    background-color: #fff;
+    background-color: #f7f7f7;
     box-shadow: inset 1px 1px 3px rgba(0, 0, 0, 0.08);
 
     &:before {

@@ -9,9 +9,6 @@ const StyledGradeBox = styled(Link)`
     box-sizing: border-box;
     box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.02);
     background-color: ${({ theme }) => theme.colors.background3};
-    ${({ theme }) => theme.media.labtop} {
-        padding: 3rem;
-    }
 `;
 
 const StyledGradeInfo = styled.div`
@@ -21,6 +18,7 @@ const StyledGradeInfo = styled.div`
     padding-left: 8rem;
 
     h4 {
+        padding-top: 0.4rem;
         font-size: ${({ theme }) => theme.fontSizes.h6};
     }
 

@@ -1,15 +1,11 @@
 import styled from 'styled-components';
 
-const Wrap = styled.div`
-    /* media */
-    ${({ theme }) => theme.media.tablet} {
-        width: 50rem;
-        margin: 0 auto;
-    }
-`;
-
 const InputBox = styled.div`
     margin-bottom: 3.5rem;
+
+    > div + div {
+        margin-top: 0.8rem;
+    }
 `;
 
 const EditForm = styled.div``;
@@ -30,4 +26,4 @@ const SubText = styled.div`
         color: ${({ theme }) => theme.colors.point1};
     }
 `;
-export { Wrap, InputBox, EditForm, ConfirmForm, SubTitleWrap, SubTitle, SubText };
+export { InputBox, EditForm, ConfirmForm, SubTitleWrap, SubTitle, SubText };

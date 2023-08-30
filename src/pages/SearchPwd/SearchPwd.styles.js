@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 
-const Wrap = styled.div`
-    /* media */
-    ${({ theme }) => theme.media.tablet} {
-        width: 50rem;
-        margin: 0 auto;
-    }
-`;
-
 const SubTitleWrap = styled.div`
     margin-bottom: 4rem;
 `;
@@ -33,4 +25,4 @@ const InputBox = styled.div`
     }
 `;
 
-export { Wrap, SubTitleWrap, Form, InputBox, Timer };
+export { SubTitleWrap, Form, InputBox, Timer };
