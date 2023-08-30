@@ -86,17 +86,16 @@ const ReviewInput = styled.textarea`
     font-size: ${({ theme }) => theme.fontSizes.body};
     padding: 1.2rem 2.2rem;
     border-radius: ${(props) => (props.$rounded ? '100px' : '0')};
-    border: 1px solid #c5c5c5;
+    border: 1px solid ${({ theme }) => theme.colors.border2};
     resize: none;
     overflow: hidden;
-
+    background-color: ${({ theme }) => theme.colors.background3};
     &:focus {
         outline: none;
         border-color: ${({ theme }) => theme.colors.point1};
         caret-color: ${({ theme }) => theme.colors.point1};
     }
 `;
-
 const ButtonContaienr = styled.div`
     display: flex;
     justify-content: center;

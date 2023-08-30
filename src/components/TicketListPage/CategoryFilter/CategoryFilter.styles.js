@@ -16,7 +16,7 @@ const StyledCategoryFilter = styled.select`
     font-size: ${({ theme }) => theme.fontSizes.text};
     border-bottom: 1px solid ${({ theme }) => theme.colors.black};
     background: url(${arrowUrl}) no-repeat right center / 2rem;
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.font2};
 
     &:focus {
         border-color: ${({ theme }) => theme.colors.point1};

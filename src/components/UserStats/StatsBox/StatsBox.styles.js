@@ -12,7 +12,7 @@ const Container = styled.div`
     padding: 2.5rem 2rem;
     margin-bottom: 1rem;
 
-    background-color: ${({ $color }) => $color};
+    background-color: ${({ $color, theme }) => $color ?? theme.colors.background3};
 
     ${({ theme }) => theme.media.labtop} {
         width: 90%;

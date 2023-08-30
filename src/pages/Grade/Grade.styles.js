@@ -20,7 +20,7 @@ const TopContent = styled.div`
     p {
         margin-bottom: 3.6rem;
         font-size: 1.6rem;
-        color: #909090;
+        color: ${({ theme }) => theme.colors.font5};
     }
     ${({ theme }) => theme.media.tablet} {
         h2 {
@@ -60,6 +60,7 @@ const ImageWrap = styled.span`
     display: flex;
     width: 15%;
     max-width: 240px;
+    
     img {
         width: 100%;
         height: auto;

@@ -57,12 +57,12 @@ const RegisterButton = styled(Button)`
     border: 2px solid ${({ theme }) => theme.colors.point1};
     font-size: 1.4rem;
     color: ${({ theme }) => theme.colors.point1};
-    background: #fff;
+    background: ${({ theme }) => theme.colors.background4};
 `;
 
 const SearchPasswordButton = styled(Link)`
     margin-top: 2rem;
     font-size: ${({ theme }) => theme.fontSizes.text};
-    color: #909090;
+    color: ${({ theme }) => theme.colors.font5};
 `;
 export { SignInContainer, SignInContent, loginTitle, loginForm, SignInButton, RegisterButton, SearchPasswordButton };

@@ -11,6 +11,7 @@ import useToastContext from '@hooks/useToastContext';
 import useHeaderContext from '@hooks/useHeaderContext';
 import useTicketQuery from '@hooks/@queries/useTicketQuery';
 import compareImage from '@utils/compareImage';
+import { useTheme } from 'styled-components';
 
 const TicketDetail = () => {
     const { ticketId } = useParams();
@@ -18,6 +19,7 @@ const TicketDetail = () => {
     const [updateDate, setUpdateDate] = useState(location?.state);
     const navigate = useNavigate();
     const toast = useToastContext();
+    const theme = useTheme();
     const { getTicket, deleteTicket } = useTicketQuery();
     const {
         data: ticketData,
@@ -54,11 +56,11 @@ const TicketDetail = () => {
     }, []);
 
     useEffect(() => {
-        if (position > colorBoxRef.current?.offsetHeight) setColor('#fff');
+        if (position > colorBoxRef.current?.offsetHeight) setColor(theme.colors.background1);
         else setColor(ticketData?.categoryColor);
 
         return () => {
-            setColor('#fff');
+            setColor(theme.colors.background1);
         };
     }, [position]);
 

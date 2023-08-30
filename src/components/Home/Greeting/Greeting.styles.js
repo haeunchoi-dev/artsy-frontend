@@ -14,8 +14,6 @@ const Greeting = styled.div`
     }
     p {
         display: none;
-        font-size: 1.4rem;
-        color: #505050;
     }
 
     ${({ theme }) => theme.media.tablet} {
@@ -29,6 +27,7 @@ const Greeting = styled.div`
             display: block;
             font-size: 1.6rem;
             margin-bottom: 6rem;
+            color: ${({ theme }) => theme.colors.font6};
         }
     }
     ${({ theme }) => theme.media.labtop} {

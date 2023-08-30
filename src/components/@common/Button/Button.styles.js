@@ -79,17 +79,17 @@ const StyledButton = styled.button`
     ${({ $style }) =>
         $style &&
         css`
-            background-color: #fff;
+            background-color: ${({ theme }) => theme.colors.background3};
             border: 2px solid ${({ $color }) => $color};
             color: ${({ $color }) => $color};
 
             &:disabled {
-                border-color: #909090;
+                background-color: ${({ theme }) => theme.colors.background8};
                 color: #fff;
             }
         `}
     &:disabled {
-        background-color: #909090;
+        background-color: ${({ theme }) => theme.colors.background8};
     }
 `;
 

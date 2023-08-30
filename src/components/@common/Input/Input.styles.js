@@ -23,20 +23,21 @@ const StyledInput = styled.input`
     width: ${(props) => props.$inputWidth};
     height: 54px;
     font-size: ${({ theme }) => theme.fontSizes.body};
-    color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.font1};
     padding: 8px 22px;
     margin-bottom: 4px;
+    background-color: ${({ theme }) => theme.colors.background3};
     border-radius: ${({ theme, $rounded }) => ($rounded ? theme.borderRadius.large : '0')};
     border: none;
-    border-bottom: 2px solid #c5c5c5;
-    ${({ $rounded }) => $rounded && 'border: 2px solid #c5c5c5;'};
+    border-bottom: 2px solid ${({ theme }) => theme.colors.border2};
+    ${({ $rounded, theme }) => $rounded && `border: 2px solid ${theme.colors.border2};`};
     ${({ $valid }) => !$valid && 'border-color: #ff624d'};
 
     &:read-only {
         color: #fff;
         background-color: ${({ theme }) => theme.colors.point1};
-        border-color: #909090;
-        opacity: 0.6;
+        border-color: ${({ theme }) => theme.colors.border2};
+        opacity: 0.7;
     }
     &::-webkit-inner-spin-button,
     &::-webkit-outer-spin-button {
@@ -51,6 +52,10 @@ const StyledInput = styled.input`
         -webkit-box-shadow: 0 0 0px 1000px #fff inset;
         box-shadow: 0 0 0px 1000px #fff inset;
         transition: background-color 5000s ease-in-out 0s;
+    }
+    &::placeholder {
+        color: ${({ theme }) => theme.colors.font7};
+        opacity: 1;
     }
 `;
 

@@ -9,7 +9,7 @@ const Container = styled(Link)`
     max-height: 200px;
     margin: 0 2rem;
     padding: 2rem 1rem;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.background3};
     border-radius: ${({ theme }) => theme.borderRadius.large};
     box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
     ${({ theme }) => theme.media.tablet} {

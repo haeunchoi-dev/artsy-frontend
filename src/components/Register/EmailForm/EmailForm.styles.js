@@ -9,8 +9,5 @@ const EmailForm = styled.form`
 const CheckButton = styled(Button)`
     font-size: 1.4rem;
     margin-top: 1.2rem;
-    &:disabled {
-        background-color: #909090;
-    }
 `;
 export { EmailForm, CheckButton };

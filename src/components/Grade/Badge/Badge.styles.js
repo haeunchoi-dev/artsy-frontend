@@ -12,7 +12,7 @@ const Container = styled.div`
     margin-bottom: 6rem;
     border-radius: 100%;
     box-shadow: 0px 1px 10px 10px rgba(0, 0, 0, 0.02);
-
+    background-color: ${({ theme }) => theme.colors.background2};
     &::after {
         content: '';
         position: absolute;

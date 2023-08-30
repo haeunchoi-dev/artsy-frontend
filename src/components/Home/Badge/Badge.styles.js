@@ -27,7 +27,7 @@ const ImageWrapper = styled.div`
     width: 25%;
     height: 0;
     padding-bottom: 25%;
-    background-color: white;
+    background-color: #fff;
     border-radius: 100%;
     box-shadow: 10px 10px 10px rgba(96, 87, 186, 0.3);
     margin-bottom: 3.8rem;

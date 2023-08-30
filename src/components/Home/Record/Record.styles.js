@@ -14,7 +14,7 @@ const RecordHeader = styled.div`
     p {
         position: absolute;
         font-size: 1.2rem;
-        color: #505050;
+        color: ${({ theme }) => theme.colors.font6};
     }
     ${({ theme }) => theme.media.tablet} {
         h2 {

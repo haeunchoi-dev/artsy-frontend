@@ -8,8 +8,7 @@ const StyledGradeBox = styled(Link)`
     border-radius: 10px;
     box-sizing: border-box;
     box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.02);
-    background-color: #fff;
-
+    background-color: ${({ theme }) => theme.colors.background3};
     ${({ theme }) => theme.media.labtop} {
         padding: 3rem;
     }

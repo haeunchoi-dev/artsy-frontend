@@ -12,7 +12,7 @@ const StyledHeader = styled.header`
 
     ${({ theme }) => theme.media.labtop} {
         height: 7rem;
-        background-color: #fff;
+        background-color: ${({ theme }) => theme.colors.background1};
     }
 `;
 
