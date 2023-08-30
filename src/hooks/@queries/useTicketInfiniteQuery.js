@@ -15,18 +15,19 @@ const useTicketInfiniteQuery = (categoryId) => {
             apiUrl += `&categoryId=${categoryId}`;
         }
 
-        if (pageParam) apiUrl += `&lastId=${pageParam}`;
+        if (pageParam) apiUrl += `&page=${pageParam}`;
 
         return api.get(apiUrl);
     };
     const options = {
         getNextPageParam: (lastPage, allPages) => {
-            const latPageTickets = lastPage.ticketList;
-            const lastPageTicketsCount = latPageTickets?.length;
+            const total = lastPage.totalCount;
+            const prevPage = lastPage.page;
             // 기록 없을 때
             if (allPages[0].ticketList.length === 0) return undefined;
-            return lastPageTicketsCount >= limit ? latPageTickets[lastPageTicketsCount - 1].id : undefined;
+            return total >= prevPage * limit ? prevPage + 1 : undefined;
         },
+        retry: false,
     };
 
     return useInfiniteQuery([QUERY_KEY, categoryId], fetcher, options);
