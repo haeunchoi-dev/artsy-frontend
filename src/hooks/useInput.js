@@ -10,14 +10,13 @@ const useInput = (initialValue) => {
 
     const onNumberChange = useCallback((e) => {
         const { id, value } = e.target;
-        const [num, setNum] = useState(value);
 
-        // 숫자 길이 제한
+        //숫자 길이 제한
         if (value.length > 9) {
-            setNum(value.slice(0, 9));
+            setInput((input) => ({ ...input, [id]: value.slice(0, 9).replace(/\D/g, '') }));
+        } else {
+            setInput((input) => ({ ...input, [id]: value.replace(/\D/g, '') }));
         }
-
-        setInput((input) => ({ ...input, [id]: num.replace(/\D/g, '') }));
     }, []);
 
     const reset = useCallback(() => setInput(initialValue), [initialValue]);

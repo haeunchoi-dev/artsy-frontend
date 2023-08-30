@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, setMinutes } from 'date-fns';
 
 const formatTicketDate = (date) => {
     return format(date, 'yyyy-MM-dd HH:mm');
@@ -21,6 +21,13 @@ const formatDate = (date) => {
     return `${year}.${month}.${day}`;
 };
 
+const formatTenMinutes = () => {
+    const nowMinutes = new Date().getMinutes();
+    const now = setMinutes(new Date(), Math.floor(nowMinutes / 10) * 10);
+
+    return now;
+};
+
 const formatTime = (seconds) => {
     let min = parseInt((seconds % 3600) / 60);
     let sec = seconds % 60;
@@ -30,4 +37,4 @@ const formatTime = (seconds) => {
     return `${min} : ${sec}`;
 };
 
-export { formatTicketDate, formatKstDate, formatDate, formatTime };
+export { formatTicketDate, formatKstDate, formatDate, formatTime, formatTenMinutes };
