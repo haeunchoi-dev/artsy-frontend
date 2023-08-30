@@ -13,7 +13,7 @@ const SliderWrap = styled.div`
 
     h5 {
         font-size: ${({ theme }) => theme.fontSizes.body};
-        color: ${({ theme }) => theme.colors.point2};
+        color: ${({ theme }) => theme.colors.point1};
         margin-right: 0.2rem;
     }
 
@@ -25,7 +25,7 @@ const SliderWrap = styled.div`
     input {
         cursor: pointer;
         width: 100%;
-        accent-color: ${({ theme }) => theme.colors.point2};
+        accent-color: ${({ theme }) => theme.colors.point1};
     }
 `;
 

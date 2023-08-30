@@ -50,7 +50,7 @@ const MainWrap = styled.div`
     justify-content: center;
 
     h2 {
-        font-weight: 700;
+        font-weight: 500;
         font-size: ${({ theme }) => theme.fontSizes.h4};
         margin: 2rem 0 4rem 0;
         color: white;

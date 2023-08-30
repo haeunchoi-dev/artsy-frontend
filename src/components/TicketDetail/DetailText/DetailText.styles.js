@@ -19,7 +19,7 @@ const RowContainer = styled.div`
 
 const TitleText = styled.span`
     font-size: ${({ theme }) => theme.fontSizes.body};
-    font-weight: 600;
+    font-weight: 500;
 
     ${({ theme }) => theme.media.labtop} {
         text-align: left;

@@ -133,7 +133,7 @@ const TicketCreate = () => {
         <T.Container>
             {categoryQuery?.isLoading && <Loading></Loading>}
             <T.TitleContainer>
-                <h3>티켓 등록</h3>
+                <h3>티켓 추가</h3>
             </T.TitleContainer>
             <T.TicketForm>
                 {imgSrc === '' && <PhotoUploader setImgfile={setImgfile} setImgSrc={setImgSrc} />}
@@ -183,6 +183,7 @@ const TicketCreate = () => {
                         onChange={(date) => setShowDate(date)}
                         customInput={
                             <Input
+                                inputmode="none"
                                 id="title"
                                 labelText="관람일"
                                 isRequired
@@ -233,7 +234,7 @@ const TicketCreate = () => {
                 </T.ReviewContainer>
                 <T.ButtonContaienr>
                     <T.CreateButton full="true" size="large" color={theme.colors.point1} onClick={onSubmit}>
-                        등록하기
+                        추가하기
                     </T.CreateButton>
                 </T.ButtonContaienr>
             </T.TicketForm>

@@ -10,12 +10,6 @@ const StatsWrap = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    ${({ theme }) => theme.media.labtop} {
-        display: flex;
-        flex-direction: row;
-        flex: 1;
-    }
 `;
 
 const StatsChartWrap = styled.div`
@@ -31,13 +25,6 @@ const StatsChartWrap = styled.div`
 
 const StatsBoxWrap = styled.div`
     margin-top: 5rem;
-    ${({ theme }) => theme.media.labtop} {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-        margin-left: 10rem;
-        margin-top: 0;
-    }
 `;
 
 export { StatsContainer, StatsWrap, StatsChartWrap, StatsBoxWrap };

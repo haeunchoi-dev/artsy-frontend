@@ -73,7 +73,7 @@ const ReviewContainer = styled.div`
 `;
 const Label = styled.label`
     font-size: ${({ theme }) => theme.fontSizes.body};
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 16px;
 `;
 

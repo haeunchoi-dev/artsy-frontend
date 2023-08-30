@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as U from './UserStats.styles';
-import Container from '@components/@common/Container/Container';
+import Wrap from '@components/@common/Wrap/Wrap';
 import Loading from '@components/@common/Loading/Loading';
 import StatsBox from '@components/UserStats/StatsBox/StatsBox';
 import CoinIconUrl from '@assets/icons/icon-coin.png';
@@ -22,8 +22,6 @@ const UserStats = () => {
         isError: isChartError,
         error: chartError,
     } = useTicketStatsQuery(year, month);
-
-    console.log(chartData);
 
     useEffect(() => {
         if (!isChartError) return;
@@ -56,7 +54,7 @@ const UserStats = () => {
             {isChartLoading ? (
                 <Loading />
             ) : (
-                <Container>
+                <Wrap>
                     <U.StatsContainer>
                         <U.StatsWrap>
                             <U.StatsChartWrap>
@@ -77,17 +75,13 @@ const UserStats = () => {
                                 />
                                 <StatsBox
                                     title={`${month}월 지출`}
-                                    content={
-                                        chartData?.pricePerMonth === null
-                                            ? '0원'
-                                            : `${chartData?.pricePerMonth.toLocaleString() ?? 0}원`
-                                    }
+                                    content={`${chartData?.pricePerMonth.toLocaleString() ?? 0}원`}
                                     imgSrc={CoinIconUrl}
                                 />
                             </U.StatsBoxWrap>
                         </U.StatsWrap>
                     </U.StatsContainer>
-                </Container>
+                </Wrap>
             )}
         </>
     );
