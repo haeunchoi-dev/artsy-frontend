@@ -1,26 +1,43 @@
 import styled from 'styled-components';
 
-const StyledPageNotFound = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10rem 0;
-
-    h2 {
-        margin: 1rem 0 4rem;
-        font-size: ${({ theme }) => theme.fontSizes.h5};
-    }
-`;
-
-const StyledIcon = styled.span`
-    display: inline-block;
-    width: 10rem;
-    height: 10rem;
-
-    img {
+const StatsContainer = styled.div`
+    ${({ theme }) => theme.media.labtop} {
         width: 100%;
     }
 `;
 
-export { StyledPageNotFound, StyledIcon };
+const StatsWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    ${({ theme }) => theme.media.labtop} {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+    }
+`;
+
+const StatsChartWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    span {
+        margin-bottom: 1rem;
+        font-size: ${({ theme }) => theme.fontSizes.body};
+    }
+`;
+
+const StatsBoxWrap = styled.div`
+    margin-top: 5rem;
+    ${({ theme }) => theme.media.labtop} {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin-left: 10rem;
+        margin-top: 0;
+    }
+`;
+
+export { StatsContainer, StatsWrap, StatsChartWrap, StatsBoxWrap };

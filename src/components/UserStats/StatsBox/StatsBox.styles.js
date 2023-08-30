@@ -15,7 +15,7 @@ const Container = styled.div`
     background-color: ${({ $color }) => $color};
 
     ${({ theme }) => theme.media.labtop} {
-        width: 50%;
+        width: 90%;
     }
 `;
 

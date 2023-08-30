@@ -1,55 +1,94 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as U from './UserStats.styles';
 import Container from '@components/@common/Container/Container';
 import Loading from '@components/@common/Loading/Loading';
-import useTicketTotalQuery from '@hooks/@queries/useTicketTotalQuery';
 import StatsBox from '@components/UserStats/StatsBox/StatsBox';
 import CoinIconUrl from '@assets/icons/icon-coin.png';
 import CalendarIconUrl from '@assets/icons/icon-calendar.png';
+import useToastContext from '@hooks/useToastContext';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
+import StatsChart from '@components/UserStats/StatsChart/StatsChart';
+import useTicketStatsQuery from '@hooks/@queries/useTicketStatsQuery';
 
 const UserStats = () => {
-    const { getTotalCount, getTotalPrice } = useTicketTotalQuery();
-    const { data: countData, isLoading: isCountLoading, isError: isCountError, error: countError } = getTotalCount();
-    const { data: priceData, isLoading: isPriceLoading, isError: isPriceError, error: priceError } = getTotalPrice();
+    const toast = useToastContext();
+    const [year, setYear] = useState(new Date().getFullYear());
+    const [month, setMonth] = useState(new Date().getMonth() + 1);
 
-    const month = new Date().getMonth() + 1;
+    const {
+        data: chartData,
+        isLoading: isChartLoading,
+        isError: isChartError,
+        error: chartError,
+    } = useTicketStatsQuery(year, month);
+
+    console.log(chartData);
 
     useEffect(() => {
-        if (!isCountError) return;
-        if (isCountError) {
-            const errorType = countError?.response?.data?.error?.type;
+        if (!isChartError) return;
+        if (isChartError) {
+            const errorType = chartError?.response?.data?.error?.type;
 
             switch (errorType) {
                 default:
                     toast.show(ERROR_MESSAGE.defaultError);
             }
         }
-    }, [isCountError]);
+    }, [isChartError]);
 
-    useEffect(() => {
-        if (!isPriceError) return;
-        if (isPriceError) {
-            const errorType = priceError?.response?.data?.error?.type;
+    const onLeft = () => {
+        if (month === 1) {
+            setYear((prev) => prev - 1);
+            setMonth(12);
+        } else setMonth((prev) => prev - 1);
+    };
 
-            switch (errorType) {
-                default:
-                    toast.show(ERROR_MESSAGE.defaultError);
-            }
-        }
-    }, [isPriceError]);
+    const onRight = () => {
+        if (month === 12) {
+            setYear((prev) => prev + 1);
+            setMonth(1);
+        } else setMonth((prev) => prev + 1);
+    };
+
     return (
         <>
-            {(isCountLoading || isPriceLoading) && <Loading />}
-            <Container>
-                <StatsBox title={`${month}월 관람 횟수`} content={`${countData?.total}회`} imgSrc={CalendarIconUrl} />
-                <StatsBox
-                    title={`${month}월 지출`}
-                    content={`${priceData?.totalPrice.toLocaleString()}원`}
-                    imgSrc={CoinIconUrl}
-                />
-            </Container>
+            {isChartLoading ? (
+                <Loading />
+            ) : (
+                <Container>
+                    <U.StatsContainer>
+                        <U.StatsWrap>
+                            <U.StatsChartWrap>
+                                <StatsChart
+                                    chartdata={chartData?.chart}
+                                    year={year}
+                                    month={month}
+                                    onLeft={onLeft}
+                                    onRight={onRight}
+                                    cntSum={chartData?.cntPerMonth}
+                                />
+                            </U.StatsChartWrap>
+                            <U.StatsBoxWrap>
+                                <StatsBox
+                                    title={`${month}월 관람 횟수`}
+                                    content={`${chartData?.cntPerMonth ?? 0}회`}
+                                    imgSrc={CalendarIconUrl}
+                                />
+                                <StatsBox
+                                    title={`${month}월 지출`}
+                                    content={
+                                        chartData?.pricePerMonth === null
+                                            ? '0원'
+                                            : `${chartData?.pricePerMonth.toLocaleString() ?? 0}원`
+                                    }
+                                    imgSrc={CoinIconUrl}
+                                />
+                            </U.StatsBoxWrap>
+                        </U.StatsWrap>
+                    </U.StatsContainer>
+                </Container>
+            )}
         </>
     );
 };
