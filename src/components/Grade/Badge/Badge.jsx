@@ -10,6 +10,7 @@ const Badge = ({ grade, prevGrade }) => {
     const prevTargetValue = prevGrade?.targetValue || 0;
     const { isNext: isMasterGrade } = calculateNextGrade(name);
     const badgeColor = theme.gradeColor[imageName];
+
     return (
         <B.Container>
             <B.ImageWrap>
@@ -19,11 +20,10 @@ const Badge = ({ grade, prevGrade }) => {
                 <p>{name}</p>
                 {isMasterGrade ? (
                     <p>{prevTargetValue}개 이상</p>
+                ) : prevTargetValue === 0 ? (
+                    `${targetValue}개 미만`
                 ) : (
-                    <p>
-                        {prevTargetValue !== 0 && `${prevTargetValue}이상 ~ `}
-                        {targetValue}미만
-                    </p>
+                    `${prevTargetValue}개 ~ ${targetValue}개`
                 )}
             </B.Content>
         </B.Container>

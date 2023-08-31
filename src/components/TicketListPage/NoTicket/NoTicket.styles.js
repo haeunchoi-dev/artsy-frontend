@@ -8,8 +8,9 @@ const StyledNoTicket = styled.div`
     margin: 4rem 0;
     border-radius: 8px;
     box-sizing: border-box;
-    background-color: #eee;
-    font-size: ${({ theme }) => theme.fontSizes.body};
+    /* background-color: #eee; */
+    background-color: ${({ theme }) => theme.colors.background5};
+    font-size: ${({ theme }) => theme.colors.background1};
 
     ${({ theme }) => theme.media.tablet} {
         max-width: 80%;

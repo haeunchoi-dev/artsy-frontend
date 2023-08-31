@@ -57,6 +57,7 @@ const Container = styled.div`
         }
     }
 `;
+
 const ImageWrap = styled.span`
     width: 40%;
     margin-bottom: 0.8rem;
@@ -67,32 +68,20 @@ const ImageWrap = styled.span`
         margin-bottom: 0rem;
     }
 `;
+
 const Content = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     color: ${({ $color }) => $color};
-    font-size: 1.6rem;
-    > p:first-of-type {
-        font-size: 2rem;
-        font-weight: bold;
-        line-height: 2.4rem;
-    }
-    ${({ theme }) => theme.media.tablet} {
-        font-size: 1.4rem;
+    font-size: 1.4rem;
 
-        > p:first-of-type {
-            font-size: 1.8rem;
-            line-height: 2.2rem;
-        }
-    }
-    ${({ theme }) => theme.media.labtop} {
-        margin-bottom: 0.4rem;
-        font-size: 1.6rem;
-        > p:first-of-type {
-            font-size: 2.4rem;
-            line-height: 2.8rem;
-        }
+    > p:first-of-type {
+        font-size: 1.8rem;
+        font-weight: 500;
+        line-height: 2.4rem;
+        margin-bottom: 0.8rem;
     }
 `;
+
 export { Container, ImageWrap, Content };
