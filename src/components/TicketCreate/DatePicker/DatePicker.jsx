@@ -11,17 +11,18 @@ const Datepicker = ({ selected, onChange, customInput, minDate, maxDate, minTime
             <ReactDatePicker
                 selected={selected}
                 onChange={onChange}
-                showTimeSelect
+                showTimeInput
                 locale={ko}
                 timeIntervals={10}
                 timeFormat="HH:mm"
-                timeCaption="관람 시간"
+                timeInputLabel="관람 시간"
                 dateFormat="yyyy년 MM월 dd일 HH:mm"
                 customInput={customInput}
                 minDate={minDate}
                 maxDate={maxDate}
                 minTime={minTime}
                 maxTime={maxTime}
+                shouldCloseOnSelect={false}
                 filterTime={filterTime}
                 containerStyle={{ width: '100%' }}
                 renderCustomHeader={({

@@ -8,8 +8,8 @@ import RatingSliderBar from '@components/TicketCreate/RatingSliderBar/RatingSlid
 import useCategoryQuery from '@hooks/@queries/useCategoryQuery';
 import CategoryButton from '@components/TicketCreate/CategoryButton/CategoryButton';
 import Loading from '@components/@common/Loading/Loading';
+import Wrap from '@components/@common/Wrap/Wrap';
 import * as I from '@components/@common/Input/Input.styles';
-import deleteIconUrl from '@assets/icons/icon-delete.png';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import useInput from '@hooks/useInput';
@@ -130,7 +130,7 @@ const TicketCreate = () => {
     };
 
     return (
-        <T.Container>
+        <Wrap>
             {categoryQuery?.isLoading && <Loading></Loading>}
             <T.TitleContainer>
                 <h3>티켓 추가</h3>
@@ -141,10 +141,10 @@ const TicketCreate = () => {
                     <T.ImgContainer>
                         <T.ImgWrap>
                             <img alt="티켓 이미지" src={imgSrc} />
+                            <T.IconWrap>
+                                <T.StyledSlClose onClick={onResetImage} />
+                            </T.IconWrap>
                         </T.ImgWrap>
-                        <T.IconWrap>
-                            <img alt="삭제" src={deleteIconUrl} onClick={onResetImage} />
-                        </T.IconWrap>
                     </T.ImgContainer>
                 )}
                 <T.MarginContainer>
@@ -183,13 +183,13 @@ const TicketCreate = () => {
                         onChange={(date) => setShowDate(date)}
                         customInput={
                             <Input
-                                inputmode="none"
+                                inputMode="none"
                                 id="title"
                                 labelText="관람일"
                                 isRequired
                                 isValid={true}
                                 inputWidth="100%"
-                                style={{ cursor: 'pointer' }}
+                                style={{ cursor: 'pointer', caretColor: 'transparent' }}
                             />
                         }
                     />
@@ -216,6 +216,7 @@ const TicketCreate = () => {
                         isValid={true}
                         placeholder="금액을 입력하세요"
                         inputWidth="100%"
+                        onWheel={(e) => e.target.blur()}
                     />
                 </T.MarginContainer>
                 <T.MarginContainer>
@@ -238,7 +239,7 @@ const TicketCreate = () => {
                     </T.CreateButton>
                 </T.ButtonContaienr>
             </T.TicketForm>
-        </T.Container>
+        </Wrap>
     );
 };
 export default TicketCreate;

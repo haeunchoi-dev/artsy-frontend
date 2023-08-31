@@ -5,7 +5,7 @@ const ImgWrap = styled.button`
     justify-content: center;
     align-items: center;
 
-    width: 30rem;
+    width: 100%;
     height: 20rem;
     margin: 2rem 0;
 
