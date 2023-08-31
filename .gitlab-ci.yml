@@ -22,23 +22,25 @@ build:
     - echo "VITE_URL=$VITE_URL" >> .env
     - echo "build"
     - npm run build
-  only:
-    - dev
-  artifacts:
-    paths:
-      - 'dist/'
-
-deploy:
-  stage: deploy
-  image: python:3.9
-  script:
-    - echo "Uploading to S3"
-    - apt-get update -y
-    - apt-get install -y zip
     - mkdir -p build_artifacts/scripts
     - mv dist/ build_artifacts/
     - mv appspec.yml build_artifacts/
     - mv scripts/move_previous.sh build_artifacts/scripts/
+  only:
+    - dev
+  artifacts:
+    paths:
+      - 'build_artifacts/'
+
+deploy:
+  stage: deploy
+  image: python:3.9
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - echo "Uploading to S3"
+    - apt-get update -y
+    - apt-get install -y zip
     - cd build_artifacts
     - zip -r $S3_ZIP .
     - pip install awscli
