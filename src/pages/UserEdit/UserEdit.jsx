@@ -207,6 +207,7 @@ const UserEdit = () => {
                             id="displayName"
                             inputType="text"
                             labelText="이름(닉네임)"
+                            placeholder="이름(닉네임)"
                             isValid={displayNameInfo.errorMessage.length === 0}
                             isRequired
                             inputWidth="100%"

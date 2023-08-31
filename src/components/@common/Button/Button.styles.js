@@ -76,6 +76,15 @@ const StyledButton = styled.button`
     /* 풀너비 */
     ${fullWidthStyle}
 
+    &:disabled {
+        background-color: ${({ theme }) => theme.colors.border2};
+
+        &:hover {
+            filter: brightness(1);
+            cursor: default;
+        }
+    }
+
     /* 라인스타일 */
     ${({ $style }) =>
         $style &&
@@ -85,19 +94,11 @@ const StyledButton = styled.button`
             color: ${({ $color }) => $color};
 
             &:disabled {
-                background-color: ${({ theme }) => theme.colors.background8};
-                color: #fff;
+                background-color: transparent;
+                border-color: ${({ theme }) => theme.colors.border2};
+                color: ${({ theme }) => theme.colors.border2};
             }
         `}
-
-    &:disabled {
-        background-color: ${({ theme }) => theme.colors.border2};
-
-        &:hover {
-            filter: brightness(1);
-            cursor: default;
-        }
-    }
 `;
 
 export default StyledButton;
