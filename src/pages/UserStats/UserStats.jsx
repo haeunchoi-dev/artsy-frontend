@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as U from './UserStats.styles';
 import Wrap from '@components/@common/Wrap/Wrap';
-import Loading from '@components/@common/Loading/Loading';
+import ContentsLoading from '@components/@common/ContentsLoading/ContentsLoading';
 import StatsBox from '@components/UserStats/StatsBox/StatsBox';
 import CoinIconUrl from '@assets/icons/icon-coin.png';
 import CalendarIconUrl from '@assets/icons/icon-calendar.png';
@@ -43,7 +43,10 @@ const UserStats = () => {
     };
 
     const onRight = () => {
-        if (month === 12) {
+        if (year === new Date().getFullYear() && month === new Date().getMonth() + 1) {
+            toast.show('해당 월까지만 선택 가능합니다.');
+            return;
+        } else if (month === 12) {
             setYear((prev) => prev + 1);
             setMonth(1);
         } else setMonth((prev) => prev + 1);
@@ -52,7 +55,7 @@ const UserStats = () => {
     return (
         <>
             {isChartLoading ? (
-                <Loading />
+                <ContentsLoading />
             ) : (
                 <Wrap>
                     <U.StatsContainer>

@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 
 const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     ${({ theme }) => theme.media.labtop} {
         width: 45rem;
         height: 45rem;
@@ -21,14 +25,8 @@ const TextWrap = styled.div`
 `;
 
 const ImageWrap = styled.div`
-    width: 2.5rem;
-    height: 2.5rem;
+    padding: 10px;
     cursor: pointer;
-
-    img {
-        width: 100%;
-        height: 100%;
-    }
 `;
 
 export { Container, TextWrap, ImageWrap };

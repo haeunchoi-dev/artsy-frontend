@@ -24,11 +24,13 @@ const TextWrap = styled.div`
     flex-direction: column;
 
     span:first-of-type {
-        font-size: ${({ theme }) => theme.fontSizes.body};
+        font-size: ${({ theme }) => theme.fontSizes.text};
         margin-bottom: 1rem;
+        color: #909090;
     }
     span:last-of-type {
-        font-size: ${({ theme }) => theme.fontSizes.text};
+        font-size: ${({ theme }) => theme.fontSizes.body};
+        font-weight: 500;
     }
 `;
 
