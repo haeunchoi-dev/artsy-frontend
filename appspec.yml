@@ -13,6 +13,6 @@ permissions:
 
 hooks:
   BeforeInstall:
-    - location: move_previous.sh
+    - location: scripts/move_previous.sh
       timeout: 300
-      runas: ubuntu
+      runas: root

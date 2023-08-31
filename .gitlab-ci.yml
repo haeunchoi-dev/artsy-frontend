@@ -35,10 +35,10 @@ deploy:
     - echo "Uploading to S3"
     - apt-get update -y
     - apt-get install -y zip
-    - mkdir build_artifacts
+    - mkdir -p build_artifacts/scripts
     - mv dist/ build_artifacts/
     - mv appspec.yml build_artifacts/
-    - mv scripts/move_previous.sh build_artifacts/
+    - mv scripts/move_previous.sh build_artifacts/scripts/
     - cd build_artifacts
     - zip -r $S3_ZIP .
     - pip install awscli
