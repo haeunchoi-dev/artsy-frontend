@@ -4,11 +4,6 @@ const StyledForm = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    > input:focus {
-        outline: none;
-        border-color: ${({ theme }) => theme.colors.point1};
-        caret-color: ${({ theme }) => theme.colors.point1};
-    }
 `;
 const StyledLabel = styled.label`
     font-size: ${({ theme }) => theme.fontSizes.body};
@@ -60,6 +55,11 @@ const StyledInput = styled.input`
     &::placeholder {
         color: ${({ theme }) => theme.colors.font7};
         opacity: 1;
+    }
+    &:focus {
+        outline: none;
+        border-color: ${({ theme }) => theme.colors.point1};
+        caret-color: ${({ theme }) => theme.colors.point1};
     }
 `;
 

@@ -81,6 +81,10 @@ const ReviewInput = styled.textarea`
         border-color: ${({ theme }) => theme.colors.point1};
         caret-color: ${({ theme }) => theme.colors.point1};
     }
+    &::placeholder {
+        color: ${({ theme }) => theme.colors.font7};
+        opacity: 1;
+    }
 `;
 const ButtonContaienr = styled.div`
     display: flex;

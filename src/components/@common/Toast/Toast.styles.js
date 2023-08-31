@@ -13,7 +13,7 @@ const StyledToast = styled.div`
     text-align: center;
     font-size: ${({ theme }) => theme.fontSizes.text};
     color: ${({ theme }) => theme.colors.font8};
-    background-color: ${({ theme }) => theme.colors.background9};
+    background-color: ${({ theme }) => theme.colors.background10};
     box-shadow: 0px 1px 10px 3px rgba(0, 0, 0, 0.02);
 
     ${({ theme }) => theme.media.tablet} {
