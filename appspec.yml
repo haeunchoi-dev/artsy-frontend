@@ -6,7 +6,7 @@ files:
     overwrite: yes
 
 permissions:
-  - object: /home/ubuntu
+  - object: /home/artsy
     pattern: '**'
     owner: www-data
     group: www-data
