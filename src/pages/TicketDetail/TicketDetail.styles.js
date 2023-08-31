@@ -84,11 +84,14 @@ const TicketImageWrap = styled.div`
     z-index: ${({ theme }) => theme.layer.layer1};
     ${imageSize}
 
+    overflow: hidden;
+    border-radius: 1.2rem;
+    background-color: #f7f7f7;
+    box-shadow: rgba(0, 0, 0, 0.04) 1px 1px 10px 10px;
+
     img {
         width: 100%;
         height: 100%;
-        border-radius: 12px;
-        box-shadow: rgba(0, 0, 0, 0.02) 1px 1px 10px 10px;
     }
 
     ${({ theme }) => theme.media.labtop} {

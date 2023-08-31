@@ -8,6 +8,7 @@ const RowContainer = styled.div`
 
     ${({ theme }) => theme.media.labtop} {
         flex-direction: row;
+        align-items: center;
 
         ${({ $review }) =>
             $review &&
