@@ -15,7 +15,7 @@ import { ERROR_MESSAGE, SUCCESS_MESSAGE } from '@constants/message';
 import useToastContext from '@hooks/useToastContext';
 import useInput from '@hooks/useInput';
 import useTicketQuery from '@hooks/@queries/useTicketQuery';
-import { formatTicketDate, formatKstDate } from '@utils/formatDate';
+import { formatTicketDate } from '@utils/formatDate';
 import setFormData from '@utils/setFormData';
 
 const TicketEdit = () => {
@@ -43,7 +43,7 @@ const TicketEdit = () => {
         review: ticketData.review ?? '',
     });
 
-    const [showDate, setShowDate] = useState(formatKstDate(ticketData.showDate));
+    const [showDate, setShowDate] = useState(new Date(ticketData.showDate));
     const [rating, setRating] = useState(ticketData.rating);
     const [category, setCategory] = useState(ticketData.categoryId);
 

@@ -12,11 +12,11 @@ const formatKstDate = (time) => {
 };
 
 const formatDate = (date) => {
-    const kst = formatKstDate(date);
+    date = new Date(date);
 
-    const year = kst.getFullYear();
-    const month = kst.getMonth() + 1;
-    const day = kst.getDate();
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
 
     return `${year}.${month}.${day}`;
 };
