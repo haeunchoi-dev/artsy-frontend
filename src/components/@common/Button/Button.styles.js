@@ -77,7 +77,7 @@ const StyledButton = styled.button`
     ${fullWidthStyle}
 
     &:disabled {
-        background-color: ${({ theme }) => theme.colors.border2};
+        background-color: ${({ theme }) => theme.colors.background9};
 
         &:hover {
             filter: brightness(1);
@@ -95,8 +95,8 @@ const StyledButton = styled.button`
 
             &:disabled {
                 background-color: transparent;
-                border-color: ${({ theme }) => theme.colors.border2};
-                color: ${({ theme }) => theme.colors.border2};
+                border-color: ${({ theme }) => theme.colors.background9};
+                color: ${({ theme }) => theme.colors.background9};
             }
         `}
 `;

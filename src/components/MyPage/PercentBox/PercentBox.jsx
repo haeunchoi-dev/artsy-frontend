@@ -8,7 +8,7 @@ const PercentBox = ({ percentage, username }) => {
             </P.Title>
             <P.PercentBar $percentage={percentage}>
                 <P.Bar>
-                    <span>상위 {Math.round(percentage)}% </span>
+                    <span>상위 {Math.round(percentage)}%</span>
                 </P.Bar>
             </P.PercentBar>
         </P.PercentWrap>

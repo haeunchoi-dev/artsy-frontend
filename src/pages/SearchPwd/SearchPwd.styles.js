@@ -30,6 +30,7 @@ const InputBox = styled.div`
         position: absolute;
         top: 0;
         right: 0;
+        text-align: right;
         font-size: ${({ theme }) => theme.fontSizes.text};
         color: ${({ theme }) => theme.colors.point2};
     }

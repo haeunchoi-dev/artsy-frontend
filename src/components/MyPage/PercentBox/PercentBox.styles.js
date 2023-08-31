@@ -32,7 +32,7 @@ const PercentBar = styled.div`
         position: absolute;
         top: 0;
         left: 0;
-        width: ${({ $percentage }) => $percentage + '%'};
+        width: ${({ $percentage }) => 100 - $percentage + '%'};
         height: 100%;
         border-radius: 0.5rem;
         background-color: ${({ theme }) => theme.colors.point1};

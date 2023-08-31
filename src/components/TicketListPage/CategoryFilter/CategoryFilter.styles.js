@@ -20,7 +20,7 @@ const StyledCategoryFilter = styled.div`
 
         /* 스타일 */
         min-width: 10rem;
-        padding: 0.4rem 2rem 0.4rem 0;
+        padding: 0.8rem 2rem 0.8rem 0;
         font-size: ${({ theme }) => theme.fontSizes.text};
         border-bottom: 1px solid ${({ theme }) => theme.colors.font1};
         color: ${({ theme }) => theme.colors.font2};
@@ -37,7 +37,7 @@ const StyledCategoryFilter = styled.div`
         z-index: -1;
         position: absolute;
         right: 0;
-        top: 0.6rem;
+        top: 1rem;
     }
 `;
 
