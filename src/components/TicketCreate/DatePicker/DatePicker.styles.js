@@ -50,10 +50,11 @@ const DatePickerWrap = styled.div`
         font-size: ${({ theme }) => theme.fontSizes.text};
         border: none;
         background-color: #fff;
+        color: black;
     }
 
     .react-datepicker-time__caption {
-        font-size: ${({ theme }) => theme.fontSizes.body};
+        font-size: ${({ theme }) => theme.fontSizes.text};
         font-weight: 500;
     }
 
@@ -63,7 +64,7 @@ const DatePickerWrap = styled.div`
     }
 
     .react-datepicker__month-container {
-        width: 27rem;
+        width: 28rem;
         font-size: ${({ theme }) => theme.fontSizes.text};
     }
 
