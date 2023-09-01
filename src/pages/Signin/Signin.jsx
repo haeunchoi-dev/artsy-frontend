@@ -7,7 +7,6 @@ import { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import useToastContext from '@hooks/useToastContext';
 import useInput from '@hooks/useInput';
-import useWindowWidth from '@hooks/useWindowWidth';
 import checkValidation from '@utils/checkValidation';
 import { ERROR_TYPE } from '@constants/serverErrorType';
 import { ERROR_MESSAGE } from '@constants/message';
@@ -24,10 +23,8 @@ const Signin = () => {
 
     const navigate = useNavigate();
     const { mutate, isSuccess, isError, error } = useLoginQuery();
-    const windowWidth = useWindowWidth();
     const emailInputRef = useRef();
     const theme = useTheme();
-    const labtopSize = theme.devicesSize.labtop.replace('px', '');
     const toast = useToastContext();
     useEffect(() => {
         if (isSuccess) navigate('/home');
@@ -60,46 +57,51 @@ const Signin = () => {
     const handleRegister = () => {
         navigate('/register');
     };
+    const handleClickTitle = () => {
+        navigate('/');
+    };
 
     return (
         <S.SignInContainer>
             <IntroBox />
             <S.SignInContent>
-                <S.loginTitle>{windowWidth > labtopSize ? 'Welcome!' : 'Artsy'}</S.loginTitle>
-                <S.loginForm onSubmit={handleSubmit}>
-                    <Input
-                        inputType="email"
-                        placeholder="이메일 주소를 입력하세요."
-                        id="email"
-                        name="email"
-                        ref={emailInputRef}
-                        onChange={handleChange}
-                        value={loginInfo.email}
-                        rounded
-                        isRequired
-                        isValid={true}
-                        inputWidth="100%"
-                    />
-                    <Input
-                        inputType="password"
-                        placeholder="비밀번호를 입력하세요."
-                        id="password"
-                        name="password"
-                        onChange={handleChange}
-                        value={loginInfo.password}
-                        rounded
-                        isRequired
-                        isValid={true}
-                        inputWidth="100%"
-                    />
-                    <S.SignInButton color={theme.colors.point1} size={'large'}>
-                        로그인
-                    </S.SignInButton>
-                </S.loginForm>
-                <S.RegisterButton size={'large'} onClick={handleRegister} style="line">
-                    회원가입
-                </S.RegisterButton>
-                <S.SearchPasswordButton to="/user/search">비밀번호 찾기</S.SearchPasswordButton>
+                <S.LoginTitle onClick={handleClickTitle}>Artsy</S.LoginTitle>
+                <S.FormContainer>
+                    <S.LoginForm onSubmit={handleSubmit}>
+                        <Input
+                            inputType="email"
+                            placeholder="이메일 주소를 입력하세요."
+                            id="email"
+                            name="email"
+                            ref={emailInputRef}
+                            onChange={handleChange}
+                            value={loginInfo.email}
+                            rounded
+                            isRequired
+                            isValid={true}
+                            inputWidth="100%"
+                        />
+                        <Input
+                            inputType="password"
+                            placeholder="비밀번호를 입력하세요."
+                            id="password"
+                            name="password"
+                            onChange={handleChange}
+                            value={loginInfo.password}
+                            rounded
+                            isRequired
+                            isValid={true}
+                            inputWidth="100%"
+                        />
+                        <S.SignInButton color={theme.colors.point1} size={'large'}>
+                            로그인
+                        </S.SignInButton>
+                    </S.LoginForm>
+                    <S.RegisterButton size={'large'} onClick={handleRegister} style="line">
+                        회원가입
+                    </S.RegisterButton>
+                    <S.SearchPasswordButton to="/user/search">비밀번호 찾기</S.SearchPasswordButton>
+                </S.FormContainer>
             </S.SignInContent>
         </S.SignInContainer>
     );
