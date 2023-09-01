@@ -33,7 +33,7 @@ const MyPage = () => {
     return (
         <Wrap>
             <M.ViewWrap>
-                <MyGreeting username={userInfo?.displayName} />
+                <MyGreeting username={userInfo?.displayName ?? ''} />
                 <MyIconMenu />
                 <GradeBox userInfo={userInfo} gradeInfo={gradeInfo} gradeNextInfo={gradeNextInfo} />
             </M.ViewWrap>

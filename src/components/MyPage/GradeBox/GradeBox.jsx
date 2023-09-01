@@ -8,23 +8,27 @@ import { getIconUrl } from '@utils/getImageUrl';
 
 const GradeBox = ({ userInfo, gradeInfo, gradeNextInfo }) => {
     return (
-        <G.StyledGradeBox to="/grade">
-            <G.StyledGradeInfo>
-                <span>
-                    <img src={getIconUrl(`Badge_${gradeInfo?.imageName}`)} alt={gradeInfo?.name} />
-                </span>
-                <h4>{gradeInfo?.name}</h4>
-                {gradeNextInfo?.isNext === false ? (
-                    <p>
-                        {gradeNextInfo?.nextGrade?.name}까지 {gradeInfo?.targetValue - userInfo?.totalTicket}
-                        개의 티켓이 필요해요!
-                    </p>
-                ) : (
-                    <p>{userInfo?.displayName}님은 문화를 사랑하는 아티 마스터!</p>
-                )}
-            </G.StyledGradeInfo>
-            <GradeBar total={userInfo?.totalTicket} height={0.8} />
-        </G.StyledGradeBox>
+        <>
+            {userInfo && (
+                <G.StyledGradeBox to="/grade">
+                    <G.StyledGradeInfo>
+                        <span>
+                            <img src={getIconUrl(`Badge_${gradeInfo?.imageName}`)} alt={gradeInfo?.name} />
+                        </span>
+                        <h4>{gradeInfo?.name}</h4>
+                        {gradeNextInfo?.isNext === false ? (
+                            <p>
+                                {gradeNextInfo?.nextGrade?.name}까지 {gradeInfo?.targetValue - userInfo?.totalTicket}
+                                개의 티켓이 필요해요!
+                            </p>
+                        ) : (
+                            <p>{userInfo?.displayName}님은 문화를 사랑하는 아티 마스터!</p>
+                        )}
+                    </G.StyledGradeInfo>
+                    <GradeBar total={userInfo?.totalTicket} height={0.8} />
+                </G.StyledGradeBox>
+            )}
+        </>
     );
 };
 export default GradeBox;
