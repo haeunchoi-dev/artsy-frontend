@@ -67,7 +67,7 @@ const TicketCreate = () => {
     useEffect(() => {
         if (!isError) return;
         if (isError) {
-            const errorType = error.response.data.error.type;
+            const errorType = error.response?.data?.error?.type;
 
             switch (errorType) {
                 case ERROR_TYPE.LIMIT_FILE_SIZE:

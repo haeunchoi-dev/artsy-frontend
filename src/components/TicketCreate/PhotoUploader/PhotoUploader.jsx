@@ -2,10 +2,14 @@ import React, { useRef } from 'react';
 import * as P from './PhotoUploader.styles';
 import galleryIconUrl from '@assets/icons/icon-gallery.png';
 import imageCompression from 'browser-image-compression';
+import useToastContext from '@hooks/useToastContext';
+import { ERROR_MESSAGE } from '@constants/message';
 
 const PhotoUploader = ({ setImgfile, setImgSrc }) => {
     // 사진 업로드 input 태그 접근
     const imageInput = useRef();
+
+    const toast = useToastContext();
 
     // 사진 업로드 버튼 선택 시 input 태그 클릭
     const onCickImageUpload = () => {
@@ -33,7 +37,7 @@ const PhotoUploader = ({ setImgfile, setImgSrc }) => {
                 setImgSrc(base64data);
             };
         } catch (error) {
-            console.log(error);
+            toast.show(ERROR_MESSAGE.photoError);
         }
     };
 

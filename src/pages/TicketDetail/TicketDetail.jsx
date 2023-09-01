@@ -100,7 +100,7 @@ const TicketDetail = () => {
     useEffect(() => {
         if (!isGetError) return;
 
-        const errorType = getError.response.data.error.type;
+        const errorType = getError?.response?.data?.error.type;
         switch (errorType) {
             case ERROR_TYPE.DATA_NOT_FOUND:
                 toast.show(ERROR_MESSAGE.dataNotFoundTicket);
@@ -120,7 +120,7 @@ const TicketDetail = () => {
 
     useEffect(() => {
         if (isDeleteError) {
-            const errorType = deleteError.response.data.error.type;
+            const errorType = deleteError.response?.data?.error?.type;
             switch (errorType) {
                 default:
                     toast.show(ERROR_MESSAGE.defaultError);

@@ -55,7 +55,9 @@ const UserStats = () => {
     return (
         <>
             {isChartLoading ? (
-                <ContentsLoading />
+                <U.StatsContainer>
+                    <ContentsLoading />
+                </U.StatsContainer>
             ) : (
                 <Wrap>
                     <U.StatsContainer>

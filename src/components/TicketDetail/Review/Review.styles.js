@@ -26,6 +26,7 @@ const TitleText = styled.h2`
 `;
 
 const DetailText = styled.span`
+    white-space: pre-wrap;
     ${({ theme }) => theme.media.labtop} {
         font-size: ${({ theme }) => theme.fontSizes.text};
         margin: 10px 0;

@@ -22,6 +22,7 @@ const ERROR_MESSAGE = {
     defaultError: '관리자에게 문의하세요',
     failCheckPassword: '비밀번호 확인에 실패했습니다. 비밀번호를 다시 입력해주세요.',
     invalideEmail: '가입된 이메일주소가 아닙니다.',
+    photoError: '오류가 발생했습니다. 다시 시도해주세요.',
 };
 
 const SUCCESS_MESSAGE = {

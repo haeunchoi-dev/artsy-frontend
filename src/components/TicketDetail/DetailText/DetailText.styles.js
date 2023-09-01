@@ -33,6 +33,12 @@ const DetailText = styled.span`
     margin: 10px 0;
     line-height: 2.5rem;
 
+    ${({ $review }) =>
+        $review &&
+        css`
+            white-space: pre-wrap;
+        `}
+
     ${({ theme }) => theme.media.labtop} {
         white-space: nowrap; // 다음 줄로 넘어가지 않도록
 

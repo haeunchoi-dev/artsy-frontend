@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 const StatsContainer = styled.div`
+    min-height: 600px;
     ${({ theme }) => theme.media.labtop} {
         width: 100%;
+        min-height: 680px;
     }
 `;
 
