@@ -1,11 +1,16 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
+import { useTheme } from 'styled-components';
 
 const HeaderContext = createContext();
 
 const HeaderContextProvider = ({ children }) => {
-    const [color, setColor] = useState('#fff');
-
+    const theme = useTheme();
+    const [color, setColor] = useState(() => theme.colors.background1);
     const value = { color, setColor };
+
+    useEffect(() => {
+        setColor(theme.colors.background1);
+    }, [theme]);
 
     return <HeaderContext.Provider value={value}>{children}</HeaderContext.Provider>;
 };

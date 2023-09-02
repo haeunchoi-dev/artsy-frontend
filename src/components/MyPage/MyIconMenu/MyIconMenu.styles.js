@@ -20,7 +20,8 @@ const IconButton = styled(Link)`
     padding: 1rem;
     box-sizing: border-box;
     box-shadow: 1px 1px 10px 10px rgba(0, 0, 0, 0.02);
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.background3};
+    text-align: center;
 
     /* 아이콘 */
     &:before {
@@ -29,7 +30,7 @@ const IconButton = styled(Link)`
         height: 6rem;
         border-radius: 50%;
         box-sizing: border-box;
-        background-color: #eee;
+        background-color: ${({ theme }) => theme.colors.background7};
         background-image: url(${({ $imgUrl }) => $imgUrl});
         background-repeat: no-repeat;
         background-size: 60%;
@@ -40,7 +41,7 @@ const IconButton = styled(Link)`
     > span {
         margin-top: 1rem;
         font-size: ${({ theme }) => theme.fontSizes.text};
-        color: ${({ theme }) => theme.colors.black};
+        color: ${({ theme }) => theme.colors.font1};
     }
 `;
 

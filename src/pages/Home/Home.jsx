@@ -9,14 +9,14 @@ import MyRecordMobile from '@components/Home/MyRecordMobile/MyRecordMobile';
 const Home = () => {
     const { data: userInfo, isLoading } = getUser();
     if (isLoading) return <Loading />;
-    const { displayName, totalTicket } = userInfo;
+
     return (
         <H.Home>
             <H.TopContainer>
                 {userInfo && (
                     <>
-                        <Greeting name={displayName} />
-                        <Badge totalTicket={totalTicket} />
+                        <Greeting name={userInfo.displayName} />
+                        <Badge totalTicket={userInfo.totalTicket} />
                     </>
                 )}
             </H.TopContainer>

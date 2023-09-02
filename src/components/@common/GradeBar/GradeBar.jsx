@@ -27,7 +27,7 @@ const GradeBar = ({ total, width, height, fontColor, fontSize }) => {
             <StyledLegend
                 $grade={imageName}
                 $fontSize={fontSize ?? theme.fontSizes.subText}
-                $fontColor={fontColor ?? theme.colors.black}
+                $fontColor={fontColor ?? theme.colors.font1}
             >
                 <span>{total}</span>
                 <span>{isFinite(targetValue) ? ` / ${targetValue}` : ' / ∞'}</span>

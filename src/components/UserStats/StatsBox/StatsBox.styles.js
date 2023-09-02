@@ -12,10 +12,10 @@ const Container = styled.div`
     padding: 2.5rem 2rem;
     margin-bottom: 1rem;
 
-    background-color: ${({ $color }) => $color};
+    background-color: ${({ $color, theme }) => $color ?? theme.colors.background3};
 
     ${({ theme }) => theme.media.labtop} {
-        width: 50%;
+        width: 90%;
     }
 `;
 
@@ -24,11 +24,13 @@ const TextWrap = styled.div`
     flex-direction: column;
 
     span:first-of-type {
-        font-size: ${({ theme }) => theme.fontSizes.body};
+        font-size: ${({ theme }) => theme.fontSizes.text};
         margin-bottom: 1rem;
+        color: #909090;
     }
     span:last-of-type {
-        font-size: ${({ theme }) => theme.fontSizes.text};
+        font-size: ${({ theme }) => theme.fontSizes.body};
+        font-weight: 500;
     }
 `;
 

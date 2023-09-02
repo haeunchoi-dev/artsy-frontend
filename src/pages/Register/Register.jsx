@@ -4,9 +4,11 @@ import { useState } from 'react';
 import IntroBox from '@components/@common/introBox/IntroBox';
 import EmailForm from '@components/Register/EmailForm/EmailForm';
 import RegisterForm from '@components/Register/RegisterForm/RegisterForm';
-import useInput from '../../hooks/useInput';
+import useInput from '@hooks/useInput';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+    const navigate = useNavigate();
     const {
         input: userInfo,
         onChange: handleChange,
@@ -19,11 +21,15 @@ const Register = () => {
 
     const [isCheckEmail, setIsCheckEmail] = useState(false);
 
+    const handleClickTitle = () => {
+        navigate('/');
+    };
+
     return (
         <R.RegisterContainer>
             <IntroBox />
             <R.RegisterContent>
-                <R.Title>회원가입</R.Title>
+                <R.Title onClick={handleClickTitle}>Artsy</R.Title>
                 <R.FormsContainer>
                     {!isCheckEmail ? (
                         <EmailForm

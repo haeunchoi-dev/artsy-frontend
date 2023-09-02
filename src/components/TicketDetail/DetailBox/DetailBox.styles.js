@@ -13,7 +13,7 @@ const TicketDetailBox = styled.div`
     border-radius: 12px;
     box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
 
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.background3};
     z-index: 0;
 
     ${({ theme }) => theme.media.labtop} {
@@ -77,7 +77,7 @@ const EditWrap = styled.div`
         justify-content: flex-end;
         align-items: flex-end;
         font-size: ${({ theme }) => theme.fontSizes.subText};
-        color: #777;
+        color: ${({ theme }) => theme.colors.font5};
         height: fit-content;
         padding: 15px 0;
 

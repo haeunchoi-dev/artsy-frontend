@@ -1,0 +1,55 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  AWS_DEFAULT_REGION: ap-northeast-2
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  S3_BUCKET: elice-artsy-bucket
+  S3_ZIP: artsy-fe.zip
+  VITE_API_URL: $VITE_API_URL
+  VITE_URL: $VITE_URL
+
+build:
+  stage: build
+  image: node
+  script:
+    - echo "libs install"
+    - npm i
+    - echo "create env"
+    - echo "VITE_API_URL=$VITE_API_URL" > .env
+    - echo "VITE_URL=$VITE_URL" >> .env
+    - echo "build"
+    - npm run build
+    - mkdir -p build_artifacts/scripts
+    - mv dist/ build_artifacts/
+    - mv appspec.yml build_artifacts/
+    - mv scripts/move_previous.sh build_artifacts/scripts/
+  only:
+    - dev
+  artifacts:
+    paths:
+      - 'build_artifacts/'
+
+deploy:
+  stage: deploy
+  image: python:3.9
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - echo "Uploading to S3"
+    - apt-get update -y
+    - apt-get install -y zip
+    - cd build_artifacts
+    - zip -r $S3_ZIP .
+    - pip install awscli
+    - aws s3 cp $S3_ZIP s3://$S3_BUCKET/dev/$S3_ZIP
+    - echo "Creating deployment with CodeDeploy"
+    - aws deploy create-deployment
+      --application-name artsy-codedeploy
+      --deployment-config-name CodeDeployDefault.OneAtATime
+      --deployment-group-name dev-fe
+      --s3-location bucket=$S3_BUCKET,bundleType=zip,key=dev/$S3_ZIP
+  only:
+    - dev

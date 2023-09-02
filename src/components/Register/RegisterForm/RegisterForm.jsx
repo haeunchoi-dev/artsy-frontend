@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as R from './RegisterForm.styles';
 import Input from '@components/@common/Input/Input';
+import Confirm from '@components/@common/Confirm/Confirm';
 import { useTheme } from 'styled-components';
 import { useNavigate } from 'react-router';
 import useToastContext from '@hooks/useToastContext';
@@ -18,6 +19,7 @@ const checkSamePassword = (passwords) => {
 const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEmail }) => {
     const [passwordCheck, setPasswordCheck] = useState('');
     const [isdisabledButton, setIsdisabledButton] = useState(true);
+    const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
     const passwordCheckInputRef = useRef(null);
     const theme = useTheme();
@@ -47,7 +49,7 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
 
     useEffect(() => {
         if (isError) {
-            const errorType = error.response.data?.error.type;
+            const errorType = error.response?.data?.error.type;
             switch (errorType) {
                 case ERROR_TYPE.INVALID_PARAM: {
                     toast.show(ERROR_MESSAGE.incorrectRegister);
@@ -59,6 +61,7 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
             }
         }
         if (isSuccess) {
+            initializeUserInfo();
             toast.show(SUCCESS_MESSAGE.successRegister);
             navigate('/signin');
         }
@@ -78,15 +81,19 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
         e.preventDefault();
 
         signUp(userInfo);
-        initializeUserInfo();
+    };
+
+    const openConfirm = () => {
+        setIsConfirmOpen(true);
+    };
+    const closeConfirm = () => {
+        setIsConfirmOpen(false);
     };
 
     const handlebackToEmail = () => {
-        const confirm = window.confirm('이메일 주소를 다시 입력하시겠어요?');
-        if (confirm) {
-            setIsCheckEmail(false);
-            initializeUserInfo();
-        }
+        closeConfirm();
+        setIsCheckEmail(false);
+        initializeUserInfo();
     };
 
     const handlePasswordCheck = () => {
@@ -124,7 +131,7 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
                     inputType="password"
                     placeholder="비밀번호를 재입력하세요."
                     id="passwordCheck"
-                    inputRef={passwordCheckInputRef}
+                    ref={passwordCheckInputRef}
                     onChange={handlePasswordCheck}
                     value={passwordCheck}
                     rounded
@@ -137,7 +144,14 @@ const RegisterForm = ({ userInfo, initializeUserInfo, handleChange, setIsCheckEm
                 <R.RegisterButton color={theme.colors.point1} size={'large'} disabled={isdisabledButton}>
                     가입하기
                 </R.RegisterButton>
-                <R.BackButton onClick={handlebackToEmail}>뒤로가기</R.BackButton>
+                <R.BackButton onClick={openConfirm}>뒤로가기</R.BackButton>
+                <Confirm
+                    isOpen={isConfirmOpen}
+                    onClose={closeConfirm}
+                    title={'이메일 재입력'}
+                    description={'다시 입력하시겠어요?'}
+                    onSubmit={handlebackToEmail}
+                />
             </R.RegisterForm>
         </>
     );

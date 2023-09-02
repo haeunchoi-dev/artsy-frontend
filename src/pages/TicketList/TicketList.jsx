@@ -7,7 +7,7 @@ import useTicketInfiniteQuery from '@hooks/@queries/useTicketInfiniteQuery';
 import Container from '@components/@common/Container/Container.jsx';
 import Button from '@components/@common/Button/Button.jsx';
 import TopButton from '@components/@common/TopButton/TopButton.jsx';
-import TicketLoading from '@components/TicketListPage/TicketLoading/TicketLoading.jsx';
+import ContentsLoading from '@components/@common/ContentsLoading/ContentsLoading.jsx';
 import Ticket from '@components/TicketListPage/Ticket/Ticket';
 import TitleWrap from '@components/TicketListPage/TitleWrap/TitleWrap.jsx';
 import CategoryFilter from '@components/TicketListPage/CategoryFilter/CategoryFilter.jsx';
@@ -79,7 +79,7 @@ const List = () => {
                 </L.FilterInner>
             </L.FilterWrap>
             <Container>
-                {ticketQuery?.isLoading && <TicketLoading />}
+                {ticketQuery?.isLoading && <ContentsLoading />}
                 {ticketQuery?.data?.pages[0].ticketList.length === 0 && <NoTicket />}
                 <L.TicketList>
                     {ticketQuery?.data?.pages.map((page) =>

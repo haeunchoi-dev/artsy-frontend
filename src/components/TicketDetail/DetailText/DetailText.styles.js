@@ -8,6 +8,7 @@ const RowContainer = styled.div`
 
     ${({ theme }) => theme.media.labtop} {
         flex-direction: row;
+        align-items: center;
 
         ${({ $review }) =>
             $review &&
@@ -19,7 +20,7 @@ const RowContainer = styled.div`
 
 const TitleText = styled.span`
     font-size: ${({ theme }) => theme.fontSizes.body};
-    font-weight: 600;
+    font-weight: 500;
 
     ${({ theme }) => theme.media.labtop} {
         text-align: left;
@@ -31,6 +32,12 @@ const DetailText = styled.span`
     font-size: ${({ theme }) => theme.fontSizes.text};
     margin: 10px 0;
     line-height: 2.5rem;
+
+    ${({ $review }) =>
+        $review &&
+        css`
+            white-space: pre-wrap;
+        `}
 
     ${({ theme }) => theme.media.labtop} {
         white-space: nowrap; // 다음 줄로 넘어가지 않도록

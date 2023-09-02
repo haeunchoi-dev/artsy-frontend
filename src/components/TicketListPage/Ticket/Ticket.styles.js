@@ -32,6 +32,7 @@ const Wrap = styled(Link)`
     border-radius: 8px;
     padding-left: 2rem;
     box-sizing: border-box;
+    will-change: filter;
     filter: drop-shadow(2px 5px 5px rgba(0, 0, 0, 0.15));
     cursor: pointer;
 
@@ -61,8 +62,8 @@ const InfoBox = styled.div`
     width: 13rem;
     padding: 2rem 2rem 2rem 1rem;
     box-sizing: border-box;
-    background-color: #fff;
-    color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.background3};
+    color: ${({ theme }) => theme.colors.font1};
 `;
 
 const Title = styled.div`
@@ -70,12 +71,13 @@ const Title = styled.div`
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: ${({ theme }) => theme.fontSizes.text};
+    line-height: 1.4;
 `;
 
 const Date = styled.div`
     margin-top: 1rem;
     font-size: ${({ theme }) => theme.fontSizes.subText};
-    color: #909090;
+    color: ${({ theme }) => theme.colors.font5};
 `;
 
 const Rating = styled.div`
@@ -109,7 +111,7 @@ const DivideLine = styled.div`
     span {
         width: 1rem;
         height: 100%;
-        background-color: #fff;
+        background-color: ${({ theme }) => theme.colors.background3};
     }
 
     span:first-of-type {
@@ -127,7 +129,7 @@ const DivideLine = styled.div`
 
     span:before {
         content: '';
-        border-left: 1rem solid #fff;
+        border-left: 1rem solid ${({ theme }) => theme.colors.background3};
         border-top: 1rem solid transparent;
         border-bottom: 1rem solid transparent;
         position: absolute;
@@ -135,7 +137,7 @@ const DivideLine = styled.div`
     }
     span:after {
         content: '';
-        border-right: 10px solid #fff;
+        border-right: 10px solid ${({ theme }) => theme.colors.background3};
         border-top: 10px solid transparent;
         border-bottom: 10px solid transparent;
         position: absolute;

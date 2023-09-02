@@ -13,6 +13,8 @@ const TopContent = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
+    text-align: center;
+
     h2 {
         margin-bottom: 1.8rem;
         font-size: 2rem;
@@ -20,7 +22,7 @@ const TopContent = styled.div`
     p {
         margin-bottom: 3.6rem;
         font-size: 1.6rem;
-        color: #909090;
+        color: ${({ theme }) => theme.colors.font5};
     }
     ${({ theme }) => theme.media.tablet} {
         h2 {
@@ -57,15 +59,15 @@ const Background = styled.div`
     }
 `;
 const ImageWrap = styled.span`
-    display: flex;
     width: 15%;
     max-width: 240px;
+
     img {
         width: 100%;
         height: auto;
     }
     &:first-of-type {
-        width: 18%;
+        width: 24%;
     }
 
     ${({ theme }) => theme.media.tablet} {
@@ -82,13 +84,14 @@ const RoundBox = styled.div`
     justify-content: center;
     width: 100%;
     max-width: 800px;
-    padding: 1.2rem 1.8rem;
-    border-radius: 2.4rem;
+    padding: 1.2rem 1rem;
+    border-radius: 1.2rem;
     margin-bottom: 8rem;
     background-color: ${({ theme }) => theme.colors.point1};
     font-size: 1.4rem;
     text-align: center;
     color: #fff;
+
     > p:first-of-type {
         margin-bottom: 0.8rem;
     }

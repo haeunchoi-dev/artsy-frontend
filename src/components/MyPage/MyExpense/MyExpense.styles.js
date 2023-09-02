@@ -15,11 +15,14 @@ const StyledMyExpense = styled.div`
     color: #fff;
 
     h4 {
-        font-size: ${({ theme }) => theme.fontSizes.body};
+        font-size: ${({ theme }) => theme.fontSizes.text};
+        font-weight: normal;
     }
 
     p {
         margin-top: 1rem;
+        font-weight: 500;
+        font-size: ${({ theme }) => theme.fontSizes.body};
     }
 `;
 

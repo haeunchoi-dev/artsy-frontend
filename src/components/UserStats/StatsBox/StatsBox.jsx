@@ -1,5 +1,4 @@
 import * as S from './StatsBox.styles';
-import CoinIconUrl from '@assets/icons/icon-coin.png';
 
 const StatsBox = ({ title, content, imgSrc, color }) => {
     return (

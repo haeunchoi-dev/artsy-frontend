@@ -30,11 +30,11 @@ const Title = styled.h2`
     display: flex;
     align-items: flex-end;
     box-sizing: border-box;
-    font-size: 3.4rem;
-    padding-bottom: 4rem;
-
+    font-size: 4.6rem;
+    padding-bottom: 2.8rem;
+    cursor: pointer;
     ${({ theme }) => theme.media.labtop} {
-        padding-bottom: 3.4rem;
+        font-size: 3.4rem;
     }
 `;
 const FormsContainer = styled.div`

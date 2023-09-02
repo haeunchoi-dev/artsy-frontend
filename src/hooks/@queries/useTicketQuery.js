@@ -1,14 +1,14 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
-import api from '@utils/api';
+import useApi from '@hooks/useApi';
 
 export const QUERY_KEY = '/api/user/ticket';
 
 const useTicketQuery = () => {
     const queryClient = useQueryClient();
-    const headers = { 'Content-Type': 'multipart/form-data' };
+    const api = useApi();
 
     const createTicket = () => {
-        const fetcher = (data) => api.post(QUERY_KEY, data, headers);
+        const fetcher = (data) => api.multipartPost(QUERY_KEY, data);
 
         return useMutation({
             mutationFn: (ticketInfo) => fetcher(ticketInfo),
@@ -27,7 +27,7 @@ const useTicketQuery = () => {
     };
 
     const updateTicket = (ticketId) => {
-        const fetcher = (data) => api.put(`${QUERY_KEY}/${ticketId}`, data, headers);
+        const fetcher = (data) => api.multipartPut(`${QUERY_KEY}/${ticketId}`, data);
 
         return useMutation({
             mutationFn: (ticketInfo) => fetcher(ticketInfo),

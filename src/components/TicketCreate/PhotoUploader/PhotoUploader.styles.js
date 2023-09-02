@@ -5,13 +5,13 @@ const ImgWrap = styled.button`
     justify-content: center;
     align-items: center;
 
-    width: 30rem;
+    width: 100%;
     height: 20rem;
     margin: 2rem 0;
 
-    border: 1px solid #c5c5c5;
+    border: 1px solid ${({ theme }) => theme.colors.border2};
     border-radius: ${({ theme }) => theme.borderRadius.large};
-    background-color: white;
+    background-color: ${({ theme }) => theme.colors.background3};
 
     cursor: pointer;
 

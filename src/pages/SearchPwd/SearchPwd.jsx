@@ -2,7 +2,7 @@ import * as S from './SearchPwd.styles';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Container from '@components/@common/Container/Container';
+import Wrap from '@components/@common/Wrap/Wrap.jsx';
 import Input from '@components/@common/Input/Input';
 import Button from '@components/@common/Button/Button';
 import PageTitle from '@components/UserEdit/PageTitle/PageTitle';
@@ -78,7 +78,11 @@ const SearchPwd = () => {
     useEffect(() => {
         if (isSuccessLogin) {
             toast.show(SUCCESS_MESSAGE.successSignin);
-            navigate('/user/edit');
+            navigate('/user/edit', {
+                state: {
+                    requiredSkipCurrentPasswordCheck: true
+                }
+            });
         }
         if (isErrorLogin) {
             toast.show(ERROR_MESSAGE.incorrectEmailOrPassword);
@@ -111,64 +115,58 @@ const SearchPwd = () => {
     };
 
     return (
-        <Container>
-            <S.Wrap>
-                <PageTitle>비밀번호 찾기</PageTitle>
-                <S.SubTitleWrap>가입하신 이메일을 입력하시면 해당 이메일로 임시비밀번호가 발송됩니다.</S.SubTitleWrap>
-                <S.Form>
-                    <S.InputBox>
-                        <Input
-                            id="email"
-                            labelText="이메일"
-                            inputType="email"
-                            name="email"
-                            placeholder="이메일주소 입력"
-                            isRequired
-                            inputWidth="100%"
-                            isValid={emailInfo.errorMessage.length === 0}
-                            errorMessage={emailInfo.errorMessage}
-                            value={emailInfo.email}
-                            onChange={handleChange}
-                        />
-                        <Button
-                            type="button"
-                            size="small"
-                            full="full"
-                            style="line"
-                            disabled={isDisabledSend}
-                            onClick={handleClickSend}
-                        >
-                            임시 비밀번호 발송
-                        </Button>
-                    </S.InputBox>
-                    <S.InputBox>
-                        {isRunning && <S.Timer>{formatTime(count)}</S.Timer>}
-                        <Input
-                            id="password"
-                            name="password"
-                            inputType="password"
-                            labelText="임시비밀번호"
-                            placeholder="임시비밀번호 입력"
-                            isRequired
-                            inputWidth="100%"
-                            isValid={passwordInfo.errorMessage.length === 0}
-                            errorMessage={passwordInfo.errorMessage}
-                            value={passwordInfo.password}
-                            onChange={handleChange}
-                        />
-                    </S.InputBox>
-                    <Button
-                        type="button"
-                        size="large"
-                        full="full"
-                        disabled={isDisabledLogin}
-                        onClick={handleClickLogin}
-                    >
-                        임시 비밀번호로 로그인
-                    </Button>
-                </S.Form>
-            </S.Wrap>
-        </Container>
+        <Wrap>
+            <PageTitle>비밀번호 찾기</PageTitle>
+            <S.SubTitleWrap>가입하신 이메일을 입력하시면 해당 이메일로 임시비밀번호가 발송됩니다.</S.SubTitleWrap>
+            <S.Form>
+                <S.InputBox>
+                    <Input
+                        id="email"
+                        labelText="이메일"
+                        inputType="email"
+                        name="email"
+                        placeholder="이메일주소 입력"
+                        isRequired
+                        inputWidth="100%"
+                        isValid={emailInfo.errorMessage.length === 0}
+                        errorMessage={emailInfo.errorMessage}
+                        value={emailInfo.email}
+                        onChange={handleChange}
+                        inputRightComponent={
+                            <S.StyledButton
+                                type="button"
+                                size="medium"
+                                //full="full"
+                                style="line"
+                                disabled={isDisabledSend}
+                                onClick={handleClickSend}
+                            >
+                                이메일 발송
+                            </S.StyledButton>
+                        }
+                    />
+                </S.InputBox>
+                <S.InputBox>
+                    {isRunning && <S.Timer>{formatTime(count)}</S.Timer>}
+                    <Input
+                        id="password"
+                        name="password"
+                        inputType="password"
+                        labelText="임시비밀번호"
+                        placeholder="임시비밀번호 입력"
+                        isRequired
+                        inputWidth="100%"
+                        isValid={passwordInfo.errorMessage.length === 0}
+                        errorMessage={passwordInfo.errorMessage}
+                        value={passwordInfo.password}
+                        onChange={handleChange}
+                    />
+                </S.InputBox>
+                <Button type="button" size="large" full="full" disabled={isDisabledLogin} onClick={handleClickLogin}>
+                    임시 비밀번호로 로그인
+                </Button>
+            </S.Form>
+        </Wrap>
     );
 };
 export default SearchPwd;

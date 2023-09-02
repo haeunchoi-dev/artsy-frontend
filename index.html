@@ -2,30 +2,55 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" type="image/png" href="/favicon.ico" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"
+        />
+        <meta name="format-detection" content="telephone=no" />
+
+        <!-- PWA -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="theme-color" content="#8B97FF" />
+        <link rel="icon" type="image/png" href="%VITE_URL%favicon.ico" />
+        <link rel="manifest" href="%VITE_URL%manifest.json" />
+        <link rel="apple-touch-icon" href="%VITE_URL%icon192.png" />
+
         <!-- Primary Meta Tags -->
-        <title>Artsy - 나만의 문화기록 티겟북</title>
-        <meta name="title" content="Artsy - 나만의 문화기록 티겟북" />
+        <title>Artsy - 나만의 문화기록 티켓북</title>
+        <meta name="title" content="Artsy - 나만의 문화기록 티켓북" />
         <meta name="description" content="보기만 해도 뿌듯한! 나만의 티켓북을 만들어보세요!" />
         <meta name="keywords" content="Artsy, 아티, 문화, 기록, 티켓북, 영화, 뮤지컬, 전시, 연극, 콘서트, 통계" />
 
         <!-- Open Graph / Facebook -->
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="http://34.64.49.14" />
-        <meta property="og:title" content="Artsy - 나만의 문화기록 티겟북" />
+        <meta property="og:url" content="%VITE_URL%" />
+        <meta property="og:title" content="Artsy - 나만의 문화기록 티켓북" />
         <meta property="og:description" content="보기만 해도 뿌듯한! 나만의 티켓북을 만들어보세요!" />
-        <meta property="og:image" content="http://34.64.49.14/thumbnail.png" />
+        <meta property="og:image" content="%VITE_URL%thumbnail.png" />
 
         <!-- Twitter -->
         <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="http://34.64.49.14/" />
-        <meta property="twitter:title" content="Artsy - 나만의 문화기록 티겟북" />
+        <meta property="twitter:url" content="%VITE_URL%" />
+        <meta property="twitter:title" content="Artsy - 나만의 문화기록 티켓북" />
         <meta property="twitter:description" content="보기만 해도 뿌듯한! 나만의 티켓북을 만들어보세요!" />
-        <meta property="twitter:image" content="http://34.64.49.14/thumbnail.png" />
+        <meta property="twitter:image" content="%VITE_URL%thumbnail.png" />
     </head>
     <body>
         <div id="root"></div>
         <script type="module" src="/src/main.jsx"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                    .register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service worker registration succeeded:', registration);
+                    })
+                    .catch((err) => {
+                        console.log('Service worker registration failed:', err);
+                    });
+            } else {
+                console.log('Service workers are not supported.');
+            }
+        </script>
     </body>
 </html>

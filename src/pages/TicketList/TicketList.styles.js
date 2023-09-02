@@ -5,7 +5,7 @@ const FilterWrap = styled.div`
     position: sticky;
     top: 50px;
     padding: 1rem 0;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.background1};
 `;
 
 const FilterInner = styled.div`

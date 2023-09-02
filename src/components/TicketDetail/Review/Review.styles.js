@@ -10,7 +10,7 @@ const Container = styled.div`
         border-radius: 12px;
         box-shadow: 0px 1px 20px 20px rgba(0, 0, 0, 0.02);
 
-        background-color: #fff;
+        background-color: ${({ theme }) => theme.colors.background3};
 
         margin-top: 13rem;
     }
@@ -19,13 +19,14 @@ const Container = styled.div`
 const TitleText = styled.h2`
     ${({ theme }) => theme.media.labtop} {
         font-size: ${({ theme }) => theme.fontSizes.body};
-        font-weight: 600;
+        font-weight: 500;
         text-align: left;
         margin: 2rem 0;
     }
 `;
 
 const DetailText = styled.span`
+    white-space: pre-wrap;
     ${({ theme }) => theme.media.labtop} {
         font-size: ${({ theme }) => theme.fontSizes.text};
         margin: 10px 0;

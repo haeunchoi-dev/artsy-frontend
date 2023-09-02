@@ -40,7 +40,7 @@ const MainText = styled.div`
 
     /* media */
     ${({ theme }) => theme.media.tablet} {
-        color: ${({ theme }) => theme.colors.black};
+        color: ${({ theme }) => theme.colors.font1};
 
         h2 {
             font-size: ${({ theme }) => theme.fontSizes.h4};
@@ -97,7 +97,7 @@ const ServiceIcon = styled.div`
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: ${({ theme }) => theme.colors.background4};
 
     img {
         width: 2rem;
@@ -130,7 +130,7 @@ const ServiceInfo = styled.div`
             width: 80%;
             padding: 1rem 2rem;
             box-sizing: border-box;
-            background-color: #f7f7f7;
+            background-color: ${({ theme }) => theme.colors.background6};
             font-size: ${({ theme }) => theme.fontSizes.text};
 
             + li {
@@ -244,14 +244,14 @@ const MainBanner = styled.div`
 `;
 
 const BannerButton = styled(Button)`
-    color: ${({ theme }) => theme.colors.point2};
-    background-color: #fff;
+    color: ${({ theme }) => theme.colors.font4};
+    background-color: ${({ theme }) => theme.colors.background4};
 `;
 const MainButton = styled(Button)`
     padding: 0 4rem;
     background-color: #fff;
-    color: ${({ theme }) => theme.colors.point1};
-
+    color: ${({ theme }) => theme.colors.font3};
+    background-color: ${({ theme }) => theme.colors.background4};
     /* media */
     ${({ theme }) => theme.media.tablet} {
         color: #fff;

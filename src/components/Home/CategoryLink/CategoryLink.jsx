@@ -18,7 +18,8 @@ const CategoryLink = ({ name, categoryId }) => {
             <C.CategoryImage src={categoryImageURL} alt={name} />
             <C.CategoryTitle>{name}</C.CategoryTitle>
             <C.MakeTicketLink>
-                기록남기기<span>&#62;</span>
+                기록남기기
+                <C.RightArrow />
             </C.MakeTicketLink>
         </C.CategoryLink>
     );

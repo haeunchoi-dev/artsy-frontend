@@ -1,33 +1,16 @@
 import styled from 'styled-components';
 import Button from '@components/@common/Button/Button';
 import Input from '@components/@common/Input/Input';
-
-const Container = styled.div`
-    margin: 0 auto;
-    padding: 0 3rem 0 2rem;
-
-    ${({ theme }) => theme.media.tablet} {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-`;
+import { SlClose } from 'react-icons/sl';
 
 const TitleContainer = styled.div`
     h3 {
         font-size: ${({ theme }) => theme.fontSizes.h5};
-        margin-bottom: 2rem;
-    }
-    ${({ theme }) => theme.media.tablet} {
-        width: 50rem;
+        margin-bottom: 3rem;
     }
 `;
 
-const TicketForm = styled.div`
-    ${({ theme }) => theme.media.tablet} {
-        width: 50rem;
-    }
-`;
+const TicketForm = styled.div``;
 
 const ImgContainer = styled.div`
     display: flex;
@@ -37,18 +20,18 @@ const ImgContainer = styled.div`
 
 const ImgWrap = styled.div`
     overflow: hidden;
-    display: block;
+    display: flex;
     position: relative;
+    justify-content: center;
 
     border: 1px solid #c5c5c5;
     border-radius: ${({ theme }) => theme.borderRadius.large};
 
-    width: 30rem;
+    width: 100%;
     height: 20rem;
-    margin-right: 1rem;
 
     img {
-        width: 100%;
+        width: 75%;
         height: 100%;
         object-fit: contain;
     }
@@ -56,15 +39,18 @@ const ImgWrap = styled.div`
 
 const IconWrap = styled.div`
     cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 30px;
+    height: 30px;
+`;
 
-    width: 3rem;
-    height: 3rem;
-
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-    }
+const StyledSlClose = styled(SlClose)`
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
 `;
 
 const ReviewContainer = styled.div`
@@ -75,7 +61,7 @@ const ReviewContainer = styled.div`
 
 const Label = styled.label`
     font-size: ${({ theme }) => theme.fontSizes.body};
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 16px;
 `;
 
@@ -86,17 +72,21 @@ const ReviewInput = styled.textarea`
     font-size: ${({ theme }) => theme.fontSizes.body};
     padding: 1.2rem 2.2rem;
     border-radius: ${(props) => (props.$rounded ? '100px' : '0')};
-    border: 1px solid #c5c5c5;
+    border: 1px solid ${({ theme }) => theme.colors.border2};
     resize: none;
     overflow: hidden;
-
+    background-color: ${({ theme }) => theme.colors.background3};
+    color: ${({ theme }) => theme.colors.font1};
     &:focus {
         outline: none;
         border-color: ${({ theme }) => theme.colors.point1};
         caret-color: ${({ theme }) => theme.colors.point1};
     }
+    &::placeholder {
+        color: ${({ theme }) => theme.colors.font7};
+        opacity: 1;
+    }
 `;
-
 const ButtonContaienr = styled.div`
     display: flex;
     justify-content: center;
@@ -114,11 +104,11 @@ const MarginContainer = styled.div`
 `;
 
 export {
-    Container,
     TitleContainer,
     TicketForm,
     ImgContainer,
     IconWrap,
+    StyledSlClose,
     ImgWrap,
     ReviewContainer,
     Label,

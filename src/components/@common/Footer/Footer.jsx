@@ -13,7 +13,7 @@ const Footer = () => {
                     </li>
                     <li>
                         <b>Frontend</b>
-                        <span>김지윤, 송서현, 이지영</span>
+                        <span>김지윤, 송서현, 이지영, 최원진</span>
                     </li>
                     <li>
                         <b>Frontend Coach</b>

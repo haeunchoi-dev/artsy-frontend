@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from 'react-query';
-
-import api from '@utils/api';
+import useApi from '@hooks/useApi';
 
 export const QUERY_KEY = '/api/user/check-password';
 
 const checkPassword = () => {
+    const api = useApi();
     const fetcher = (data) => api.post(QUERY_KEY, data);
     const queryClient = useQueryClient();
     const options = {

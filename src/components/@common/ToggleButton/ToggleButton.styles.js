@@ -29,7 +29,7 @@ const ToggleButton = styled.div`
 `;
 const ButtonBar = styled.span`
     display: block;
-    background-color: black;
+    background-color: ${({ theme }) => theme.colors.font1};
     width: 30px;
     height: 2px;
     border-radius: 3px;

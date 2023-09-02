@@ -7,10 +7,7 @@ const MyRecordMobile = () => {
         <M.Container to="/ticket/list">
             <M.BookImage src={bookUrl} alt={'book'} />
             <M.Content>
-                당신의 소중한 문화 기록을 확인해보세요!
-                <M.Arrow>
-                    <img src={ArrowUrl} alt="left arrow" />
-                </M.Arrow>
+                당신의 소중한 문화 기록을 확인해보세요! <M.RightArrow />
             </M.Content>
         </M.Container>
     );

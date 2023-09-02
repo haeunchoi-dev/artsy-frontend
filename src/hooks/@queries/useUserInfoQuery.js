@@ -1,10 +1,11 @@
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 
-import api from '@utils/api';
+import useApi from '@hooks/useApi';
 
 export const QUERY_KEY = '/api/user/info';
 
 const getUser = () => {
+    const api = useApi();
     const fetcher = () => api.get(QUERY_KEY);
     const options = {
         retry: false,
@@ -13,6 +14,7 @@ const getUser = () => {
 };
 
 const updateUser = () => {
+    const api = useApi();
     const fetcher = (data) => api.put(QUERY_KEY, data);
     const queryClient = useQueryClient();
     const options = {

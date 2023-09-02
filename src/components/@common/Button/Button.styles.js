@@ -65,6 +65,7 @@ const StyledButton = styled.button`
     align-items: center;
     box-sizing: border-box;
     color: #fff;
+    font-weight: 500;
 
     /* 크기 */
     ${sizeStyles}
@@ -75,22 +76,29 @@ const StyledButton = styled.button`
     /* 풀너비 */
     ${fullWidthStyle}
 
+    &:disabled {
+        background-color: ${({ theme }) => theme.colors.background9};
+
+        &:hover {
+            filter: brightness(1);
+            cursor: default;
+        }
+    }
+
     /* 라인스타일 */
     ${({ $style }) =>
         $style &&
         css`
-            background-color: #fff;
+            background-color: transparent;
             border: 2px solid ${({ $color }) => $color};
             color: ${({ $color }) => $color};
 
             &:disabled {
-                border-color: #909090;
-                color: #fff;
+                background-color: transparent;
+                border-color: ${({ theme }) => theme.colors.background9};
+                color: ${({ theme }) => theme.colors.background9};
             }
         `}
-    &:disabled {
-        background-color: #909090;
-    }
 `;
 
 export default StyledButton;

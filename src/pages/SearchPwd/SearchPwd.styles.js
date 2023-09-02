@@ -1,15 +1,10 @@
 import styled from 'styled-components';
 
-const Wrap = styled.div`
-    /* media */
-    ${({ theme }) => theme.media.tablet} {
-        width: 50rem;
-        margin: 0 auto;
-    }
-`;
+import Button from '@components/@common/Button/Button';
 
 const SubTitleWrap = styled.div`
     margin-bottom: 4rem;
+    word-break: keep-all;
 `;
 
 const Form = styled.div``;
@@ -17,6 +12,9 @@ const Form = styled.div``;
 const Timer = styled.div``;
 
 const InputBox = styled.div`
+    display: flex;
+    align-items: flex-end;
+
     position: relative;
     margin-bottom: 3.5rem;
 
@@ -24,13 +22,24 @@ const InputBox = styled.div`
         margin-top: 1rem;
     }
 
+    > div {
+        width: 100%;
+    }
+
     ${Timer} {
         position: absolute;
         top: 0;
         right: 0;
+        text-align: right;
         font-size: ${({ theme }) => theme.fontSizes.text};
         color: ${({ theme }) => theme.colors.point2};
     }
 `;
 
-export { Wrap, SubTitleWrap, Form, InputBox, Timer };
+const StyledButton = styled(Button)`
+    flex-shrink: 0;
+    margin-left: 8px;
+    height: 54px;
+`;
+
+export { SubTitleWrap, Form, InputBox, Timer, StyledButton };

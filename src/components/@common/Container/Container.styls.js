@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const StyledMaxWidth = styled.div`
-    max-width: 1280px;
+    max-width: ${({ theme }) => theme.devicesSize.labtop};
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 2rem;
     box-sizing: border-box;
 `;
 

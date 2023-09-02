@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
-    background-color: #f7f7f7;
+    background-color: ${({ theme }) => theme.colors.background5};
 `;
 
 const StyledFooterInner = styled.div`
@@ -13,7 +13,7 @@ const StyledFooterInner = styled.div`
 
 const StyledProjectInfo = styled.ul`
     font-size: ${({ theme }) => theme.fontSizes.text};
-    color: #909090;
+    color: ${({ theme }) => theme.colors.font5};
 
     > li {
         display: flex;

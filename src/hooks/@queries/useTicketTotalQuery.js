@@ -1,9 +1,11 @@
 import { useQuery, useQueryClient } from 'react-query';
-import api from '@utils/api';
+import useApi from '@hooks/useApi';
 
 export const QUERY_KEY = '/api/user/ticket-total';
 
 const useTicketTotalQuery = () => {
+    const api = useApi();
+
     const getTotalCount = () => {
         const fetcher = () => api.get(`${QUERY_KEY}-count`);
 

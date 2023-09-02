@@ -29,16 +29,26 @@ const SignInContent = styled.div`
     }
 `;
 
-const loginTitle = styled.h2`
-    margin-bottom: 3.6rem;
-    font-size: 4.6rem;
+const LoginTitle = styled.h2`
+    flex-basis: 30%;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 2.8rem;
 
+    font-size: 4.6rem;
+    cursor: pointer;
     ${({ theme }) => theme.media.labtop} {
         font-size: 3.4rem;
     }
 `;
-
-const loginForm = styled.form`
+const FormContainer = styled.div`
+    flex-basis: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+`;
+const LoginForm = styled.form`
     display: grid;
     grid-template-rows: 57px 57px 53px;
     grid-gap: 12px;
@@ -56,13 +66,20 @@ const RegisterButton = styled(Button)`
     max-width: 29rem;
     border: 2px solid ${({ theme }) => theme.colors.point1};
     font-size: 1.4rem;
-    color: ${({ theme }) => theme.colors.point1};
-    background: #fff;
 `;
 
 const SearchPasswordButton = styled(Link)`
     margin-top: 2rem;
     font-size: ${({ theme }) => theme.fontSizes.text};
-    color: #909090;
+    color: ${({ theme }) => theme.colors.font5};
 `;
-export { SignInContainer, SignInContent, loginTitle, loginForm, SignInButton, RegisterButton, SearchPasswordButton };
+export {
+    SignInContainer,
+    SignInContent,
+    LoginTitle,
+    FormContainer,
+    LoginForm,
+    SignInButton,
+    RegisterButton,
+    SearchPasswordButton,
+};
