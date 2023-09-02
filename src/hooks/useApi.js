@@ -29,6 +29,35 @@ const HTTP = {
 const useApi = () => {
     const toast = useToastContext();
 
+    const getAxiosParams = useCallback((method, path, data, isFormData) => {
+        const axiosParams = {
+            method: method,
+            url: path,
+        };
+
+        if (data !== undefined) axiosParams.data = data;
+        if (isFormData === true) axiosParams.headers = { 'Content-Type': 'multipart/form-data' };
+
+        return axiosParams;
+    }, []);
+
+    const callApi = useCallback(async (method, path, data, isFormData = false) => {
+        const axiosParams = getAxiosParams(method, path, data, isFormData);
+
+        try {
+            const response = await axiosInstance(axiosParams);
+            return response.data.artsyData;
+        } catch (error) {
+            const errorType = error?.response?.data?.error?.type;
+
+            if (!errorType || errorType === ERROR_TYPE.INTERNAL_SERVER_ERROR) {
+                toast.show(ERROR_MESSAGE.unexpected);
+            }
+
+            throw error;
+        }
+    }, []);
+
     const api = useMemo(() => {
         return {
             get: async (path) => {
@@ -50,35 +79,6 @@ const useApi = () => {
                 return await callApi(HTTP.PUT, path, formData, true);
             },
         };
-    }, []);
-
-    const callApi = useCallback(async (method, path, data, isFormData = false) => {
-        const axiosParams = getAxiosParams(method, path, data, isFormData);
-
-        try {
-            const response = await axiosInstance(axiosParams);
-            return response.data.artsyData;
-        } catch (error) {
-            const errorType = error?.response?.data?.error?.type;
-
-            if (!errorType || errorType === ERROR_TYPE.INTERNAL_SERVER_ERROR) {
-                toast.show(ERROR_MESSAGE.unexpected);
-            }
-
-            throw error;
-        }
-    }, []);
-
-    const getAxiosParams = useCallback((method, path, data, isFormData) => {
-        const axiosParams = {
-            method: method,
-            url: path,
-        };
-
-        if (data !== undefined) axiosParams.data = data;
-        if (isFormData === true) axiosParams.headers = { 'Content-Type': 'multipart/form-data' };
-
-        return axiosParams;
     }, []);
 
     return api;

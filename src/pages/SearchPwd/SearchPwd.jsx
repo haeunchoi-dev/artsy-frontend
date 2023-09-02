@@ -80,7 +80,7 @@ const SearchPwd = () => {
             toast.show(SUCCESS_MESSAGE.successSignin);
             navigate('/user/edit', {
                 state: {
-                    requiredSkipCurPassword: true
+                    requiredSkipCurrentPasswordCheck: true
                 }
             });
         }

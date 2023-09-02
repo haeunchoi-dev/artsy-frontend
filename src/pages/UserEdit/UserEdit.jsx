@@ -56,9 +56,7 @@ const UserEdit = () => {
     });
 
     useEffect(() => {
-        const _requiredSkipCurPassword = location.state?.requiredSkipCurPassword;
-
-        if (_requiredSkipCurPassword === true) {
+        if (location.state?.requiredSkipCurrentPasswordCheck === true) {
             setIsCorrectCurrentPassword(true);
         }
     }, []);
